@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="afd073d222e9418ca14ea09a1828fa7e" Name="Diagram1">
+        <EntityTypeShape EntityType="bankasiaNSModel.LOG_APP" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="bankasiaNSModel.ow" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="bankasiaNSModel.client_adress" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="bankasiaNSModel.client_comp_details" Width="1.5" PointX="2.75" PointY="5.75" />
+        <EntityTypeShape EntityType="bankasiaNSModel.client_dl" Width="1.5" PointX="2.75" PointY="8.75" />
+        <EntityTypeShape EntityType="bankasiaNSModel.client_licence" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="bankasiaNSModel.client_oborot" Width="1.5" PointX="10.75" PointY="4.75" />
+        <EntityTypeShape EntityType="bankasiaNSModel.client_paspdata" Width="1.5" PointX="10.75" PointY="7.75" />
+        <EntityTypeShape EntityType="bankasiaNSModel.client_podpic" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="bankasiaNSModel.client_risk" Width="1.5" PointX="8" PointY="6" />
+        <EntityTypeShape EntityType="bankasiaNSModel.ClientOrg" Width="1.5" PointX="8" PointY="9.375" />
+        <EntityTypeShape EntityType="bankasiaNSModel.clientPhoto" Width="1.5" PointX="8" PointY="3.25" />
+        <EntityTypeShape EntityType="bankasiaNSModel.ClientProxy" Width="1.5" PointX="12.75" PointY="0.75" />
+        <EntityTypeShape EntityType="bankasiaNSModel.clients" Width="1.5" PointX="5.75" PointY="1.375" />
+        <AssociationConnector Association="bankasiaNSModel.FK__client_ri__CR_KL__58360A52" />
+        <AssociationConnector Association="bankasiaNSModel.FK_ClientOrg_clients" />
+        <AssociationConnector Association="bankasiaNSModel.FK_ClientOrg_clients1" />
+        <AssociationConnector Association="bankasiaNSModel.FK_200420_ClCode" />
+        <EntityTypeShape EntityType="bankasiaNSModel.ENUMERATOR_SPR" Width="1.5" PointX="13.375" PointY="3.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

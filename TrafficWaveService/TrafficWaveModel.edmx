@@ -1,0 +1,1038 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище bankasiaNSModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="client_adress">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kl_kod" Type="int" Nullable="false" />
+          <Property Name="dl_kod" Type="tinyint" Nullable="false" />
+          <Property Name="a_typeadress" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="a_kstr" Type="char" MaxLength="3" />
+          <Property Name="a_knp" Type="nvarchar" MaxLength="14" />
+          <Property Name="a_np" Type="nvarchar" MaxLength="250" />
+          <Property Name="a_ind" Type="nvarchar" MaxLength="10" />
+          <Property Name="a_obl" Type="nvarchar" MaxLength="250" />
+          <Property Name="a_raion" Type="nvarchar" MaxLength="250" />
+          <Property Name="a_topfx" Type="nvarchar" MaxLength="10" />
+          <Property Name="a_to" Type="nvarchar" MaxLength="250" />
+          <Property Name="a_ulpfx" Type="nvarchar" MaxLength="10" />
+          <Property Name="a_ul" Type="nvarchar" MaxLength="250" />
+          <Property Name="a_dom" Type="nvarchar" MaxLength="10" />
+          <Property Name="a_korpuc" Type="nvarchar" MaxLength="10" />
+          <Property Name="a_ctroen" Type="nvarchar" MaxLength="10" />
+          <Property Name="a_kvart" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="client_comp_details">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KL_KOD" Type="int" />
+          <Property Name="KL_ACTIV" Type="nvarchar" MaxLength="50" />
+          <Property Name="KL_CAPITAL" Type="nvarchar" MaxLength="50" />
+          <Property Name="KL_QUANTITY_W" Type="nvarchar" MaxLength="50" />
+          <Property Name="KL_QUANTITY_M" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="client_dl">
+          <Key>
+            <PropertyRef Name="kl_kod" />
+            <PropertyRef Name="dl_kod" />
+          </Key>
+          <Property Name="kl_kod" Type="int" Nullable="false" />
+          <Property Name="dl_kod" Type="tinyint" Nullable="false" />
+          <Property Name="dl_relig" Type="bit" />
+          <Property Name="dl_offsh" Type="bit" />
+          <Property Name="dl_affinkod" Type="bit" />
+          <Property Name="dl_cfr" Type="int" />
+          <Property Name="dl_pzl" Type="bit" />
+          <Property Name="dl_dolgn" Type="tinyint" />
+          <Property Name="dl_rzd" Type="tinyint" />
+          <Property Name="dl_tel1" Type="nvarchar" MaxLength="50" />
+          <Property Name="dl_tel2" Type="nvarchar" MaxLength="50" />
+          <Property Name="dl_tel3" Type="nvarchar" MaxLength="50" />
+          <Property Name="dl_legal_doc" Type="nvarchar" MaxLength="100" />
+          <Property Name="dl_enddov" Type="datetime" />
+          <Property Name="dl_socst" Type="tinyint" />
+          <Property Name="dl_datecreate" Type="datetime" />
+          <Property Name="dl_otvcreate" Type="smallint" />
+          <Property Name="dl_sortindx" Type="tinyint" />
+          <Property Name="dl_client_bnfs" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="client_licence">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LCE_KL_KOD" Type="int" />
+          <Property Name="LCE_TYPE" Type="nvarchar" MaxLength="25" />
+          <Property Name="LCE_NUMBER" Type="nvarchar" MaxLength="25" />
+          <Property Name="LCE_DATE_ISSUE" Type="date" />
+          <Property Name="LCE_DATE_END" Type="date" />
+          <Property Name="LCE_ISSUED_BY" Type="nvarchar" MaxLength="215" />
+          <Property Name="LCE_IsNoEnd" Type="bit" />
+        </EntityType>
+        <EntityType Name="client_oborot">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KL_KOD" Type="int" />
+          <Property Name="KOD_VAL" Type="smallint" />
+          <Property Name="RECEIPT_ACC" Type="nvarchar" MaxLength="50" />
+          <Property Name="COST_ACC" Type="nvarchar" MaxLength="50" />
+          <Property Name="QUANTITY" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="client_paspdata">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kl_kod" Type="int" Nullable="false" />
+          <Property Name="dl_kod" Type="tinyint" Nullable="false" />
+          <Property Name="p_inn" Type="nvarchar" MaxLength="14" />
+          <Property Name="p_fam" Type="nvarchar" MaxLength="100" />
+          <Property Name="p_name" Type="nvarchar" MaxLength="100" />
+          <Property Name="p_otch" Type="nvarchar" MaxLength="100" />
+          <Property Name="p_grajd" Type="char" MaxLength="3" />
+          <Property Name="p_viddoksfr" Type="nvarchar" MaxLength="2" />
+          <Property Name="p_viddok" Type="nvarchar" MaxLength="254" />
+          <Property Name="p_srdok" Type="nvarchar" MaxLength="7" />
+          <Property Name="p_ndok" Type="nvarchar" MaxLength="50" />
+          <Property Name="p_mvd" Type="nvarchar" MaxLength="60" />
+          <Property Name="p_enddok" Type="datetime" />
+          <Property Name="p_datev" Type="datetime" />
+          <Property Name="p_noend" Type="bit" />
+          <Property Name="p_strb" Type="char" MaxLength="3" />
+          <Property Name="p_mb" Type="nvarchar" MaxLength="250" />
+          <Property Name="p_db" Type="datetime" />
+          <Property Name="p_pol" Type="tinyint" />
+          <Property Name="p_father" Type="nvarchar" MaxLength="250" />
+          <Property Name="p_nation" Type="nvarchar" MaxLength="50" />
+          <Property Name="p_family_status" Type="smallint" />
+          <Property Name="vzml_dl_code" Type="int" />
+        </EntityType>
+        <EntityType Name="client_podpic">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kl_kod" Type="int" Nullable="false" />
+          <Property Name="kl_podp" Type="image" />
+        </EntityType>
+        <EntityType Name="client_risk">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CR_KL_KOD" Type="int" />
+          <Property Name="CR_DL_KOD" Type="smallint" />
+          <Property Name="CR_KOM" Type="nvarchar" MaxLength="250" />
+          <Property Name="CR_RISK_LEVEL" Type="smallint" />
+          <Property Name="CR_OTV" Type="smallint" />
+          <Property Name="CR_DATE" Type="date" />
+        </EntityType>
+        <EntityType Name="ClientOrg">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrgKlKod" Type="int" Nullable="false" />
+          <Property Name="KlKod" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="clientPhoto">
+          <Key>
+            <PropertyRef Name="KlCode" />
+          </Key>
+          <Property Name="KlCode" Type="int" Nullable="false" />
+          <Property Name="DlCode" Type="tinyint" />
+          <Property Name="PhotoBase64" Type="image" Nullable="false" />
+          <Property Name="Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ClientProxy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientCode" Type="int" />
+          <Property Name="ProxyImage" Type="image" />
+        </EntityType>
+        <EntityType Name="clients">
+          <Key>
+            <PropertyRef Name="kl_kod" />
+          </Key>
+          <Property Name="kl_kod" Type="int" Nullable="false" />
+          <Property Name="kl_nam" Type="nvarchar" MaxLength="120" />
+          <Property Name="kl_nam_eng" Type="nvarchar" MaxLength="120" />
+          <Property Name="kl_stat" Type="tinyint" />
+          <Property Name="kl_rzd" Type="tinyint" />
+          <Property Name="kl_rchp" Type="bit" />
+          <Property Name="kl_rpat" Type="bit" />
+          <Property Name="kl_rip" Type="bit" />
+          <Property Name="kl_opf" Type="tinyint" />
+          <Property Name="kl_inn" Type="nvarchar" MaxLength="14" />
+          <Property Name="kl_vidsob" Type="tinyint" />
+          <Property Name="kl_otr" Type="smallint" />
+          <Property Name="kl_osnvd" Type="smallint" />
+          <Property Name="kl_kodter" Type="nvarchar" MaxLength="8" />
+          <Property Name="kl_relig" Type="bit" />
+          <Property Name="kl_offsh" Type="bit" />
+          <Property Name="kl_cfr" Type="int" />
+          <Property Name="kl_benefs" Type="bit" />
+          <Property Name="kl_benefsname" Type="nvarchar" MaxLength="254" />
+          <Property Name="kl_benefs_paspdata" Type="nvarchar" MaxLength="254" />
+          <Property Name="kl_tel1" Type="nvarchar" MaxLength="50" />
+          <Property Name="kl_tel2" Type="nvarchar" MaxLength="50" />
+          <Property Name="kl_tel3" Type="nvarchar" MaxLength="50" />
+          <Property Name="kl_orgreg" Type="tinyint" />
+          <Property Name="kl_nomreg" Type="nvarchar" MaxLength="100" />
+          <Property Name="kl_okpo" Type="nvarchar" MaxLength="8" />
+          <Property Name="kl_rnsf" Type="nvarchar" MaxLength="14" />
+          <Property Name="kl_datareg" Type="datetime" />
+          <Property Name="kl_dataperereg" Type="datetime" />
+          <Property Name="kl_dataendpat" Type="datetime" />
+          <Property Name="kl_ustav" Type="nvarchar" MaxLength="250" />
+          <Property Name="kl_wname" Type="nvarchar" MaxLength="250" />
+          <Property Name="kl_wfio" Type="nvarchar" MaxLength="120" />
+          <Property Name="kl_wdoljn" Type="nvarchar" MaxLength="250" />
+          <Property Name="kl_sez" Type="bit" />
+          <Property Name="kl_sezend" Type="datetime" />
+          <Property Name="KL_BONUS" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="kl_isys" Type="nvarchar" MaxLength="4" />
+          <Property Name="kl_datecreate" Type="datetime" />
+          <Property Name="kl_otvcreate" Type="smallint" />
+          <Property Name="kl_keyw" Type="nvarchar" MaxLength="20" />
+          <Property Name="KODB" Type="smallint" />
+          <Property Name="KODC" Type="smallint" />
+          <Property Name="kl_ins" Type="bit" />
+          <Property Name="kl_pzl" Type="bit" />
+          <Property Name="kl_dopvd" Type="nvarchar" MaxLength="150" />
+          <Property Name="kl_goal" Type="smallint" />
+          <Property Name="kl_fatca" Type="bit" />
+          <Property Name="IdPatent" Type="int" />
+          <Property Name="VerificationDate" Type="date" />
+          <Property Name="LastEditDate" Type="date" />
+          <Property Name="BranchId" Type="smallint" />
+        </EntityType>
+        <EntityType Name="ENUMERATOR_SPR">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="client_kod" Type="int" Nullable="false" />
+          <Property Name="insider_kod" Type="int" Nullable="false" />
+          <Property Name="korresp_kod" Type="int" />
+          <Property Name="reg_code" Type="int" />
+          <Property Name="biznes_partneru_code" Type="int" />
+          <Property Name="vzml_dl_code" Type="int" />
+          <Property Name="ms_id" Type="int" />
+          <Property Name="service_sms_id" Type="int" />
+          <Property Name="krProdId" Type="int" />
+        </EntityType>
+        <EntityType Name="LOG_APP">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="formNum" Type="int" />
+          <Property Name="errorMsg" Type="varchar(max)" />
+          <Property Name="innerMsg" Type="varchar(max)" />
+          <Property Name="method" Type="varchar" MaxLength="250" />
+          <Property Name="dateLog" Type="datetime" />
+          <Property Name="ip" Type="nvarchar" MaxLength="20" />
+          <Property Name="AppName" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="ow">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ow_modul" Type="int" />
+          <Property Name="ow_type" Type="int" />
+          <Property Name="ow_operation_id" Type="int" />
+          <Property Name="ow_object_id" Type="int" />
+          <Property Name="ow_name" Type="nvarchar" MaxLength="200" />
+          <Property Name="ow_otv_oper" Type="int" />
+          <Property Name="ow_compl" Type="int" />
+          <Property Name="ow_check" Type="int" />
+          <Property Name="ow_date_time" Type="datetime" />
+          <Property Name="ow_s_date" Type="date" />
+          <Property Name="ow_text" Type="nvarchar" MaxLength="200" />
+          <Property Name="ow_edit" Type="int" />
+          <Property Name="ow_open" Type="int" />
+        </EntityType>
+        <Association Name="FK__client_ri__CR_KL__58360A52">
+          <End Role="clients" Type="Self.clients" Multiplicity="0..1" />
+          <End Role="client_risk" Type="Self.client_risk" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="kl_kod" />
+            </Principal>
+            <Dependent Role="client_risk">
+              <PropertyRef Name="CR_KL_KOD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_200420_ClCode">
+          <End Role="clients" Type="Self.clients" Multiplicity="1" />
+          <End Role="clientPhoto" Type="Self.clientPhoto" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="kl_kod" />
+            </Principal>
+            <Dependent Role="clientPhoto">
+              <PropertyRef Name="KlCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientOrg_clients">
+          <End Role="clients" Type="Self.clients" Multiplicity="1" />
+          <End Role="ClientOrg" Type="Self.ClientOrg" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="kl_kod" />
+            </Principal>
+            <Dependent Role="ClientOrg">
+              <PropertyRef Name="KlKod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientOrg_clients1">
+          <End Role="clients" Type="Self.clients" Multiplicity="1" />
+          <End Role="ClientOrg" Type="Self.ClientOrg" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="kl_kod" />
+            </Principal>
+            <Dependent Role="ClientOrg">
+              <PropertyRef Name="OrgKlKod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="SearchReg" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pFam" Type="varchar" Mode="In" />
+          <Parameter Name="pName" Type="varchar" Mode="In" />
+          <Parameter Name="pOtch" Type="varchar" Mode="In" />
+          <Parameter Name="pStatus" Type="tinyint" Mode="In" />
+        </Function>
+        <EntityContainer Name="Хранилище bankasiaNSModelContainer">
+          <EntitySet Name="client_adress" EntityType="Self.client_adress" Schema="bankadm" store:Type="Tables" />
+          <EntitySet Name="client_comp_details" EntityType="Self.client_comp_details" Schema="bankadm" store:Type="Tables" />
+          <EntitySet Name="client_dl" EntityType="Self.client_dl" Schema="bankadm" store:Type="Tables" />
+          <EntitySet Name="client_licence" EntityType="Self.client_licence" Schema="bankadm" store:Type="Tables" />
+          <EntitySet Name="client_oborot" EntityType="Self.client_oborot" Schema="bankadm" store:Type="Tables" />
+          <EntitySet Name="client_paspdata" EntityType="Self.client_paspdata" Schema="bankadm" store:Type="Tables" />
+          <EntitySet Name="client_podpic" EntityType="Self.client_podpic" Schema="bankadm" store:Type="Tables" />
+          <EntitySet Name="client_risk" EntityType="Self.client_risk" Schema="bankadm" store:Type="Tables" />
+          <EntitySet Name="ClientOrg" EntityType="Self.ClientOrg" Schema="bankadm" store:Type="Tables" />
+          <EntitySet Name="clientPhoto" EntityType="Self.clientPhoto" Schema="bankadm" store:Type="Tables" />
+          <EntitySet Name="ClientProxy" EntityType="Self.ClientProxy" Schema="bankadm" store:Type="Tables" />
+          <EntitySet Name="clients" EntityType="Self.clients" Schema="bankadm" store:Type="Tables" />
+          <EntitySet Name="ENUMERATOR_SPR" EntityType="Self.ENUMERATOR_SPR" Schema="bankadm" store:Type="Tables" />
+          <EntitySet Name="LOG_APP" EntityType="Self.LOG_APP" Schema="bankadm" store:Type="Tables" />
+          <EntitySet Name="ow" EntityType="Self.ow" Schema="bankadm" store:Type="Tables" />
+          <AssociationSet Name="FK__client_ri__CR_KL__58360A52" Association="Self.FK__client_ri__CR_KL__58360A52">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="client_risk" EntitySet="client_risk" />
+          </AssociationSet>
+          <AssociationSet Name="FK_200420_ClCode" Association="Self.FK_200420_ClCode">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="clientPhoto" EntitySet="clientPhoto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientOrg_clients" Association="Self.FK_ClientOrg_clients">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="ClientOrg" EntitySet="ClientOrg" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientOrg_clients1" Association="Self.FK_ClientOrg_clients1">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="ClientOrg" EntitySet="ClientOrg" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="bankasiaNSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="bankasiaNSEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="SearchReg" ReturnType="Collection(bankasiaNSModel.SearchReg_Result)">
+            <Parameter Name="pFam" Mode="In" Type="String" />
+            <Parameter Name="pName" Mode="In" Type="String" />
+            <Parameter Name="pOtch" Mode="In" Type="String" />
+            <Parameter Name="pStatus" Mode="In" Type="Byte" />
+          </FunctionImport>
+          <EntitySet Name="LOG_APP" EntityType="bankasiaNSModel.LOG_APP" />
+          <EntitySet Name="ow" EntityType="bankasiaNSModel.ow" />
+          <EntitySet Name="client_adress" EntityType="bankasiaNSModel.client_adress" />
+          <EntitySet Name="client_comp_details" EntityType="bankasiaNSModel.client_comp_details" />
+          <EntitySet Name="client_dl" EntityType="bankasiaNSModel.client_dl" />
+          <EntitySet Name="client_licence" EntityType="bankasiaNSModel.client_licence" />
+          <EntitySet Name="client_oborot" EntityType="bankasiaNSModel.client_oborot" />
+          <EntitySet Name="client_paspdata" EntityType="bankasiaNSModel.client_paspdata" />
+          <EntitySet Name="client_podpic" EntityType="bankasiaNSModel.client_podpic" />
+          <EntitySet Name="client_risk" EntityType="bankasiaNSModel.client_risk" />
+          <EntitySet Name="ClientOrg" EntityType="bankasiaNSModel.ClientOrg" />
+          <EntitySet Name="clientPhoto" EntityType="bankasiaNSModel.clientPhoto" />
+          <EntitySet Name="ClientProxy" EntityType="bankasiaNSModel.ClientProxy" />
+          <EntitySet Name="clients" EntityType="bankasiaNSModel.clients" />
+          <AssociationSet Name="FK__client_ri__CR_KL__58360A52" Association="bankasiaNSModel.FK__client_ri__CR_KL__58360A52">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="client_risk" EntitySet="client_risk" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientOrg_clients" Association="bankasiaNSModel.FK_ClientOrg_clients">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="ClientOrg" EntitySet="ClientOrg" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientOrg_clients1" Association="bankasiaNSModel.FK_ClientOrg_clients1">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="ClientOrg" EntitySet="ClientOrg" />
+          </AssociationSet>
+          <AssociationSet Name="FK_200420_ClCode" Association="bankasiaNSModel.FK_200420_ClCode">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="clientPhoto" EntitySet="clientPhoto" />
+          </AssociationSet>
+          <EntitySet Name="ENUMERATOR_SPR" EntityType="bankasiaNSModel.ENUMERATOR_SPR" />
+        </EntityContainer>
+        <ComplexType Name="SearchReg_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="302" />
+          <Property Type="String" Name="OriginalName" Nullable="true" MaxLength="302" />
+          <Property Type="String" Name="OriginalRegName" Nullable="true" MaxLength="350" />
+          <Property Type="Int32" Name="Compare" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="LOG_APP">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="formNum" Type="Int32" />
+          <Property Name="errorMsg" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="innerMsg" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="method" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="dateLog" Type="DateTime" Precision="3" />
+          <Property Name="ip" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="AppName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ow">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ow_modul" Type="Int32" />
+          <Property Name="ow_type" Type="Int32" />
+          <Property Name="ow_operation_id" Type="Int32" />
+          <Property Name="ow_object_id" Type="Int32" />
+          <Property Name="ow_name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ow_otv_oper" Type="Int32" />
+          <Property Name="ow_compl" Type="Int32" />
+          <Property Name="ow_check" Type="Int32" />
+          <Property Name="ow_date_time" Type="DateTime" Precision="3" />
+          <Property Name="ow_s_date" Type="DateTime" Precision="0" />
+          <Property Name="ow_text" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ow_edit" Type="Int32" />
+          <Property Name="ow_open" Type="Int32" />
+        </EntityType>
+        <EntityType Name="client_adress">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kl_kod" Type="Int32" Nullable="false" />
+          <Property Name="dl_kod" Type="Byte" Nullable="false" />
+          <Property Name="a_typeadress" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="a_kstr" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="a_knp" Type="String" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="a_np" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="a_ind" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="a_obl" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="a_raion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="a_topfx" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="a_to" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="a_ulpfx" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="a_ul" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="a_dom" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="a_korpuc" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="a_ctroen" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="a_kvart" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="client_comp_details">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KL_KOD" Type="Int32" />
+          <Property Name="KL_ACTIV" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KL_CAPITAL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KL_QUANTITY_W" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KL_QUANTITY_M" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="client_dl">
+          <Key>
+            <PropertyRef Name="kl_kod" />
+            <PropertyRef Name="dl_kod" />
+          </Key>
+          <Property Name="kl_kod" Type="Int32" Nullable="false" />
+          <Property Name="dl_kod" Type="Byte" Nullable="false" />
+          <Property Name="dl_relig" Type="Boolean" />
+          <Property Name="dl_offsh" Type="Boolean" />
+          <Property Name="dl_affinkod" Type="Boolean" />
+          <Property Name="dl_cfr" Type="Int32" />
+          <Property Name="dl_pzl" Type="Boolean" />
+          <Property Name="dl_dolgn" Type="Byte" />
+          <Property Name="dl_rzd" Type="Byte" />
+          <Property Name="dl_tel1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="dl_tel2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="dl_tel3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="dl_legal_doc" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="dl_enddov" Type="DateTime" Precision="3" />
+          <Property Name="dl_socst" Type="Byte" />
+          <Property Name="dl_datecreate" Type="DateTime" Precision="3" />
+          <Property Name="dl_otvcreate" Type="Int16" />
+          <Property Name="dl_sortindx" Type="Byte" />
+          <Property Name="dl_client_bnfs" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="client_licence">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LCE_KL_KOD" Type="Int32" />
+          <Property Name="LCE_TYPE" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="LCE_NUMBER" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="LCE_DATE_ISSUE" Type="DateTime" Precision="0" />
+          <Property Name="LCE_DATE_END" Type="DateTime" Precision="0" />
+          <Property Name="LCE_ISSUED_BY" Type="String" MaxLength="215" FixedLength="false" Unicode="true" />
+          <Property Name="LCE_IsNoEnd" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="client_oborot">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KL_KOD" Type="Int32" />
+          <Property Name="KOD_VAL" Type="Int16" />
+          <Property Name="RECEIPT_ACC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="COST_ACC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="QUANTITY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="client_paspdata">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kl_kod" Type="Int32" Nullable="false" />
+          <Property Name="dl_kod" Type="Byte" Nullable="false" />
+          <Property Name="p_inn" Type="String" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="p_fam" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="p_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="p_otch" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="p_grajd" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="p_viddoksfr" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="p_viddok" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="p_srdok" Type="String" MaxLength="7" FixedLength="false" Unicode="true" />
+          <Property Name="p_ndok" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="p_mvd" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="p_enddok" Type="DateTime" Precision="3" />
+          <Property Name="p_datev" Type="DateTime" Precision="3" />
+          <Property Name="p_noend" Type="Boolean" />
+          <Property Name="p_strb" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="p_mb" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="p_db" Type="DateTime" Precision="3" />
+          <Property Name="p_pol" Type="Byte" />
+          <Property Name="p_father" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="p_nation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="p_family_status" Type="Int16" />
+          <Property Name="vzml_dl_code" Type="Int32" />
+        </EntityType>
+        <EntityType Name="client_podpic">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kl_kod" Type="Int32" Nullable="false" />
+          <Property Name="kl_podp" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="client_risk">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CR_KL_KOD" Type="Int32" />
+          <Property Name="CR_DL_KOD" Type="Int16" />
+          <Property Name="CR_KOM" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CR_RISK_LEVEL" Type="Int16" />
+          <Property Name="CR_OTV" Type="Int16" />
+          <Property Name="CR_DATE" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="clients" Relationship="bankasiaNSModel.FK__client_ri__CR_KL__58360A52" FromRole="client_risk" ToRole="clients" />
+        </EntityType>
+        <EntityType Name="ClientOrg">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrgKlKod" Type="Int32" Nullable="false" />
+          <Property Name="KlKod" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="clients" Relationship="bankasiaNSModel.FK_ClientOrg_clients" FromRole="ClientOrg" ToRole="clients" />
+          <NavigationProperty Name="clients1" Relationship="bankasiaNSModel.FK_ClientOrg_clients1" FromRole="ClientOrg" ToRole="clients" />
+        </EntityType>
+        <EntityType Name="clientPhoto">
+          <Key>
+            <PropertyRef Name="KlCode" />
+          </Key>
+          <Property Name="KlCode" Type="Int32" Nullable="false" />
+          <Property Name="DlCode" Type="Byte" />
+          <Property Name="PhotoBase64" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="clients" Relationship="bankasiaNSModel.FK_200420_ClCode" FromRole="clientPhoto" ToRole="clients" />
+        </EntityType>
+        <EntityType Name="ClientProxy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientCode" Type="Int32" />
+          <Property Name="ProxyImage" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="clients">
+          <Key>
+            <PropertyRef Name="kl_kod" />
+          </Key>
+          <Property Name="kl_kod" Type="Int32" Nullable="false" />
+          <Property Name="kl_nam" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="kl_nam_eng" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="kl_stat" Type="Byte" />
+          <Property Name="kl_rzd" Type="Byte" />
+          <Property Name="kl_rchp" Type="Boolean" />
+          <Property Name="kl_rpat" Type="Boolean" />
+          <Property Name="kl_rip" Type="Boolean" />
+          <Property Name="kl_opf" Type="Byte" />
+          <Property Name="kl_inn" Type="String" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="kl_vidsob" Type="Byte" />
+          <Property Name="kl_otr" Type="Int16" />
+          <Property Name="kl_osnvd" Type="Int16" />
+          <Property Name="kl_kodter" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="kl_relig" Type="Boolean" />
+          <Property Name="kl_offsh" Type="Boolean" />
+          <Property Name="kl_cfr" Type="Int32" />
+          <Property Name="kl_benefs" Type="Boolean" />
+          <Property Name="kl_benefsname" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="kl_benefs_paspdata" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="kl_tel1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="kl_tel2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="kl_tel3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="kl_orgreg" Type="Byte" />
+          <Property Name="kl_nomreg" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="kl_okpo" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="kl_rnsf" Type="String" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="kl_datareg" Type="DateTime" Precision="3" />
+          <Property Name="kl_dataperereg" Type="DateTime" Precision="3" />
+          <Property Name="kl_dataendpat" Type="DateTime" Precision="3" />
+          <Property Name="kl_ustav" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="kl_wname" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="kl_wfio" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="kl_wdoljn" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="kl_sez" Type="Boolean" />
+          <Property Name="kl_sezend" Type="DateTime" Precision="3" />
+          <Property Name="KL_BONUS" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="kl_isys" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="kl_datecreate" Type="DateTime" Precision="3" />
+          <Property Name="kl_otvcreate" Type="Int16" />
+          <Property Name="kl_keyw" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="KODB" Type="Int16" />
+          <Property Name="KODC" Type="Int16" />
+          <Property Name="kl_ins" Type="Boolean" />
+          <Property Name="kl_pzl" Type="Boolean" />
+          <Property Name="kl_dopvd" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="kl_goal" Type="Int16" />
+          <Property Name="kl_fatca" Type="Boolean" />
+          <Property Name="IdPatent" Type="Int32" />
+          <Property Name="VerificationDate" Type="DateTime" Precision="0" />
+          <Property Name="LastEditDate" Type="DateTime" Precision="0" />
+          <Property Name="BranchId" Type="Int16" />
+          <NavigationProperty Name="client_risk" Relationship="bankasiaNSModel.FK__client_ri__CR_KL__58360A52" FromRole="clients" ToRole="client_risk" />
+          <NavigationProperty Name="ClientOrg" Relationship="bankasiaNSModel.FK_ClientOrg_clients" FromRole="clients" ToRole="ClientOrg" />
+          <NavigationProperty Name="ClientOrg1" Relationship="bankasiaNSModel.FK_ClientOrg_clients1" FromRole="clients" ToRole="ClientOrg" />
+          <NavigationProperty Name="clientPhoto" Relationship="bankasiaNSModel.FK_200420_ClCode" FromRole="clients" ToRole="clientPhoto" />
+        </EntityType>
+        <Association Name="FK__client_ri__CR_KL__58360A52">
+          <End Type="bankasiaNSModel.clients" Role="clients" Multiplicity="0..1" />
+          <End Type="bankasiaNSModel.client_risk" Role="client_risk" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="kl_kod" />
+            </Principal>
+            <Dependent Role="client_risk">
+              <PropertyRef Name="CR_KL_KOD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientOrg_clients">
+          <End Type="bankasiaNSModel.clients" Role="clients" Multiplicity="1" />
+          <End Type="bankasiaNSModel.ClientOrg" Role="ClientOrg" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="kl_kod" />
+            </Principal>
+            <Dependent Role="ClientOrg">
+              <PropertyRef Name="KlKod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientOrg_clients1">
+          <End Type="bankasiaNSModel.clients" Role="clients" Multiplicity="1" />
+          <End Type="bankasiaNSModel.ClientOrg" Role="ClientOrg" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="kl_kod" />
+            </Principal>
+            <Dependent Role="ClientOrg">
+              <PropertyRef Name="OrgKlKod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_200420_ClCode">
+          <End Type="bankasiaNSModel.clients" Role="clients" Multiplicity="1" />
+          <End Type="bankasiaNSModel.clientPhoto" Role="clientPhoto" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="kl_kod" />
+            </Principal>
+            <Dependent Role="clientPhoto">
+              <PropertyRef Name="KlCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ENUMERATOR_SPR">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="client_kod" Type="Int32" Nullable="false" />
+          <Property Name="insider_kod" Type="Int32" Nullable="false" />
+          <Property Name="korresp_kod" Type="Int32" />
+          <Property Name="reg_code" Type="Int32" />
+          <Property Name="biznes_partneru_code" Type="Int32" />
+          <Property Name="vzml_dl_code" Type="Int32" />
+          <Property Name="ms_id" Type="Int32" />
+          <Property Name="service_sms_id" Type="Int32" />
+          <Property Name="krProdId" Type="Int32" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище bankasiaNSModelContainer" CdmEntityContainer="bankasiaNSEntities">
+          <FunctionImportMapping FunctionImportName="SearchReg" FunctionName="Хранилище bankasiaNSModel.SearchReg">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="bankasiaNSModel.SearchReg_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="OriginalName" ColumnName="OriginalName" />
+                <ScalarProperty Name="OriginalRegName" ColumnName="OriginalRegName" />
+                <ScalarProperty Name="Compare" ColumnName="Compare" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="LOG_APP">
+            <EntityTypeMapping TypeName="bankasiaNSModel.LOG_APP">
+              <MappingFragment StoreEntitySet="LOG_APP">
+                <ScalarProperty Name="AppName" ColumnName="AppName" />
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="dateLog" ColumnName="dateLog" />
+                <ScalarProperty Name="method" ColumnName="method" />
+                <ScalarProperty Name="innerMsg" ColumnName="innerMsg" />
+                <ScalarProperty Name="errorMsg" ColumnName="errorMsg" />
+                <ScalarProperty Name="formNum" ColumnName="formNum" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ow">
+            <EntityTypeMapping TypeName="bankasiaNSModel.ow">
+              <MappingFragment StoreEntitySet="ow">
+                <ScalarProperty Name="ow_open" ColumnName="ow_open" />
+                <ScalarProperty Name="ow_edit" ColumnName="ow_edit" />
+                <ScalarProperty Name="ow_text" ColumnName="ow_text" />
+                <ScalarProperty Name="ow_s_date" ColumnName="ow_s_date" />
+                <ScalarProperty Name="ow_date_time" ColumnName="ow_date_time" />
+                <ScalarProperty Name="ow_check" ColumnName="ow_check" />
+                <ScalarProperty Name="ow_compl" ColumnName="ow_compl" />
+                <ScalarProperty Name="ow_otv_oper" ColumnName="ow_otv_oper" />
+                <ScalarProperty Name="ow_name" ColumnName="ow_name" />
+                <ScalarProperty Name="ow_object_id" ColumnName="ow_object_id" />
+                <ScalarProperty Name="ow_operation_id" ColumnName="ow_operation_id" />
+                <ScalarProperty Name="ow_type" ColumnName="ow_type" />
+                <ScalarProperty Name="ow_modul" ColumnName="ow_modul" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="client_adress">
+            <EntityTypeMapping TypeName="bankasiaNSModel.client_adress">
+              <MappingFragment StoreEntitySet="client_adress">
+                <ScalarProperty Name="a_kvart" ColumnName="a_kvart" />
+                <ScalarProperty Name="a_ctroen" ColumnName="a_ctroen" />
+                <ScalarProperty Name="a_korpuc" ColumnName="a_korpuc" />
+                <ScalarProperty Name="a_dom" ColumnName="a_dom" />
+                <ScalarProperty Name="a_ul" ColumnName="a_ul" />
+                <ScalarProperty Name="a_ulpfx" ColumnName="a_ulpfx" />
+                <ScalarProperty Name="a_to" ColumnName="a_to" />
+                <ScalarProperty Name="a_topfx" ColumnName="a_topfx" />
+                <ScalarProperty Name="a_raion" ColumnName="a_raion" />
+                <ScalarProperty Name="a_obl" ColumnName="a_obl" />
+                <ScalarProperty Name="a_ind" ColumnName="a_ind" />
+                <ScalarProperty Name="a_np" ColumnName="a_np" />
+                <ScalarProperty Name="a_knp" ColumnName="a_knp" />
+                <ScalarProperty Name="a_kstr" ColumnName="a_kstr" />
+                <ScalarProperty Name="a_typeadress" ColumnName="a_typeadress" />
+                <ScalarProperty Name="dl_kod" ColumnName="dl_kod" />
+                <ScalarProperty Name="kl_kod" ColumnName="kl_kod" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="client_comp_details">
+            <EntityTypeMapping TypeName="bankasiaNSModel.client_comp_details">
+              <MappingFragment StoreEntitySet="client_comp_details">
+                <ScalarProperty Name="KL_QUANTITY_M" ColumnName="KL_QUANTITY_M" />
+                <ScalarProperty Name="KL_QUANTITY_W" ColumnName="KL_QUANTITY_W" />
+                <ScalarProperty Name="KL_CAPITAL" ColumnName="KL_CAPITAL" />
+                <ScalarProperty Name="KL_ACTIV" ColumnName="KL_ACTIV" />
+                <ScalarProperty Name="KL_KOD" ColumnName="KL_KOD" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="client_dl">
+            <EntityTypeMapping TypeName="bankasiaNSModel.client_dl">
+              <MappingFragment StoreEntitySet="client_dl">
+                <ScalarProperty Name="dl_client_bnfs" ColumnName="dl_client_bnfs" />
+                <ScalarProperty Name="dl_sortindx" ColumnName="dl_sortindx" />
+                <ScalarProperty Name="dl_otvcreate" ColumnName="dl_otvcreate" />
+                <ScalarProperty Name="dl_datecreate" ColumnName="dl_datecreate" />
+                <ScalarProperty Name="dl_socst" ColumnName="dl_socst" />
+                <ScalarProperty Name="dl_enddov" ColumnName="dl_enddov" />
+                <ScalarProperty Name="dl_legal_doc" ColumnName="dl_legal_doc" />
+                <ScalarProperty Name="dl_tel3" ColumnName="dl_tel3" />
+                <ScalarProperty Name="dl_tel2" ColumnName="dl_tel2" />
+                <ScalarProperty Name="dl_tel1" ColumnName="dl_tel1" />
+                <ScalarProperty Name="dl_rzd" ColumnName="dl_rzd" />
+                <ScalarProperty Name="dl_dolgn" ColumnName="dl_dolgn" />
+                <ScalarProperty Name="dl_pzl" ColumnName="dl_pzl" />
+                <ScalarProperty Name="dl_cfr" ColumnName="dl_cfr" />
+                <ScalarProperty Name="dl_affinkod" ColumnName="dl_affinkod" />
+                <ScalarProperty Name="dl_offsh" ColumnName="dl_offsh" />
+                <ScalarProperty Name="dl_relig" ColumnName="dl_relig" />
+                <ScalarProperty Name="dl_kod" ColumnName="dl_kod" />
+                <ScalarProperty Name="kl_kod" ColumnName="kl_kod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="client_licence">
+            <EntityTypeMapping TypeName="bankasiaNSModel.client_licence">
+              <MappingFragment StoreEntitySet="client_licence">
+                <ScalarProperty Name="LCE_IsNoEnd" ColumnName="LCE_IsNoEnd" />
+                <ScalarProperty Name="LCE_ISSUED_BY" ColumnName="LCE_ISSUED_BY" />
+                <ScalarProperty Name="LCE_DATE_END" ColumnName="LCE_DATE_END" />
+                <ScalarProperty Name="LCE_DATE_ISSUE" ColumnName="LCE_DATE_ISSUE" />
+                <ScalarProperty Name="LCE_NUMBER" ColumnName="LCE_NUMBER" />
+                <ScalarProperty Name="LCE_TYPE" ColumnName="LCE_TYPE" />
+                <ScalarProperty Name="LCE_KL_KOD" ColumnName="LCE_KL_KOD" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="client_oborot">
+            <EntityTypeMapping TypeName="bankasiaNSModel.client_oborot">
+              <MappingFragment StoreEntitySet="client_oborot">
+                <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
+                <ScalarProperty Name="COST_ACC" ColumnName="COST_ACC" />
+                <ScalarProperty Name="RECEIPT_ACC" ColumnName="RECEIPT_ACC" />
+                <ScalarProperty Name="KOD_VAL" ColumnName="KOD_VAL" />
+                <ScalarProperty Name="KL_KOD" ColumnName="KL_KOD" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="client_paspdata">
+            <EntityTypeMapping TypeName="bankasiaNSModel.client_paspdata">
+              <MappingFragment StoreEntitySet="client_paspdata">
+                <ScalarProperty Name="vzml_dl_code" ColumnName="vzml_dl_code" />
+                <ScalarProperty Name="p_family_status" ColumnName="p_family_status" />
+                <ScalarProperty Name="p_nation" ColumnName="p_nation" />
+                <ScalarProperty Name="p_father" ColumnName="p_father" />
+                <ScalarProperty Name="p_pol" ColumnName="p_pol" />
+                <ScalarProperty Name="p_db" ColumnName="p_db" />
+                <ScalarProperty Name="p_mb" ColumnName="p_mb" />
+                <ScalarProperty Name="p_strb" ColumnName="p_strb" />
+                <ScalarProperty Name="p_noend" ColumnName="p_noend" />
+                <ScalarProperty Name="p_datev" ColumnName="p_datev" />
+                <ScalarProperty Name="p_enddok" ColumnName="p_enddok" />
+                <ScalarProperty Name="p_mvd" ColumnName="p_mvd" />
+                <ScalarProperty Name="p_ndok" ColumnName="p_ndok" />
+                <ScalarProperty Name="p_srdok" ColumnName="p_srdok" />
+                <ScalarProperty Name="p_viddok" ColumnName="p_viddok" />
+                <ScalarProperty Name="p_viddoksfr" ColumnName="p_viddoksfr" />
+                <ScalarProperty Name="p_grajd" ColumnName="p_grajd" />
+                <ScalarProperty Name="p_otch" ColumnName="p_otch" />
+                <ScalarProperty Name="p_name" ColumnName="p_name" />
+                <ScalarProperty Name="p_fam" ColumnName="p_fam" />
+                <ScalarProperty Name="p_inn" ColumnName="p_inn" />
+                <ScalarProperty Name="dl_kod" ColumnName="dl_kod" />
+                <ScalarProperty Name="kl_kod" ColumnName="kl_kod" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="client_podpic">
+            <EntityTypeMapping TypeName="bankasiaNSModel.client_podpic">
+              <MappingFragment StoreEntitySet="client_podpic">
+                <ScalarProperty Name="kl_podp" ColumnName="kl_podp" />
+                <ScalarProperty Name="kl_kod" ColumnName="kl_kod" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="client_risk">
+            <EntityTypeMapping TypeName="bankasiaNSModel.client_risk">
+              <MappingFragment StoreEntitySet="client_risk">
+                <ScalarProperty Name="CR_DATE" ColumnName="CR_DATE" />
+                <ScalarProperty Name="CR_OTV" ColumnName="CR_OTV" />
+                <ScalarProperty Name="CR_RISK_LEVEL" ColumnName="CR_RISK_LEVEL" />
+                <ScalarProperty Name="CR_KOM" ColumnName="CR_KOM" />
+                <ScalarProperty Name="CR_DL_KOD" ColumnName="CR_DL_KOD" />
+                <ScalarProperty Name="CR_KL_KOD" ColumnName="CR_KL_KOD" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientOrg">
+            <EntityTypeMapping TypeName="bankasiaNSModel.ClientOrg">
+              <MappingFragment StoreEntitySet="ClientOrg">
+                <ScalarProperty Name="KlKod" ColumnName="KlKod" />
+                <ScalarProperty Name="OrgKlKod" ColumnName="OrgKlKod" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="clientPhoto">
+            <EntityTypeMapping TypeName="bankasiaNSModel.clientPhoto">
+              <MappingFragment StoreEntitySet="clientPhoto">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="PhotoBase64" ColumnName="PhotoBase64" />
+                <ScalarProperty Name="DlCode" ColumnName="DlCode" />
+                <ScalarProperty Name="KlCode" ColumnName="KlCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientProxy">
+            <EntityTypeMapping TypeName="bankasiaNSModel.ClientProxy">
+              <MappingFragment StoreEntitySet="ClientProxy">
+                <ScalarProperty Name="ProxyImage" ColumnName="ProxyImage" />
+                <ScalarProperty Name="ClientCode" ColumnName="ClientCode" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="clients">
+            <EntityTypeMapping TypeName="bankasiaNSModel.clients">
+              <MappingFragment StoreEntitySet="clients">
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+                <ScalarProperty Name="LastEditDate" ColumnName="LastEditDate" />
+                <ScalarProperty Name="VerificationDate" ColumnName="VerificationDate" />
+                <ScalarProperty Name="IdPatent" ColumnName="IdPatent" />
+                <ScalarProperty Name="kl_fatca" ColumnName="kl_fatca" />
+                <ScalarProperty Name="kl_goal" ColumnName="kl_goal" />
+                <ScalarProperty Name="kl_dopvd" ColumnName="kl_dopvd" />
+                <ScalarProperty Name="kl_pzl" ColumnName="kl_pzl" />
+                <ScalarProperty Name="kl_ins" ColumnName="kl_ins" />
+                <ScalarProperty Name="KODC" ColumnName="KODC" />
+                <ScalarProperty Name="KODB" ColumnName="KODB" />
+                <ScalarProperty Name="kl_keyw" ColumnName="kl_keyw" />
+                <ScalarProperty Name="kl_otvcreate" ColumnName="kl_otvcreate" />
+                <ScalarProperty Name="kl_datecreate" ColumnName="kl_datecreate" />
+                <ScalarProperty Name="kl_isys" ColumnName="kl_isys" />
+                <ScalarProperty Name="KL_BONUS" ColumnName="KL_BONUS" />
+                <ScalarProperty Name="kl_sezend" ColumnName="kl_sezend" />
+                <ScalarProperty Name="kl_sez" ColumnName="kl_sez" />
+                <ScalarProperty Name="kl_wdoljn" ColumnName="kl_wdoljn" />
+                <ScalarProperty Name="kl_wfio" ColumnName="kl_wfio" />
+                <ScalarProperty Name="kl_wname" ColumnName="kl_wname" />
+                <ScalarProperty Name="kl_ustav" ColumnName="kl_ustav" />
+                <ScalarProperty Name="kl_dataendpat" ColumnName="kl_dataendpat" />
+                <ScalarProperty Name="kl_dataperereg" ColumnName="kl_dataperereg" />
+                <ScalarProperty Name="kl_datareg" ColumnName="kl_datareg" />
+                <ScalarProperty Name="kl_rnsf" ColumnName="kl_rnsf" />
+                <ScalarProperty Name="kl_okpo" ColumnName="kl_okpo" />
+                <ScalarProperty Name="kl_nomreg" ColumnName="kl_nomreg" />
+                <ScalarProperty Name="kl_orgreg" ColumnName="kl_orgreg" />
+                <ScalarProperty Name="kl_tel3" ColumnName="kl_tel3" />
+                <ScalarProperty Name="kl_tel2" ColumnName="kl_tel2" />
+                <ScalarProperty Name="kl_tel1" ColumnName="kl_tel1" />
+                <ScalarProperty Name="kl_benefs_paspdata" ColumnName="kl_benefs_paspdata" />
+                <ScalarProperty Name="kl_benefsname" ColumnName="kl_benefsname" />
+                <ScalarProperty Name="kl_benefs" ColumnName="kl_benefs" />
+                <ScalarProperty Name="kl_cfr" ColumnName="kl_cfr" />
+                <ScalarProperty Name="kl_offsh" ColumnName="kl_offsh" />
+                <ScalarProperty Name="kl_relig" ColumnName="kl_relig" />
+                <ScalarProperty Name="kl_kodter" ColumnName="kl_kodter" />
+                <ScalarProperty Name="kl_osnvd" ColumnName="kl_osnvd" />
+                <ScalarProperty Name="kl_otr" ColumnName="kl_otr" />
+                <ScalarProperty Name="kl_vidsob" ColumnName="kl_vidsob" />
+                <ScalarProperty Name="kl_inn" ColumnName="kl_inn" />
+                <ScalarProperty Name="kl_opf" ColumnName="kl_opf" />
+                <ScalarProperty Name="kl_rip" ColumnName="kl_rip" />
+                <ScalarProperty Name="kl_rpat" ColumnName="kl_rpat" />
+                <ScalarProperty Name="kl_rchp" ColumnName="kl_rchp" />
+                <ScalarProperty Name="kl_rzd" ColumnName="kl_rzd" />
+                <ScalarProperty Name="kl_stat" ColumnName="kl_stat" />
+                <ScalarProperty Name="kl_nam_eng" ColumnName="kl_nam_eng" />
+                <ScalarProperty Name="kl_nam" ColumnName="kl_nam" />
+                <ScalarProperty Name="kl_kod" ColumnName="kl_kod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ENUMERATOR_SPR">
+            <EntityTypeMapping TypeName="bankasiaNSModel.ENUMERATOR_SPR">
+              <MappingFragment StoreEntitySet="ENUMERATOR_SPR">
+                <ScalarProperty Name="krProdId" ColumnName="krProdId" />
+                <ScalarProperty Name="service_sms_id" ColumnName="service_sms_id" />
+                <ScalarProperty Name="ms_id" ColumnName="ms_id" />
+                <ScalarProperty Name="vzml_dl_code" ColumnName="vzml_dl_code" />
+                <ScalarProperty Name="biznes_partneru_code" ColumnName="biznes_partneru_code" />
+                <ScalarProperty Name="reg_code" ColumnName="reg_code" />
+                <ScalarProperty Name="korresp_kod" ColumnName="korresp_kod" />
+                <ScalarProperty Name="insider_kod" ColumnName="insider_kod" />
+                <ScalarProperty Name="client_kod" ColumnName="client_kod" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
