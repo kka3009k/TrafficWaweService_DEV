@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using TrafficWaveService.Dictionaries;
 namespace TrafficWaveService.Client
 {
@@ -39,8 +38,6 @@ namespace TrafficWaveService.Client
         public string Add()
         {
             string res = "Error - Add";
-            //Task.Run(() =>
-            //{
             try
             {
                 res = AddNewClient(_clientInfo);
@@ -49,7 +46,6 @@ namespace TrafficWaveService.Client
             {
                 res = ex.Message;
             }
-            //});
             return res;
         }
 
@@ -74,6 +70,7 @@ namespace TrafficWaveService.Client
                         kl_nam = pCl.first_name + " " + pCl.last_name + " " + pCl.patronymic,
                         kl_nam_eng = _Translate.Front(pCl.first_name + " " + pCl.last_name + " " + pCl.patronymic),
                         kl_tel1 = pCl.contact_phone,
+                        kl_tel2 = pCl.home_phone,
                         kl_kodter = "01",
                         kl_relig = false,
                         kl_offsh = false,

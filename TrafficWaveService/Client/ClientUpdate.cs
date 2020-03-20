@@ -49,8 +49,6 @@ namespace TrafficWaveService.Client
         public string Update()
         {
             string res = "Error-Update";
-            //Task.Run(() =>
-            //{
             try
             {
                 res = UpdateClient(_ClientInfo);
@@ -59,7 +57,6 @@ namespace TrafficWaveService.Client
             {
                 res = ex.Message;
             }
-            //});
             return res;
         }
 
@@ -74,11 +71,10 @@ namespace TrafficWaveService.Client
             {
                 using (bankasiaNSEntities db = new bankasiaNSEntities())
                 {
-                    int max_kod = db.clients.Max(x => x.kl_kod);
-
                     clients cl = db.clients.FirstOrDefault(x => x.kl_kod == _ClCode);
                     cl.kl_nam = pCl.first_name + " " + pCl.last_name + " " + pCl.patronymic;
                     cl.kl_tel1 = pCl.contact_phone;
+                    cl.kl_tel2 = pCl.home_phone != null ? pCl.home_phone : cl.kl_tel2;
                     //kl_kodter = "01",
                     db.SaveChanges();
                     UpdateClientPaspData(pCl);

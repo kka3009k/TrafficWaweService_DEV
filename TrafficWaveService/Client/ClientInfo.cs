@@ -56,7 +56,7 @@ namespace TrafficWaveService.Client
     }
     public class ClientInfo
     {
-         public int id { get; set; }
+    public int id { get; set; }
     public string inn { get; set; }
     public string first_name { get; set; }
     public string last_name { get; set; }
@@ -71,7 +71,7 @@ namespace TrafficWaveService.Client
     public PhotoClient photo_client { get; set; }
     public int person_type { get; set; }
     public string client_type { get; set; }
-    public object home_phone { get; set; }
+    public string home_phone { get; set; }
     public string contact_phone { get; set; }
     public object email { get; set; }
     public object gender { get; set; }
