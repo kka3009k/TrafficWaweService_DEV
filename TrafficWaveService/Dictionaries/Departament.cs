@@ -15,7 +15,7 @@ namespace TrafficWaveService.Dictionaries
 
         public void Init()
         {
-            
+            int test;
         }
     }
 }
