@@ -46,18 +46,20 @@ namespace TrafficWaveService.Client
         /// Обновление данных о клиенте
         /// </summary>
         /// <returns></returns>
-        public string Update()
+        public int Update()
         {
             string res = "Error-Update";
+            int ID=-1;
             try
             {
-                res = UpdateClient(_ClientInfo);
+                ID = UpdateClient(_ClientInfo);
             }
             catch (Exception ex)
             {
                 res = ex.Message;
+                new DataBase().WriteLog(ex, "Run");
             }
-            return res;
+            return ID;
         }
 
 
@@ -65,7 +67,7 @@ namespace TrafficWaveService.Client
         /// Метод для обновления информации о клиенте - таблица clients
         /// </summary>
         /// <param name="pCl"></param>
-        public string UpdateClient(ClientInfo pCl)
+        public int UpdateClient(ClientInfo pCl)
         {
             try
             {
@@ -78,12 +80,15 @@ namespace TrafficWaveService.Client
                     //kl_kodter = "01",
                     db.SaveChanges();
                     UpdateClientPaspData(pCl);
+
+                    return cl.kl_kod;
                 }
-                return "Update - OK";
             }
             catch(Exception ex)
             {
-                return ex.Message;
+                new DataBase().WriteLog(ex, "Run");
+                return -1;
+                
             }
         }
 

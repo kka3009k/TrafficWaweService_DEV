@@ -55,7 +55,8 @@ namespace TrafficWaveService.Client
                 Result res = new Result();
                 try
                 {
-                    res.Message = AddOrUpdateClient();
+                    res.Code = AddOrUpdateClient();
+                    res.Message = "Клиент создан";
                 }
                 catch (Exception ex)
                 {
@@ -67,51 +68,14 @@ namespace TrafficWaveService.Client
             });
         }
 
-        /// <summary>
-        /// Проверка статуса принят или отказано
-        /// </summary>
-        /// <returns></returns>
-        public Task<Result> Check(long pQueryId)
-        {
-            return Task.Run(() =>
-            {
-                Result res = new Result() { Code = 0, Message = "OK" };
-                try
-                {
-                    var owRes = new DataBase().GetOnlineWindows(pQueryId);
-                    if(owRes.Where(w=>w.ow_check == null).Count() > 0)
-                    {
-                        res.Code = 2;
-                        res.Message = "Processed";
-                    }
-                    if (owRes.Where(w => w.ow_check == 1).Count() > 0)
-                    {
-                        res.Code = 3;
-                        res.Message = "Accepted";
-                    }
-                    if (owRes.Where(w => w.ow_check == 2).Count() > 0)
-                    {
-                        res.Code = 4;
-                        res.Message = "Not Accepted";
-                    }
-                }
-                catch (Exception ex)
-                {
-                    new DataBase().WriteLog(ex, "Check");
-                    res.Code = 500;
-                    res.Message = "Inner error";
-                }
-                return res;
-            });
-        }
+      
 
         /// <summary>
         /// Метод для добавления или обновления клиента
         /// </summary>
         /// <returns></returns>
-        private string AddOrUpdateClient()
-        {
-            //string res = "OK";
+        private int AddOrUpdateClient()
+        { 
             using (bankasiaNSEntities db = new bankasiaNSEntities())
             {
                 clients cl = db.clients.FirstOrDefault(x => x.kl_inn.Trim() == _clientInfo.inn.Trim());

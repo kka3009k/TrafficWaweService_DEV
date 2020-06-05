@@ -314,6 +314,80 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="LoanApplication_create" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="bankadm">
+          <Parameter Name="BranchID" Type="smallint" Mode="In" />
+          <Parameter Name="OfficeID" Type="smallint" Mode="In" />
+          <Parameter Name="CurrencyID" Type="smallint" Mode="In" />
+          <Parameter Name="ClientID" Type="int" Mode="In" />
+          <Parameter Name="Amount" Type="numeric" Mode="In" />
+          <Parameter Name="LoanPercent" Type="numeric" Mode="In" />
+          <Parameter Name="PeriodInMonth" Type="int" Mode="In" />
+          <Parameter Name="GroupName" Type="varchar" Mode="In" />
+          <Parameter Name="FirstPaymentInPercent" Type="numeric" Mode="In" />
+          <Parameter Name="AttractionCanalID" Type="tinyint" Mode="In" />
+          <Parameter Name="ProductID" Type="int" Mode="In" />
+          <Parameter Name="ClientClassID" Type="tinyint" Mode="In" />
+          <Parameter Name="TypeClientID" Type="tinyint" Mode="In" />
+          <Parameter Name="AuctionSourceID" Type="int" Mode="In" />
+          <Parameter Name="PurposeID" Type="tinyint" Mode="In" />
+          <Parameter Name="PaymentSourceID" Type="tinyint" Mode="In" />
+          <Parameter Name="GuaranteeID" Type="int" Mode="In" />
+          <Parameter Name="StatusID" Type="tinyint" Mode="In" />
+          <Parameter Name="TypeCreditID" Type="smallint" Mode="In" />
+          <Parameter Name="EnterpriseID" Type="int" Mode="In" />
+          <Parameter Name="LoanSubTypeID" Type="tinyint" Mode="In" />
+          <Parameter Name="AimsID" Type="int" Mode="In" />
+          <Parameter Name="AimsComment" Type="varchar" Mode="In" />
+          <Parameter Name="FirstContactDate" Type="datetime" Mode="In" />
+          <Parameter Name="AnalysisDate" Type="datetime" Mode="In" />
+          <Parameter Name="CommitteeDate" Type="datetime" Mode="In" />
+          <Parameter Name="PersonID" Type="smallint" Mode="In" />
+          <Parameter Name="CreatorID" Type="smallint" Mode="In" />
+          <Parameter Name="BankConnection" Type="varchar" Mode="In" />
+          <Parameter Name="Comment" Type="varchar" Mode="In" />
+          <Parameter Name="ClientComment" Type="varchar" Mode="In" />
+          <Parameter Name="PercentType" Type="tinyint" Mode="In" />
+        </Function>
+        <Function Name="LoanApplication_createLoanContract" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="bankadm">
+          <Parameter Name="applicationID" Type="int" Mode="In" />
+          <Parameter Name="CreatorID" Type="smallint" Mode="In" />
+        </Function>
+        <Function Name="LoanApplication_update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="bankadm">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="ApplicationNumber" Type="varchar" Mode="In" />
+          <Parameter Name="BranchID" Type="smallint" Mode="In" />
+          <Parameter Name="OfficeID" Type="smallint" Mode="In" />
+          <Parameter Name="CurrencyID" Type="smallint" Mode="In" />
+          <Parameter Name="ClientID" Type="int" Mode="In" />
+          <Parameter Name="Amount" Type="numeric" Mode="In" />
+          <Parameter Name="LoanPercent" Type="numeric" Mode="In" />
+          <Parameter Name="PeriodInMonth" Type="int" Mode="In" />
+          <Parameter Name="GroupName" Type="varchar" Mode="In" />
+          <Parameter Name="FirstPaymentInPercent" Type="numeric" Mode="In" />
+          <Parameter Name="AttractionCanalID" Type="tinyint" Mode="In" />
+          <Parameter Name="ProductID" Type="int" Mode="In" />
+          <Parameter Name="ClientClassID" Type="tinyint" Mode="In" />
+          <Parameter Name="TypeClientID" Type="tinyint" Mode="In" />
+          <Parameter Name="AuctionSourceID" Type="int" Mode="In" />
+          <Parameter Name="PurposeID" Type="tinyint" Mode="In" />
+          <Parameter Name="PaymentSourceID" Type="tinyint" Mode="In" />
+          <Parameter Name="GuaranteeID" Type="int" Mode="In" />
+          <Parameter Name="StatusID" Type="tinyint" Mode="In" />
+          <Parameter Name="TypeCreditID" Type="smallint" Mode="In" />
+          <Parameter Name="EnterpriseID" Type="int" Mode="In" />
+          <Parameter Name="LoanSubTypeID" Type="tinyint" Mode="In" />
+          <Parameter Name="AimsID" Type="int" Mode="In" />
+          <Parameter Name="AimsComment" Type="varchar" Mode="In" />
+          <Parameter Name="FirstContactDate" Type="datetime" Mode="In" />
+          <Parameter Name="AnalysisDate" Type="datetime" Mode="In" />
+          <Parameter Name="CommitteeDate" Type="datetime" Mode="In" />
+          <Parameter Name="PersonID" Type="smallint" Mode="In" />
+          <Parameter Name="CreatorID" Type="smallint" Mode="In" />
+          <Parameter Name="BankConnection" Type="varchar" Mode="In" />
+          <Parameter Name="Comment" Type="varchar" Mode="In" />
+          <Parameter Name="ClientComment" Type="varchar" Mode="In" />
+          <Parameter Name="PercentType" Type="tinyint" Mode="In" />
+        </Function>
         <Function Name="SearchReg" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="pFam" Type="varchar" Mode="In" />
           <Parameter Name="pName" Type="varchar" Mode="In" />
@@ -395,6 +469,80 @@
             <End Role="clientPhoto" EntitySet="clientPhoto" />
           </AssociationSet>
           <EntitySet Name="ENUMERATOR_SPR" EntityType="bankasiaNSModel.ENUMERATOR_SPR" />
+          <FunctionImport Name="LoanApplication_create" ReturnType="Collection(Int32)">
+            <Parameter Name="BranchID" Mode="In" Type="Int16" />
+            <Parameter Name="OfficeID" Mode="In" Type="Int16" />
+            <Parameter Name="CurrencyID" Mode="In" Type="Int16" />
+            <Parameter Name="ClientID" Mode="In" Type="Int32" />
+            <Parameter Name="Amount" Mode="In" Type="Decimal" />
+            <Parameter Name="LoanPercent" Mode="In" Type="Decimal" />
+            <Parameter Name="PeriodInMonth" Mode="In" Type="Int32" />
+            <Parameter Name="GroupName" Mode="In" Type="String" />
+            <Parameter Name="FirstPaymentInPercent" Mode="In" Type="Decimal" />
+            <Parameter Name="AttractionCanalID" Mode="In" Type="Byte" />
+            <Parameter Name="ProductID" Mode="In" Type="Int32" />
+            <Parameter Name="ClientClassID" Mode="In" Type="Byte" />
+            <Parameter Name="TypeClientID" Mode="In" Type="Byte" />
+            <Parameter Name="AuctionSourceID" Mode="In" Type="Int32" />
+            <Parameter Name="PurposeID" Mode="In" Type="Byte" />
+            <Parameter Name="PaymentSourceID" Mode="In" Type="Byte" />
+            <Parameter Name="GuaranteeID" Mode="In" Type="Int32" />
+            <Parameter Name="StatusID" Mode="In" Type="Byte" />
+            <Parameter Name="TypeCreditID" Mode="In" Type="Int16" />
+            <Parameter Name="EnterpriseID" Mode="In" Type="Int32" />
+            <Parameter Name="LoanSubTypeID" Mode="In" Type="Byte" />
+            <Parameter Name="AimsID" Mode="In" Type="Int32" />
+            <Parameter Name="AimsComment" Mode="In" Type="String" />
+            <Parameter Name="FirstContactDate" Mode="In" Type="DateTime" />
+            <Parameter Name="AnalysisDate" Mode="In" Type="DateTime" />
+            <Parameter Name="CommitteeDate" Mode="In" Type="DateTime" />
+            <Parameter Name="PersonID" Mode="In" Type="Int16" />
+            <Parameter Name="CreatorID" Mode="In" Type="Int16" />
+            <Parameter Name="BankConnection" Mode="In" Type="String" />
+            <Parameter Name="Comment" Mode="In" Type="String" />
+            <Parameter Name="ClientComment" Mode="In" Type="String" />
+            <Parameter Name="PercentType" Mode="In" Type="Byte" />
+          </FunctionImport>
+          <FunctionImport Name="LoanApplication_update" ReturnType="Collection(bankasiaNSModel.LoanApplication_update_Result)">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="ApplicationNumber" Mode="In" Type="String" />
+            <Parameter Name="BranchID" Mode="In" Type="Int16" />
+            <Parameter Name="OfficeID" Mode="In" Type="Int16" />
+            <Parameter Name="CurrencyID" Mode="In" Type="Int16" />
+            <Parameter Name="ClientID" Mode="In" Type="Int32" />
+            <Parameter Name="Amount" Mode="In" Type="Decimal" />
+            <Parameter Name="LoanPercent" Mode="In" Type="Decimal" />
+            <Parameter Name="PeriodInMonth" Mode="In" Type="Int32" />
+            <Parameter Name="GroupName" Mode="In" Type="String" />
+            <Parameter Name="FirstPaymentInPercent" Mode="In" Type="Decimal" />
+            <Parameter Name="AttractionCanalID" Mode="In" Type="Byte" />
+            <Parameter Name="ProductID" Mode="In" Type="Int32" />
+            <Parameter Name="ClientClassID" Mode="In" Type="Byte" />
+            <Parameter Name="TypeClientID" Mode="In" Type="Byte" />
+            <Parameter Name="AuctionSourceID" Mode="In" Type="Int32" />
+            <Parameter Name="PurposeID" Mode="In" Type="Byte" />
+            <Parameter Name="PaymentSourceID" Mode="In" Type="Byte" />
+            <Parameter Name="GuaranteeID" Mode="In" Type="Int32" />
+            <Parameter Name="StatusID" Mode="In" Type="Byte" />
+            <Parameter Name="TypeCreditID" Mode="In" Type="Int16" />
+            <Parameter Name="EnterpriseID" Mode="In" Type="Int32" />
+            <Parameter Name="LoanSubTypeID" Mode="In" Type="Byte" />
+            <Parameter Name="AimsID" Mode="In" Type="Int32" />
+            <Parameter Name="AimsComment" Mode="In" Type="String" />
+            <Parameter Name="FirstContactDate" Mode="In" Type="DateTime" />
+            <Parameter Name="AnalysisDate" Mode="In" Type="DateTime" />
+            <Parameter Name="CommitteeDate" Mode="In" Type="DateTime" />
+            <Parameter Name="PersonID" Mode="In" Type="Int16" />
+            <Parameter Name="CreatorID" Mode="In" Type="Int16" />
+            <Parameter Name="BankConnection" Mode="In" Type="String" />
+            <Parameter Name="Comment" Mode="In" Type="String" />
+            <Parameter Name="ClientComment" Mode="In" Type="String" />
+            <Parameter Name="PercentType" Mode="In" Type="Byte" />
+          </FunctionImport>
+          <FunctionImport Name="LoanApplication_createLoanContract" ReturnType="Collection(bankasiaNSModel.LoanApplication_createLoanContract_Result)">
+            <Parameter Name="applicationID" Mode="In" Type="Int32" />
+            <Parameter Name="CreatorID" Mode="In" Type="Int16" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SearchReg_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -720,6 +868,14 @@
           <Property Name="service_sms_id" Type="Int32" />
           <Property Name="krProdId" Type="Int32" />
         </EntityType>
+        <ComplexType Name="LoanApplication_update_Result">
+          <Property Type="Int32" Name="MQ_RESULT" Nullable="true" />
+          <Property Type="String" Name="MQ_DESC" Nullable="false" MaxLength="1" />
+        </ComplexType>
+        <ComplexType Name="LoanApplication_createLoanContract_Result">
+          <Property Type="Int32" Name="MQ_RESULT" Nullable="true" />
+          <Property Type="String" Name="MQ_DESC" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1012,6 +1168,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="LoanApplication_create" FunctionName="Хранилище bankasiaNSModel.LoanApplication_create" />
+          <FunctionImportMapping FunctionImportName="LoanApplication_update" FunctionName="Хранилище bankasiaNSModel.LoanApplication_update">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="bankasiaNSModel.LoanApplication_update_Result">
+                <ScalarProperty Name="MQ_RESULT" ColumnName="MQ_RESULT" />
+                <ScalarProperty Name="MQ_DESC" ColumnName="MQ_DESC" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="LoanApplication_createLoanContract" FunctionName="Хранилище bankasiaNSModel.LoanApplication_createLoanContract">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="bankasiaNSModel.LoanApplication_createLoanContract_Result">
+                <ScalarProperty Name="MQ_RESULT" ColumnName="MQ_RESULT" />
+                <ScalarProperty Name="MQ_DESC" ColumnName="MQ_DESC" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

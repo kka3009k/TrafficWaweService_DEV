@@ -1,4 +1,4 @@
-﻿// Создание кода T4 для модели "C:\Users\k.kargin\Desktop\Traffic\TrafficWaveService_DEVELOPMENT\TrafficWaveService\TrafficWaveModel.edmx" включено. 
+﻿// Создание кода T4 для модели "C:\Users\k.kargin\Desktop\Traffic\TrafficWaweService_DEV\TrafficWaveService\TrafficWaveModel.edmx" включено. 
 // Чтобы включить формирование кода прежних версий, измените значение свойства "Стратегия создания кода" конструктора
 // на "Legacy ObjectContext". Это свойство доступно в окне "Свойства", если модель
 // открыта в конструкторе.

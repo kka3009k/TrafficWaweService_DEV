@@ -3,6 +3,9 @@ using System.Threading.Tasks;
 using TrafficWaveService.Factory.SearchFactory;
 using TrafficWaveService.Client;
 using TrafficWaveService.Dictionaries;
+using TrafficWaveService.Reports;
+using TrafficWaveService.ClientSearch;
+using TrafficWaveService.CreditApp;
 namespace TrafficWaveService
 {
     /// <summary>
@@ -34,7 +37,7 @@ namespace TrafficWaveService
 
 
         /// <summary>
-        /// Метод поиска
+        /// Метод для работы с клиентами
         /// </summary>
         /// <param name="pClientQuery">Параметры запроса</param>
         /// <param name="pAddType">Тип объекта</param>
@@ -46,6 +49,40 @@ namespace TrafficWaveService
             string res = trans.Front("Султан Джунушалиев Аскенович");
             return await client.Run();
         }
+
+        /// <summary>
+        /// Метод для работы c шаблоном документа
+        /// </summary>
+        /// <param name="pTemplateQuery">Параметры запроса</param>
+        /// <returns></returns>
+        public async Task<ResultBase64> GetTemplatePdf(TemplateQuery pTemplateQuery)
+        {
+            TemlateMain client = new TemlateMain(pTemplateQuery);  
+            return await client.Run();
+        }
+
+        /// <summary>
+        /// Метод для поиска клиента по ИНН
+        /// </summary>
+        /// <param name="pTemplateQuery">Параметры запроса</param>
+        /// <returns></returns>
+        public async Task<ResultData> SearchClient(SearchClientQuery pTemplateQuery)
+        {
+            SeachMain search= new SeachMain(pTemplateQuery);
+            return await search.Run();
+        }
+
+        /// <summary>
+        /// Создание кредитной заявки
+        /// </summary>
+        /// <param name="pCreditQuery">Параметры запроса</param>
+        /// <returns></returns>
+        public async Task<Result> CreateLoanApp(CreditQuery pCreditQuery)
+        {
+            CreditController credit = new CreditController(pCreditQuery);
+            return await credit.Run();
+        }
+
 
 
     }

@@ -35,18 +35,20 @@ namespace TrafficWaveService.Client
         /// Добавление нового клиента
         /// </summary>
         /// <returns></returns>
-        public string Add()
+        public int Add()
         {
             string res = "Error - Add";
+            int ID = -1;
             try
             {
-                res = AddNewClient(_clientInfo);
+                ID = AddNewClient(_clientInfo);
             }
             catch (Exception ex)
             {
                 res = ex.Message;
+                new DataBase().WriteLog(ex, "Run");
             }
-            return res;
+            return ID;
         }
 
 
@@ -54,7 +56,7 @@ namespace TrafficWaveService.Client
         /// Метод для добавления нового клиента - таблица clients
         /// </summary>
         /// <param name="pCl"></param>
-        public string AddNewClient(ClientInfo pCl)
+        public int AddNewClient(ClientInfo pCl)
         {
             try
             {
@@ -77,17 +79,19 @@ namespace TrafficWaveService.Client
                         KODB = 60,
                         kl_rchp = false,
                         kl_cfr = 1,
-                        
+
                     };
                     db.clients.Add(cl);
                     db.SaveChanges();
                     AddNewClientPaspData(pCl, cl.kl_kod);
+
+                    return cl.kl_kod;
                 }
-                return "Add - OK";
             }
             catch(Exception ex)
             {
-                return ex.Message;
+                new DataBase().WriteLog(ex, "Run");
+                return -1;
             }
         }
 
