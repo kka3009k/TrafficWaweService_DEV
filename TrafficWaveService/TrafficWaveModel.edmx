@@ -234,6 +234,46 @@
           <Property Name="service_sms_id" Type="int" />
           <Property Name="krProdId" Type="int" />
         </EntityType>
+        <EntityType Name="LoanApplication">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ApplicationNumber" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="BranchID" Type="smallint" Nullable="false" />
+          <Property Name="OfficeID" Type="smallint" Nullable="false" />
+          <Property Name="CurrencyID" Type="smallint" Nullable="false" />
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="numeric" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="LoanPercent" Type="numeric" Precision="10" Scale="4" Nullable="false" />
+          <Property Name="PeriodInMonth" Type="int" Nullable="false" />
+          <Property Name="GroupName" Type="varchar" MaxLength="150" />
+          <Property Name="FirstPaymentInPercent" Type="numeric" Precision="10" Scale="4" Nullable="false" />
+          <Property Name="AttractionCanalID" Type="tinyint" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="ClientClassID" Type="tinyint" Nullable="false" />
+          <Property Name="TypeClientID" Type="tinyint" Nullable="false" />
+          <Property Name="AuctionSourceID" Type="int" Nullable="false" />
+          <Property Name="PurposeID" Type="tinyint" />
+          <Property Name="PaymentSourceID" Type="tinyint" Nullable="false" />
+          <Property Name="GuaranteeID" Type="int" Nullable="false" />
+          <Property Name="StatusID" Type="tinyint" Nullable="false" />
+          <Property Name="TypeCreditID" Type="smallint" Nullable="false" />
+          <Property Name="EnterpriseID" Type="int" Nullable="false" />
+          <Property Name="LoanSubTypeID" Type="tinyint" Nullable="false" />
+          <Property Name="AimsID" Type="int" Nullable="false" />
+          <Property Name="AimsComment" Type="varchar" MaxLength="500" />
+          <Property Name="DateCreate" Type="datetime" Nullable="false" />
+          <Property Name="FirstContactDate" Type="datetime" Nullable="false" />
+          <Property Name="AnalysisDate" Type="datetime" />
+          <Property Name="CommitteeDate" Type="datetime" />
+          <Property Name="PersonID" Type="decimal" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="CreatorID" Type="smallint" Nullable="false" />
+          <Property Name="BankConnection" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Comment" Type="varchar" MaxLength="500" />
+          <Property Name="ClientComment" Type="varchar" MaxLength="500" />
+          <Property Name="PercentType" Type="tinyint" />
+        </EntityType>
         <EntityType Name="LOG_APP">
           <Key>
             <PropertyRef Name="id" />
@@ -266,6 +306,52 @@
           <Property Name="ow_edit" Type="int" />
           <Property Name="ow_open" Type="int" />
         </EntityType>
+        <EntityType Name="LoanContracts">
+          <Key>
+            <PropertyRef Name="DgPozn" />
+            <PropertyRef Name="KodKl" />
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="DgPozn" Type="int" Nullable="false" />
+          <Property Name="KodKl" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="250" />
+          <Property Name="Description" Type="varchar" MaxLength="250" />
+          <Property Name="Number" Type="varchar" MaxLength="50" />
+          <Property Name="Decision" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="LoanCredits">
+          <Key>
+            <PropertyRef Name="DgPozn" />
+            <PropertyRef Name="KodKl" />
+          </Key>
+          <Property Name="DgPozn" Type="int" Nullable="false" />
+          <Property Name="KodKl" Type="int" Nullable="false" />
+          <Property Name="Pozn_Old" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="SourceID" Type="tinyint" />
+          <Property Name="ClassID" Type="tinyint" />
+          <Property Name="QuantityID" Type="tinyint" Nullable="false" />
+          <Property Name="ProductID" Type="int" />
+          <Property Name="DateIssue" Type="date" />
+          <Property Name="DateEnd" Type="date" />
+          <Property Name="Period" Type="int" Nullable="false" />
+          <Property Name="FirstPayment" Type="numeric" Precision="10" Scale="2" />
+          <Property Name="Amount" Type="numeric" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="TypeCreditID" Type="smallint" Nullable="false" />
+          <Property Name="EnterpriseID" Type="int" Nullable="false" />
+          <Property Name="AimsID" Type="int" />
+          <Property Name="PurposeID" Type="tinyint" />
+          <Property Name="StatusCreditID" Type="tinyint" />
+          <Property Name="LenderID" Type="smallint" />
+          <Property Name="ResponsibleID" Type="smallint" />
+          <Property Name="CreatorID" Type="smallint" />
+          <Property Name="DateFactEnd" Type="date" />
+          <Property Name="StatusEnd" Type="tinyint" />
+          <Property Name="TypeEnd" Type="tinyint" />
+          <Property Name="AmountEnd" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="CheckCredits" Type="smallint" />
+        </EntityType>
         <Association Name="FK__client_ri__CR_KL__58360A52">
           <End Role="clients" Type="Self.clients" Multiplicity="0..1" />
           <End Role="client_risk" Type="Self.client_risk" Multiplicity="*" />
@@ -275,6 +361,30 @@
             </Principal>
             <Dependent Role="client_risk">
               <PropertyRef Name="CR_KL_KOD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LoanContr__KodKl__01816D51">
+          <End Role="clients" Type="Self.clients" Multiplicity="1" />
+          <End Role="LoanContracts" Type="Self.LoanContracts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="kl_kod" />
+            </Principal>
+            <Dependent Role="LoanContracts">
+              <PropertyRef Name="KodKl" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LoanCredi__KodKl__75A5A651">
+          <End Role="clients" Type="Self.clients" Multiplicity="1" />
+          <End Role="LoanCredits" Type="Self.LoanCredits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="kl_kod" />
+            </Principal>
+            <Dependent Role="LoanCredits">
+              <PropertyRef Name="KodKl" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -311,6 +421,18 @@
             </Principal>
             <Dependent Role="ClientOrg">
               <PropertyRef Name="OrgKlKod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoanApplicaton_clients">
+          <End Role="clients" Type="Self.clients" Multiplicity="1" />
+          <End Role="LoanApplication" Type="Self.LoanApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="kl_kod" />
+            </Principal>
+            <Dependent Role="LoanApplication">
+              <PropertyRef Name="ClientID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -408,11 +530,22 @@
           <EntitySet Name="ClientProxy" EntityType="Self.ClientProxy" Schema="bankadm" store:Type="Tables" />
           <EntitySet Name="clients" EntityType="Self.clients" Schema="bankadm" store:Type="Tables" />
           <EntitySet Name="ENUMERATOR_SPR" EntityType="Self.ENUMERATOR_SPR" Schema="bankadm" store:Type="Tables" />
+          <EntitySet Name="LoanApplication" EntityType="Self.LoanApplication" Schema="bankadm" store:Type="Tables" />
           <EntitySet Name="LOG_APP" EntityType="Self.LOG_APP" Schema="bankadm" store:Type="Tables" />
           <EntitySet Name="ow" EntityType="Self.ow" Schema="bankadm" store:Type="Tables" />
+          <EntitySet Name="LoanContracts" EntityType="Self.LoanContracts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoanCredits" EntityType="Self.LoanCredits" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__client_ri__CR_KL__58360A52" Association="Self.FK__client_ri__CR_KL__58360A52">
             <End Role="clients" EntitySet="clients" />
             <End Role="client_risk" EntitySet="client_risk" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LoanContr__KodKl__01816D51" Association="Self.FK__LoanContr__KodKl__01816D51">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="LoanContracts" EntitySet="LoanContracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LoanCredi__KodKl__75A5A651" Association="Self.FK__LoanCredi__KodKl__75A5A651">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="LoanCredits" EntitySet="LoanCredits" />
           </AssociationSet>
           <AssociationSet Name="FK_200420_ClCode" Association="Self.FK_200420_ClCode">
             <End Role="clients" EntitySet="clients" />
@@ -425,6 +558,10 @@
           <AssociationSet Name="FK_ClientOrg_clients1" Association="Self.FK_ClientOrg_clients1">
             <End Role="clients" EntitySet="clients" />
             <End Role="ClientOrg" EntitySet="ClientOrg" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoanApplicaton_clients" Association="Self.FK_LoanApplicaton_clients">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="LoanApplication" EntitySet="LoanApplication" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -543,6 +680,21 @@
             <Parameter Name="applicationID" Mode="In" Type="Int32" />
             <Parameter Name="CreatorID" Mode="In" Type="Int16" />
           </FunctionImport>
+          <EntitySet Name="LoanApplication" EntityType="bankasiaNSModel.LoanApplication" />
+          <AssociationSet Name="FK_LoanApplicaton_clients" Association="bankasiaNSModel.FK_LoanApplicaton_clients">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="LoanApplication" EntitySet="LoanApplication" />
+          </AssociationSet>
+          <EntitySet Name="LoanContracts" EntityType="bankasiaNSModel.LoanContracts" />
+          <EntitySet Name="LoanCredits" EntityType="bankasiaNSModel.LoanCredits" />
+          <AssociationSet Name="FK__LoanContr__KodKl__01816D51" Association="bankasiaNSModel.FK__LoanContr__KodKl__01816D51">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="LoanContracts" EntitySet="LoanContracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LoanCredi__KodKl__75A5A651" Association="bankasiaNSModel.FK__LoanCredi__KodKl__75A5A651">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="LoanCredits" EntitySet="LoanCredits" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="SearchReg_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -804,6 +956,9 @@
           <NavigationProperty Name="ClientOrg" Relationship="bankasiaNSModel.FK_ClientOrg_clients" FromRole="clients" ToRole="ClientOrg" />
           <NavigationProperty Name="ClientOrg1" Relationship="bankasiaNSModel.FK_ClientOrg_clients1" FromRole="clients" ToRole="ClientOrg" />
           <NavigationProperty Name="clientPhoto" Relationship="bankasiaNSModel.FK_200420_ClCode" FromRole="clients" ToRole="clientPhoto" />
+          <NavigationProperty Name="LoanApplication" Relationship="bankasiaNSModel.FK_LoanApplicaton_clients" FromRole="clients" ToRole="LoanApplication" />
+          <NavigationProperty Name="LoanContracts" Relationship="bankasiaNSModel.FK__LoanContr__KodKl__01816D51" FromRole="clients" ToRole="LoanContracts" />
+          <NavigationProperty Name="LoanCredits" Relationship="bankasiaNSModel.FK__LoanCredi__KodKl__75A5A651" FromRole="clients" ToRole="LoanCredits" />
         </EntityType>
         <Association Name="FK__client_ri__CR_KL__58360A52">
           <End Type="bankasiaNSModel.clients" Role="clients" Multiplicity="0..1" />
@@ -876,6 +1031,131 @@
           <Property Type="Int32" Name="MQ_RESULT" Nullable="true" />
           <Property Type="String" Name="MQ_DESC" Nullable="true" />
         </ComplexType>
+        <EntityType Name="LoanApplication">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ApplicationNumber" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="BranchID" Type="Int16" Nullable="false" />
+          <Property Name="OfficeID" Type="Int16" Nullable="false" />
+          <Property Name="CurrencyID" Type="Int16" Nullable="false" />
+          <Property Name="ClientID" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="15" Scale="2" />
+          <Property Name="LoanPercent" Type="Decimal" Nullable="false" Precision="10" Scale="4" />
+          <Property Name="PeriodInMonth" Type="Int32" Nullable="false" />
+          <Property Name="GroupName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="FirstPaymentInPercent" Type="Decimal" Nullable="false" Precision="10" Scale="4" />
+          <Property Name="AttractionCanalID" Type="Byte" Nullable="false" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="ClientClassID" Type="Byte" Nullable="false" />
+          <Property Name="TypeClientID" Type="Byte" Nullable="false" />
+          <Property Name="AuctionSourceID" Type="Int32" Nullable="false" />
+          <Property Name="PurposeID" Type="Byte" />
+          <Property Name="PaymentSourceID" Type="Byte" Nullable="false" />
+          <Property Name="GuaranteeID" Type="Int32" Nullable="false" />
+          <Property Name="StatusID" Type="Byte" Nullable="false" />
+          <Property Name="TypeCreditID" Type="Int16" Nullable="false" />
+          <Property Name="EnterpriseID" Type="Int32" Nullable="false" />
+          <Property Name="LoanSubTypeID" Type="Byte" Nullable="false" />
+          <Property Name="AimsID" Type="Int32" Nullable="false" />
+          <Property Name="AimsComment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DateCreate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FirstContactDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AnalysisDate" Type="DateTime" Precision="3" />
+          <Property Name="CommitteeDate" Type="DateTime" Precision="3" />
+          <Property Name="PersonID" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+          <Property Name="CreatorID" Type="Int16" Nullable="false" />
+          <Property Name="BankConnection" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Comment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ClientComment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="PercentType" Type="Byte" />
+          <NavigationProperty Name="clients" Relationship="bankasiaNSModel.FK_LoanApplicaton_clients" FromRole="LoanApplication" ToRole="clients" />
+        </EntityType>
+        <Association Name="FK_LoanApplicaton_clients">
+          <End Type="bankasiaNSModel.clients" Role="clients" Multiplicity="1" />
+          <End Type="bankasiaNSModel.LoanApplication" Role="LoanApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="kl_kod" />
+            </Principal>
+            <Dependent Role="LoanApplication">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="LoanContracts">
+          <Key>
+            <PropertyRef Name="DgPozn" />
+            <PropertyRef Name="KodKl" />
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="DgPozn" Type="Int32" Nullable="false" />
+          <Property Name="KodKl" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Decision" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="clients" Relationship="bankasiaNSModel.FK__LoanContr__KodKl__01816D51" FromRole="LoanContracts" ToRole="clients" />
+        </EntityType>
+        <EntityType Name="LoanCredits">
+          <Key>
+            <PropertyRef Name="DgPozn" />
+            <PropertyRef Name="KodKl" />
+          </Key>
+          <Property Name="DgPozn" Type="Int32" Nullable="false" />
+          <Property Name="KodKl" Type="Int32" Nullable="false" />
+          <Property Name="Pozn_Old" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="SourceID" Type="Byte" />
+          <Property Name="ClassID" Type="Byte" />
+          <Property Name="QuantityID" Type="Byte" Nullable="false" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="DateIssue" Type="DateTime" Precision="0" />
+          <Property Name="DateEnd" Type="DateTime" Precision="0" />
+          <Property Name="Period" Type="Int32" Nullable="false" />
+          <Property Name="FirstPayment" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="15" Scale="2" />
+          <Property Name="TypeCreditID" Type="Int16" Nullable="false" />
+          <Property Name="EnterpriseID" Type="Int32" Nullable="false" />
+          <Property Name="AimsID" Type="Int32" />
+          <Property Name="PurposeID" Type="Byte" />
+          <Property Name="StatusCreditID" Type="Byte" />
+          <Property Name="LenderID" Type="Int16" />
+          <Property Name="ResponsibleID" Type="Int16" />
+          <Property Name="CreatorID" Type="Int16" />
+          <Property Name="DateFactEnd" Type="DateTime" Precision="0" />
+          <Property Name="StatusEnd" Type="Byte" />
+          <Property Name="TypeEnd" Type="Byte" />
+          <Property Name="AmountEnd" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="CheckCredits" Type="Int16" />
+          <NavigationProperty Name="clients" Relationship="bankasiaNSModel.FK__LoanCredi__KodKl__75A5A651" FromRole="LoanCredits" ToRole="clients" />
+        </EntityType>
+        <Association Name="FK__LoanContr__KodKl__01816D51">
+          <End Type="bankasiaNSModel.clients" Role="clients" Multiplicity="1" />
+          <End Type="bankasiaNSModel.LoanContracts" Role="LoanContracts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="kl_kod" />
+            </Principal>
+            <Dependent Role="LoanContracts">
+              <PropertyRef Name="KodKl" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LoanCredi__KodKl__75A5A651">
+          <End Type="bankasiaNSModel.clients" Role="clients" Multiplicity="1" />
+          <End Type="bankasiaNSModel.LoanCredits" Role="LoanCredits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="kl_kod" />
+            </Principal>
+            <Dependent Role="LoanCredits">
+              <PropertyRef Name="KodKl" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1185,6 +1465,92 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="LoanApplication">
+            <EntityTypeMapping TypeName="bankasiaNSModel.LoanApplication">
+              <MappingFragment StoreEntitySet="LoanApplication">
+                <ScalarProperty Name="PercentType" ColumnName="PercentType" />
+                <ScalarProperty Name="ClientComment" ColumnName="ClientComment" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="BankConnection" ColumnName="BankConnection" />
+                <ScalarProperty Name="CreatorID" ColumnName="CreatorID" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+                <ScalarProperty Name="CommitteeDate" ColumnName="CommitteeDate" />
+                <ScalarProperty Name="AnalysisDate" ColumnName="AnalysisDate" />
+                <ScalarProperty Name="FirstContactDate" ColumnName="FirstContactDate" />
+                <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
+                <ScalarProperty Name="AimsComment" ColumnName="AimsComment" />
+                <ScalarProperty Name="AimsID" ColumnName="AimsID" />
+                <ScalarProperty Name="LoanSubTypeID" ColumnName="LoanSubTypeID" />
+                <ScalarProperty Name="EnterpriseID" ColumnName="EnterpriseID" />
+                <ScalarProperty Name="TypeCreditID" ColumnName="TypeCreditID" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="GuaranteeID" ColumnName="GuaranteeID" />
+                <ScalarProperty Name="PaymentSourceID" ColumnName="PaymentSourceID" />
+                <ScalarProperty Name="PurposeID" ColumnName="PurposeID" />
+                <ScalarProperty Name="AuctionSourceID" ColumnName="AuctionSourceID" />
+                <ScalarProperty Name="TypeClientID" ColumnName="TypeClientID" />
+                <ScalarProperty Name="ClientClassID" ColumnName="ClientClassID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="AttractionCanalID" ColumnName="AttractionCanalID" />
+                <ScalarProperty Name="FirstPaymentInPercent" ColumnName="FirstPaymentInPercent" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="PeriodInMonth" ColumnName="PeriodInMonth" />
+                <ScalarProperty Name="LoanPercent" ColumnName="LoanPercent" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="CurrencyID" ColumnName="CurrencyID" />
+                <ScalarProperty Name="OfficeID" ColumnName="OfficeID" />
+                <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+                <ScalarProperty Name="ApplicationNumber" ColumnName="ApplicationNumber" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoanContracts">
+            <EntityTypeMapping TypeName="bankasiaNSModel.LoanContracts">
+              <MappingFragment StoreEntitySet="LoanContracts">
+                <ScalarProperty Name="Decision" ColumnName="Decision" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="KodKl" ColumnName="KodKl" />
+                <ScalarProperty Name="DgPozn" ColumnName="DgPozn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoanCredits">
+            <EntityTypeMapping TypeName="bankasiaNSModel.LoanCredits">
+              <MappingFragment StoreEntitySet="LoanCredits">
+                <ScalarProperty Name="CheckCredits" ColumnName="CheckCredits" />
+                <ScalarProperty Name="AmountEnd" ColumnName="AmountEnd" />
+                <ScalarProperty Name="TypeEnd" ColumnName="TypeEnd" />
+                <ScalarProperty Name="StatusEnd" ColumnName="StatusEnd" />
+                <ScalarProperty Name="DateFactEnd" ColumnName="DateFactEnd" />
+                <ScalarProperty Name="CreatorID" ColumnName="CreatorID" />
+                <ScalarProperty Name="ResponsibleID" ColumnName="ResponsibleID" />
+                <ScalarProperty Name="LenderID" ColumnName="LenderID" />
+                <ScalarProperty Name="StatusCreditID" ColumnName="StatusCreditID" />
+                <ScalarProperty Name="PurposeID" ColumnName="PurposeID" />
+                <ScalarProperty Name="AimsID" ColumnName="AimsID" />
+                <ScalarProperty Name="EnterpriseID" ColumnName="EnterpriseID" />
+                <ScalarProperty Name="TypeCreditID" ColumnName="TypeCreditID" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="FirstPayment" ColumnName="FirstPayment" />
+                <ScalarProperty Name="Period" ColumnName="Period" />
+                <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
+                <ScalarProperty Name="DateIssue" ColumnName="DateIssue" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="QuantityID" ColumnName="QuantityID" />
+                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+                <ScalarProperty Name="SourceID" ColumnName="SourceID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Pozn_Old" ColumnName="Pozn_Old" />
+                <ScalarProperty Name="KodKl" ColumnName="KodKl" />
+                <ScalarProperty Name="DgPozn" ColumnName="DgPozn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -42,6 +42,9 @@ namespace TrafficWaveService
         public virtual DbSet<ClientProxy> ClientProxy { get; set; }
         public virtual DbSet<clients> clients { get; set; }
         public virtual DbSet<ENUMERATOR_SPR> ENUMERATOR_SPR { get; set; }
+        public virtual DbSet<LoanApplication> LoanApplication { get; set; }
+        public virtual DbSet<LoanContracts> LoanContracts { get; set; }
+        public virtual DbSet<LoanCredits> LoanCredits { get; set; }
     
         public virtual ObjectResult<SearchReg_Result> SearchReg(string pFam, string pName, string pOtch, Nullable<byte> pStatus)
         {

@@ -24,6 +24,12 @@
         <AssociationConnector Association="bankasiaNSModel.FK_ClientOrg_clients1" />
         <AssociationConnector Association="bankasiaNSModel.FK_200420_ClCode" />
         <EntityTypeShape EntityType="bankasiaNSModel.ENUMERATOR_SPR" Width="1.5" PointX="13.375" PointY="3.75" />
+        <EntityTypeShape EntityType="bankasiaNSModel.LoanApplication" Width="1.5" PointX="8" PointY="12.375" />
+        <AssociationConnector Association="bankasiaNSModel.FK_LoanApplicaton_clients" />
+        <EntityTypeShape EntityType="bankasiaNSModel.LoanContracts" Width="1.5" PointX="8" PointY="21.75" />
+        <EntityTypeShape EntityType="bankasiaNSModel.LoanCredits" Width="1.5" PointX="8" PointY="25.125" />
+        <AssociationConnector Association="bankasiaNSModel.FK__LoanContr__KodKl__01816D51" />
+        <AssociationConnector Association="bankasiaNSModel.FK__LoanCredi__KodKl__75A5A651" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

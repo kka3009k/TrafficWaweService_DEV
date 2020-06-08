@@ -41,5 +41,11 @@ namespace TrafficWaveService.CreditApp
         public string AimsComment { get; set; }
         public int PercentType { get; set; }
 
+        public int IDLoan { get; set; }
+        public int IDLoanContract { get; set; }
+
+        //Тип операция 1 создание заявки 2 создание договора
+        public int TypeOperation { get; set; }
+
     }
 }

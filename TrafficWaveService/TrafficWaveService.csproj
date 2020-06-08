@@ -221,6 +221,7 @@
       <DependentUpon>TrafficWaveModel.tt</DependentUpon>
     </Compile>
     <Compile Include="CreditApp\CreditAppData.cs" />
+    <Compile Include="CreditApp\CreditContract.cs" />
     <Compile Include="CreditApp\CreditController.cs" />
     <Compile Include="CreditApp\CreditQuery.cs" />
     <Compile Include="DataBase.cs" />
@@ -235,7 +236,19 @@
     <Compile Include="Factory\SearchFactory\SearchCriminals.cs" />
     <Compile Include="Factory\SearchFactory\SearchFactory.cs" />
     <Compile Include="Factory\SearchFactory\SearchQuery.cs" />
+    <Compile Include="LoanApplication.cs">
+      <DependentUpon>TrafficWaveModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LoanApplication_createLoanContract_Result.cs">
+      <DependentUpon>TrafficWaveModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="LoanApplication_update_Result.cs">
+      <DependentUpon>TrafficWaveModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LoanContracts.cs">
+      <DependentUpon>TrafficWaveModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LoanCredits.cs">
       <DependentUpon>TrafficWaveModel.tt</DependentUpon>
     </Compile>
     <Compile Include="LOG_APP.cs">

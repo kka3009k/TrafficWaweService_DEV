@@ -40,20 +40,30 @@ namespace TrafficWaveService.CreditApp
         /// <returns></returns>
         public async Task<Result> Run()
         {
-            return await Task.Run(() => CreateCreditApp());
+            return await Task.Run(() => CreditApp());
         }
 
-        private Result CreateCreditApp()
+        private Result CreditApp()
         {
             Result res = new Result();
             try
             {
-              
+
                 //Десериализация строки
                 string str = _CreditQuery.RequestStringCreditData.Replace("None", "null").Replace("False", "false").Replace("True", "true");
                 _crApp = JsonConvert.DeserializeObject<CreditAppData>(str);
-                InsertCreditApp(_crApp);
-                res.Code = 200;
+                switch (_crApp.TypeOperation)
+                {
+                    case 1:
+                        res.Code = InsertCreditApp(_crApp);
+                        break;
+                    case 2:
+                        res.Code = InsertCreditContract(_crApp);
+                        break;
+                    default:
+                        res.Code = 200;
+                        break;
+                }
                 res.Message = "Заявка создана";
             }
             catch (Exception ex)
@@ -69,11 +79,16 @@ namespace TrafficWaveService.CreditApp
         /// Создание новой заявки
         /// </summary>
         /// <param name="pCr"></param>
-        private void InsertCreditApp(CreditAppData pCr)
+        private int InsertCreditApp(CreditAppData pCr)
         {
             using (bankasiaNSEntities db = new bankasiaNSEntities())
             {
-               var creditId  =  db.LoanApplication_create(
+                LoanApplication ln = db.LoanApplication.FirstOrDefault(x => x.ID == pCr.IDLoan);
+                if (ln != null)
+                {
+                    return ln.ID;
+                }
+                var creditId = db.LoanApplication_create(
                     (short)pCr.BranchID,
                     (short)pCr.OfficeID,
                     (short)pCr.CurrencyID,
@@ -110,11 +125,21 @@ namespace TrafficWaveService.CreditApp
                     //Коментарий клиента
                     " ",
                     (byte)pCr.PercentType
-                    
-                    );
-                db.SaveChanges();
 
+                    ).ToList();
+                db.SaveChanges();
+                return creditId.First().Value;
             }
+        }
+
+        /// <summary>
+        /// Создание нового договора
+        /// </summary>
+        /// <param name="pCr"></param>
+        private int InsertCreditContract(CreditAppData pCr)
+        {
+            CreditContract cr = new CreditContract();
+            return cr.CreateCreditContract(pCr);
         }
     }
 }
