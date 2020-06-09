@@ -27,7 +27,7 @@ namespace TrafficWaveService.Reports
         }
 
         /// <summary>
-        /// Возврать байтов файла
+        /// Возврат байтов файла
         /// </summary>
         /// <param name="filePath">путь к файлу</param>
         /// <returns>байты файла</returns>

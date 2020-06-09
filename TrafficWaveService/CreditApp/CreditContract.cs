@@ -26,5 +26,10 @@ namespace TrafficWaveService.CreditApp
                 return (int)contract.First().MQ_RESULT;
             }
         }
+
+        public string CreateCreditContractPdf(CreditAppData pCr)
+        {
+            return "";
+        }
     }
 }

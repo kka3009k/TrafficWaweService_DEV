@@ -55,16 +55,22 @@ namespace TrafficWaveService.CreditApp
                 switch (_crApp.TypeOperation)
                 {
                     case 1:
+                        //Создание новой заявки
                         res.Code = InsertCreditApp(_crApp);
                         break;
                     case 2:
+                        //Создание кредитнго договора
                         res.Code = InsertCreditContract(_crApp);
+                        break;
+                    case 3:
+                        //Формирование договора в формате PDF
+                        res.Message = GetContractCredit(_crApp);
                         break;
                     default:
                         res.Code = 200;
                         break;
                 }
-                res.Message = "Заявка создана";
+                res.Message = res.Message == null || res.Message == "" ? "Заявка создана" : res.Message;
             }
             catch (Exception ex)
             {
@@ -140,6 +146,17 @@ namespace TrafficWaveService.CreditApp
         {
             CreditContract cr = new CreditContract();
             return cr.CreateCreditContract(pCr);
+        }
+
+        /// <summary>
+        /// Формирование кр. договора
+        /// </summary>
+        /// <param name="pCr"></param>
+        /// <returns></returns>
+        private string GetContractCredit(CreditAppData pCr)
+        {
+            CreditContract cr = new CreditContract();
+            return cr.CreateCreditContractPdf(pCr);
         }
     }
 }

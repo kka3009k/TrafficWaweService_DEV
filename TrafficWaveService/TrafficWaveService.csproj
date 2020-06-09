@@ -314,7 +314,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Reports\Templates\Temp\empty.ts" />
   </ItemGroup>
