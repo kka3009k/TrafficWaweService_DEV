@@ -12,6 +12,10 @@ namespace TrafficWaveService.CreditApp
         {
            
         }
+        public CreditContract(CreditAppData pCr)
+        {
+            _Cr = pCr;
+        }
 
         public int CreateCreditContract(CreditAppData pCr)
         {
@@ -27,9 +31,19 @@ namespace TrafficWaveService.CreditApp
             }
         }
 
-        public string CreateCreditContractPdf(CreditAppData pCr)
+        public string CreateCreditContractPdf()
         {
+            Dictionary<string, object> dict = CreateContractMeta();
+            ReportServiceRef.ReportServiceClient client = new ReportServiceRef.ReportServiceClient();
+            client.print_DOG_KREDIT(dict, 0);
             return "";
+        }
+
+        private Dictionary<string, object> CreateContractMeta()
+        {
+            Dictionary<string, object> dict = new Dictionary<string, object>();
+            return dict;
+
         }
     }
 }

@@ -162,6 +162,13 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Service References\ReportServiceRef\ReportService.disco" />
+    <None Include="Service References\ReportServiceRef\configuration91.svcinfo" />
+    <None Include="Service References\ReportServiceRef\configuration.svcinfo" />
+    <None Include="Service References\ReportServiceRef\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="TrafficWave.svc" />
     <Content Include="TrafficWaveModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -268,6 +275,11 @@
     <Compile Include="SearchReg_Result.cs">
       <DependentUpon>TrafficWaveModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Service References\ReportServiceRef\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="TrafficWave.svc.cs">
       <DependentUpon>TrafficWave.svc</DependentUpon>
     </Compile>
@@ -307,6 +319,31 @@
     <Content Include="Reports\Templates\consen_doc_personal_data.docx" />
     <Content Include="Reports\Templates\req_doc_data.docx" />
     <Content Include="Reports\Templates\act_doc_data.docx" />
+    <None Include="Service References\ReportServiceRef\ReportService.wsdl" />
+    <None Include="Service References\ReportServiceRef\ReportService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ReportServiceRef\ReportService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ReportServiceRef\ReportService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ReportServiceRef\ReportService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ReportServiceRef\ReportService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Service References\ReportServiceRef\TrafficWaveService.ReportServiceRef.od230hResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ReportServiceRef\TrafficWaveService.ReportServiceRef.SS_Operation_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ReportServiceRef\TrafficWaveService.ReportServiceRef.XLSDownload.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -319,6 +356,9 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Reports\Templates\Temp\empty.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\ReportServiceRef\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
