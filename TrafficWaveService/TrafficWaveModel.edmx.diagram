@@ -30,6 +30,7 @@
         <EntityTypeShape EntityType="bankasiaNSModel.LoanCredits" Width="1.5" PointX="8" PointY="25.125" />
         <AssociationConnector Association="bankasiaNSModel.FK__LoanContr__KodKl__01816D51" />
         <AssociationConnector Association="bankasiaNSModel.FK__LoanCredi__KodKl__75A5A651" />
+        <EntityTypeShape EntityType="bankasiaNSModel.vLoanContract" Width="1.5" PointX="13.375" PointY="7.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

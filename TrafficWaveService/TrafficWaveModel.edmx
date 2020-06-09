@@ -352,6 +352,41 @@
           <Property Name="AmountEnd" Type="numeric" Precision="15" Scale="2" />
           <Property Name="CheckCredits" Type="smallint" />
         </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "bankasiaNS.bankadm.vLoanContract" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="vLoanContract">
+          <Key>
+            <PropertyRef Name="DG_POZN" />
+            <PropertyRef Name="DG_DATE" />
+            <PropertyRef Name="DG_SUM" />
+            <PropertyRef Name="dg_nomco" />
+            <PropertyRef Name="kodc" />
+            <PropertyRef Name="DG_VIDKR" />
+            <PropertyRef Name="DG_KODKL" />
+            <PropertyRef Name="DgPoznOld" />
+          </Key>
+          <Property Name="DG_POZN" Type="int" Nullable="false" />
+          <Property Name="DG_DATE" Type="date" Nullable="false" />
+          <Property Name="DG_DATEZ" Type="date" />
+          <Property Name="DG_KODV" Type="nvarchar" MaxLength="3" />
+          <Property Name="DG_NOM" Type="nvarchar" MaxLength="20" />
+          <Property Name="DG_NAM" Type="nvarchar" MaxLength="120" />
+          <Property Name="DG_SUM" Type="numeric" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="dg_nomco" Type="int" Nullable="false" />
+          <Property Name="kodb" Type="smallint" />
+          <Property Name="kodc" Type="int" Nullable="false" />
+          <Property Name="DG_LC" Type="nvarchar" MaxLength="10" />
+          <Property Name="ML_OSTV2" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="ML_OSTN2" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="GroupName" Type="varchar" MaxLength="100" />
+          <Property Name="DG_VIDKR" Type="tinyint" Nullable="false" />
+          <Property Name="DG_KODKL" Type="int" Nullable="false" />
+          <Property Name="DG_OTV" Type="smallint" />
+          <Property Name="DG_OTV1" Type="smallint" />
+          <Property Name="DG_CreatorID" Type="smallint" />
+          <Property Name="IsEmployee" Type="bit" />
+          <Property Name="DgPoznOld" Type="int" Nullable="false" />
+        </EntityType>
         <Association Name="FK__client_ri__CR_KL__58360A52">
           <End Role="clients" Type="Self.clients" Multiplicity="0..1" />
           <End Role="client_risk" Type="Self.client_risk" Multiplicity="*" />
@@ -535,6 +570,31 @@
           <EntitySet Name="ow" EntityType="Self.ow" Schema="bankadm" store:Type="Tables" />
           <EntitySet Name="LoanContracts" EntityType="Self.LoanContracts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoanCredits" EntityType="Self.LoanCredits" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vLoanContract" EntityType="Self.vLoanContract" store:Type="Views" store:Schema="bankadm">
+            <DefiningQuery>SELECT 
+    [vLoanContract].[DG_POZN] AS [DG_POZN], 
+    [vLoanContract].[DG_DATE] AS [DG_DATE], 
+    [vLoanContract].[DG_DATEZ] AS [DG_DATEZ], 
+    [vLoanContract].[DG_KODV] AS [DG_KODV], 
+    [vLoanContract].[DG_NOM] AS [DG_NOM], 
+    [vLoanContract].[DG_NAM] AS [DG_NAM], 
+    [vLoanContract].[DG_SUM] AS [DG_SUM], 
+    [vLoanContract].[dg_nomco] AS [dg_nomco], 
+    [vLoanContract].[kodb] AS [kodb], 
+    [vLoanContract].[kodc] AS [kodc], 
+    [vLoanContract].[DG_LC] AS [DG_LC], 
+    [vLoanContract].[ML_OSTV2] AS [ML_OSTV2], 
+    [vLoanContract].[ML_OSTN2] AS [ML_OSTN2], 
+    [vLoanContract].[GroupName] AS [GroupName], 
+    [vLoanContract].[DG_VIDKR] AS [DG_VIDKR], 
+    [vLoanContract].[DG_KODKL] AS [DG_KODKL], 
+    [vLoanContract].[DG_OTV] AS [DG_OTV], 
+    [vLoanContract].[DG_OTV1] AS [DG_OTV1], 
+    [vLoanContract].[DG_CreatorID] AS [DG_CreatorID], 
+    [vLoanContract].[IsEmployee] AS [IsEmployee], 
+    [vLoanContract].[DgPoznOld] AS [DgPoznOld]
+    FROM [bankadm].[vLoanContract] AS [vLoanContract]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK__client_ri__CR_KL__58360A52" Association="Self.FK__client_ri__CR_KL__58360A52">
             <End Role="clients" EntitySet="clients" />
             <End Role="client_risk" EntitySet="client_risk" />
@@ -695,6 +755,7 @@
             <End Role="clients" EntitySet="clients" />
             <End Role="LoanCredits" EntitySet="LoanCredits" />
           </AssociationSet>
+          <EntitySet Name="vLoanContract" EntityType="bankasiaNSModel.vLoanContract" />
         </EntityContainer>
         <ComplexType Name="SearchReg_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -1156,6 +1217,39 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="vLoanContract">
+          <Key>
+            <PropertyRef Name="DG_POZN" />
+            <PropertyRef Name="DG_DATE" />
+            <PropertyRef Name="DG_SUM" />
+            <PropertyRef Name="dg_nomco" />
+            <PropertyRef Name="kodc" />
+            <PropertyRef Name="DG_VIDKR" />
+            <PropertyRef Name="DG_KODKL" />
+            <PropertyRef Name="DgPoznOld" />
+          </Key>
+          <Property Name="DG_POZN" Type="Int32" Nullable="false" />
+          <Property Name="DG_DATE" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DG_DATEZ" Type="DateTime" Precision="0" />
+          <Property Name="DG_KODV" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="DG_NOM" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DG_NAM" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="DG_SUM" Type="Decimal" Nullable="false" Precision="15" Scale="2" />
+          <Property Name="dg_nomco" Type="Int32" Nullable="false" />
+          <Property Name="kodb" Type="Int16" />
+          <Property Name="kodc" Type="Int32" Nullable="false" />
+          <Property Name="DG_LC" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ML_OSTV2" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="ML_OSTN2" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="GroupName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DG_VIDKR" Type="Byte" Nullable="false" />
+          <Property Name="DG_KODKL" Type="Int32" Nullable="false" />
+          <Property Name="DG_OTV" Type="Int16" />
+          <Property Name="DG_OTV1" Type="Int16" />
+          <Property Name="DG_CreatorID" Type="Int16" />
+          <Property Name="IsEmployee" Type="Boolean" />
+          <Property Name="DgPoznOld" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1548,6 +1642,33 @@
                 <ScalarProperty Name="Pozn_Old" ColumnName="Pozn_Old" />
                 <ScalarProperty Name="KodKl" ColumnName="KodKl" />
                 <ScalarProperty Name="DgPozn" ColumnName="DgPozn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vLoanContract">
+            <EntityTypeMapping TypeName="bankasiaNSModel.vLoanContract">
+              <MappingFragment StoreEntitySet="vLoanContract">
+                <ScalarProperty Name="DgPoznOld" ColumnName="DgPoznOld" />
+                <ScalarProperty Name="IsEmployee" ColumnName="IsEmployee" />
+                <ScalarProperty Name="DG_CreatorID" ColumnName="DG_CreatorID" />
+                <ScalarProperty Name="DG_OTV1" ColumnName="DG_OTV1" />
+                <ScalarProperty Name="DG_OTV" ColumnName="DG_OTV" />
+                <ScalarProperty Name="DG_KODKL" ColumnName="DG_KODKL" />
+                <ScalarProperty Name="DG_VIDKR" ColumnName="DG_VIDKR" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="ML_OSTN2" ColumnName="ML_OSTN2" />
+                <ScalarProperty Name="ML_OSTV2" ColumnName="ML_OSTV2" />
+                <ScalarProperty Name="DG_LC" ColumnName="DG_LC" />
+                <ScalarProperty Name="kodc" ColumnName="kodc" />
+                <ScalarProperty Name="kodb" ColumnName="kodb" />
+                <ScalarProperty Name="dg_nomco" ColumnName="dg_nomco" />
+                <ScalarProperty Name="DG_SUM" ColumnName="DG_SUM" />
+                <ScalarProperty Name="DG_NAM" ColumnName="DG_NAM" />
+                <ScalarProperty Name="DG_NOM" ColumnName="DG_NOM" />
+                <ScalarProperty Name="DG_KODV" ColumnName="DG_KODV" />
+                <ScalarProperty Name="DG_DATEZ" ColumnName="DG_DATEZ" />
+                <ScalarProperty Name="DG_DATE" ColumnName="DG_DATE" />
+                <ScalarProperty Name="DG_POZN" ColumnName="DG_POZN" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
