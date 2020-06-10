@@ -5,7 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Hosting;
 using TrafficWaveService.Reports;
-
+using WordToPDF;
+using System.Net;
 namespace TrafficWaveService.CreditApp
 {
     public class CreditContract
@@ -34,19 +35,22 @@ namespace TrafficWaveService.CreditApp
             }
         }
 
-        public string CreateCreditContractPdf()
+        /// <summary>
+        /// Формирование шаблона в формате docx
+        /// </summary>
+        /// <returns></returns>
+        public string CreateCreditContractDocx()
         {
             Dictionary<string, object> dict = CreateContractMeta();
             ReportServiceRef.ReportServiceClient client = new ReportServiceRef.ReportServiceClient();
+            
             client.ClientCredentials.UserName.UserName = "60k.kargin";
             client.ClientCredentials.UserName.Password = "W0Y0b8FPAhSAtZSiWIhugw==PAcw5B3SToLcFg";
-
+            ServicePointManager.ServerCertificateValidationCallback += new System.Net.Security.RemoteCertificateValidationCallback((s, ce, ch, ssl)=>true);
             ReportServiceRef.XLSDownload xls = client.print_DOG_KREDIT(dict, 0);
             byte [] bytes = xls.XLSFile;
             string path = HostingEnvironment.MapPath("~/CreditApp/") + xls.XLSName;
-            FileWriteStream(bytes, path);
-            Converter con = new Converter(HostingEnvironment.MapPath("~/CreditApp/"), xls.XLSName);
-            return Convert.ToBase64String(con.ConvertToPdf());
+            return Convert.ToBase64String(bytes);
         }
 
         private Dictionary<string, object> CreateContractMeta()
@@ -80,19 +84,12 @@ namespace TrafficWaveService.CreditApp
 
         }
 
-        private void FileWriteStream(byte[] pBytes,string pFileName)
+        private void FileWriteStream(byte[] pBytes, string pFileName)
         {
-            try
+            using (FileStream fs = File.Create(pFileName))
             {
-                using (FileStream fs = File.Create(pFileName))
-                {
-                    fs.Write(pBytes,0,pBytes.Length);
-                    fs.Close();
-                }
-            }
-            catch (Exception ex)
-            {
-
+                fs.Write(pBytes, 0, pBytes.Length);
+                fs.Close();
             }
         }
     }

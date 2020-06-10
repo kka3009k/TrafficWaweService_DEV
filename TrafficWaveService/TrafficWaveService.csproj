@@ -160,15 +160,20 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="WindowsBase" />
+    <Reference Include="WordToPDF, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WordToPDF.1.0.0\lib\net452\WordToPDF.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\ReportServiceRef\ReportService.disco" />
+    <Content Include="CreditApp\output.pdf" />
     <None Include="Service References\ReportServiceRef\configuration91.svcinfo" />
     <None Include="Service References\ReportServiceRef\configuration.svcinfo" />
     <None Include="Service References\ReportServiceRef\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Service References\ReportServiceRef\ReportService1.disco" />
     <Content Include="TrafficWave.svc" />
     <Content Include="TrafficWaveModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -322,22 +327,6 @@
     <Content Include="Reports\Templates\consen_doc_personal_data.docx" />
     <Content Include="Reports\Templates\req_doc_data.docx" />
     <Content Include="Reports\Templates\act_doc_data.docx" />
-    <None Include="Service References\ReportServiceRef\ReportService.wsdl" />
-    <None Include="Service References\ReportServiceRef\ReportService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ReportServiceRef\ReportService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ReportServiceRef\ReportService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ReportServiceRef\ReportService3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ReportServiceRef\ReportService4.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <Content Include="Service References\ReportServiceRef\TrafficWaveService.ReportServiceRef.od230hResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -347,6 +336,22 @@
     <Content Include="Service References\ReportServiceRef\TrafficWaveService.ReportServiceRef.XLSDownload.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <None Include="Service References\ReportServiceRef\ReportService1.wsdl" />
+    <None Include="Service References\ReportServiceRef\ReportService5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ReportServiceRef\ReportService51.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ReportServiceRef\ReportService52.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ReportServiceRef\ReportService53.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ReportServiceRef\ReportService54.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

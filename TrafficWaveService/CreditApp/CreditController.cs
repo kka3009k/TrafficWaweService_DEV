@@ -156,7 +156,7 @@ namespace TrafficWaveService.CreditApp
         private string GetContractCredit(CreditAppData pCr)
         {
             CreditContract cr = new CreditContract(pCr);
-            return cr.CreateCreditContractPdf();
+            return cr.CreateCreditContractDocx();
         }
     }
 }
