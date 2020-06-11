@@ -67,18 +67,41 @@ namespace TrafficWaveService.Client
                     {
                         kl_kod = cl_kod,
                         kl_inn = pCl.inn,
-                        kl_datareg = DateTime.Now,
                         kl_datecreate = DateTime.Now,
                         kl_nam = pCl.first_name + " " + pCl.last_name + " " + pCl.patronymic,
                         kl_nam_eng = _Translate.Front(pCl.first_name + " " + pCl.last_name + " " + pCl.patronymic),
-                        kl_tel1 = pCl.contact_phone,
-                        kl_tel2 = pCl.home_phone,
+                        kl_tel1 = ParsPhone(pCl.contact_phone),
+                        kl_tel2 = pCl.home_phone == null || pCl.home_phone == "" ? "" : pCl.home_phone,
                         kl_kodter = "01",
                         kl_relig = false,
                         kl_offsh = false,
                         KODB = 60,
                         kl_rchp = false,
                         kl_cfr = 1,
+                        kl_stat = 2,
+                        kl_rzd = 1,
+                        kl_rpat = false,
+                        kl_rip = false,
+                        kl_vidsob = 5,
+                        kl_benefs = true,
+                        kl_benefsname = "",
+                        kl_benefs_paspdata = "",
+                        kl_tel3 = "",
+                        kl_wdoljn = "Прочее",
+                        kl_wfio = "Прочее",
+                        kl_wname = "Прочее",
+                        kl_otvcreate = 3009,
+                        kl_ins = false,
+                        kl_pzl = false,
+                        kl_dopvd = "",
+                        kl_fatca = false,
+                        kl_isys ="OD",
+                        kl_otr = 90,
+                        kl_osnvd = 580,
+                        kl_keyw = "",
+                        
+
+
 
                     };
                     db.clients.Add(cl);
@@ -95,6 +118,14 @@ namespace TrafficWaveService.Client
             }
         }
 
+        private string ParsPhone(string pNum)
+        {
+            string phone = "(996)" + pNum.Remove(0, 5).Remove(4);
+            string num_1 = pNum.Remove(0, 9).Remove(2);
+            string num_2 = "-" + pNum.Remove(0, 11).Remove(2) + "-";
+            string num_3 = pNum.Remove(0, 13);
+            return phone + num_1 + num_2 + num_3;
+        }
         /// <summary>
         /// Добавление паспортных данных - таблица client_paspdata
         /// </summary>
@@ -182,7 +213,18 @@ namespace TrafficWaveService.Client
                     a_ulpfx = "ул.",
                     a_dom = pCl.real_address.house,
                     a_kvart = pCl.real_address.apartment,
-                    a_ul = pCl.real_address.street
+                    a_ul = pCl.real_address.street,
+                    a_knp = "41711000000000",
+                    a_topfx = "",
+                    a_ind = "",
+                    a_ctroen = "",
+                    a_korpuc = "",
+                    a_np = "",
+                    a_obl = "",
+                    a_raion = "",
+                    a_to = "",
+
+
                 };
                 db.client_adress.Add(cl_addr);
 
@@ -196,7 +238,16 @@ namespace TrafficWaveService.Client
                     a_ulpfx = "ул.",
                     a_dom = pCl.jur_address.house,
                     a_kvart = pCl.jur_address.apartment,
-                    a_ul = pCl.jur_address.street
+                    a_ul = pCl.jur_address.street,
+                    a_knp = "41711000000000",
+                    a_topfx = "",
+                    a_ind = "",
+                    a_ctroen = "",
+                    a_korpuc="",
+                    a_np = "",
+                    a_obl="",
+                    a_raion="",
+                    a_to = "",
                 };
                 db.client_adress.Add(cl_addr);
 
@@ -205,7 +256,10 @@ namespace TrafficWaveService.Client
                 {
                     kl_kod = pClCode,
                     dl_kod = pDlCode,
-                    a_typeadress = "W"             
+                    a_typeadress = "W",
+                    a_topfx = "",
+                    a_ulpfx = "ул.",
+
                 };
                 db.client_adress.Add(cl_addr);
 
@@ -214,7 +268,9 @@ namespace TrafficWaveService.Client
                 {
                     kl_kod = pClCode,
                     dl_kod = pDlCode,
-                    a_typeadress = "B"
+                    a_typeadress = "B",
+                    a_topfx = "",
+                    a_ulpfx = "ул.",
                 };
                 db.client_adress.Add(cl_addr);
                 db.SaveChanges();

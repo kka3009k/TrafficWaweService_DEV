@@ -167,6 +167,31 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CreditApp\output.pdf" />
+    <None Include="Service References\ReportServiceDev\ReportService.wsdl" />
+    <None Include="Service References\ReportServiceDev\ReportService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ReportServiceDev\ReportService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ReportServiceDev\ReportService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ReportServiceDev\ReportService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ReportServiceDev\ReportService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Service References\ReportServiceDev\TrafficWaveService.ReportServiceDev.od230hResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ReportServiceDev\TrafficWaveService.ReportServiceDev.SS_Operation_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ReportServiceDev\TrafficWaveService.ReportServiceDev.XLSDownload.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Service References\ReportServiceRef\configuration91.svcinfo" />
     <None Include="Service References\ReportServiceRef\configuration.svcinfo" />
     <None Include="Service References\ReportServiceRef\Reference.svcmap">
@@ -174,6 +199,13 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Service References\ReportServiceRef\ReportService1.disco" />
+    <None Include="Service References\ReportServiceDev\ReportService.disco" />
+    <None Include="Service References\ReportServiceDev\configuration91.svcinfo" />
+    <None Include="Service References\ReportServiceDev\configuration.svcinfo" />
+    <None Include="Service References\ReportServiceDev\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="TrafficWave.svc" />
     <Content Include="TrafficWaveModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -280,6 +312,11 @@
     <Compile Include="SearchReg_Result.cs">
       <DependentUpon>TrafficWaveModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Service References\ReportServiceDev\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\ReportServiceRef\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -366,6 +403,7 @@
     <TypeScriptCompile Include="Reports\Templates\Temp\empty.ts" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Service References\ReportServiceDev\" />
     <WCFMetadataStorage Include="Service References\ReportServiceRef\" />
   </ItemGroup>
   <PropertyGroup>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/OdRepService.Data" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/OdRepService.Data" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="XLSDownload">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IsFileEnd" type="xs:boolean" />
+      <xs:element minOccurs="0" name="MsgResult" nillable="true" type="tns:RepResult" />
+      <xs:element minOccurs="0" name="XLSFile" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="XLSName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="XLSDownload" nillable="true" type="tns:XLSDownload" />
+  <xs:complexType name="RepResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Code" type="xs:int" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RepResult" nillable="true" type="tns:RepResult" />
+  <xs:complexType name="ArrayOfreportsParam">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="reportsParam" nillable="true" type="tns:reportsParam" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfreportsParam" nillable="true" type="tns:ArrayOfreportsParam" />
+  <xs:complexType name="reportsParam">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Nametext" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Typetext" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ValueObj" nillable="true" type="xs:anyType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="reportsParam" nillable="true" type="tns:reportsParam" />
+  <xs:complexType name="ArrayOfprbo_29b_report">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="prbo_29b_report" nillable="true" type="tns:prbo_29b_report" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfprbo_29b_report" nillable="true" type="tns:ArrayOfprbo_29b_report" />
+  <xs:complexType name="prbo_29b_report">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="dep_ID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="kod_bk" type="xs:int" />
+      <xs:element minOccurs="0" name="kod_sr" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="priz" type="xs:short" />
+      <xs:element minOccurs="0" name="sred" type="xs:decimal" />
+      <xs:element minOccurs="0" name="st" type="xs:decimal" />
+      <xs:element minOccurs="0" name="sum" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="prbo_29b_report" nillable="true" type="tns:prbo_29b_report" />
+  <xs:complexType name="SS_Operation_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="err" type="xs:int" />
+      <xs:element minOccurs="0" name="err_msg" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SS_Operation_Result" nillable="true" type="tns:SS_Operation_Result" />
+  <xs:complexType name="ArrayOfClearingMapItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ClearingMapItem" nillable="true" type="tns:ClearingMapItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfClearingMapItem" nillable="true" type="tns:ArrayOfClearingMapItem" />
+  <xs:complexType name="ClearingMapItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="bic1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="bic2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="count" type="xs:int" />
+      <xs:element minOccurs="0" name="nameBank1" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ClearingMapItem" nillable="true" type="tns:ClearingMapItem" />
+  <xs:complexType name="ArrayOfXLSDownload">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="XLSDownload" nillable="true" type="tns:XLSDownload" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfXLSDownload" nillable="true" type="tns:ArrayOfXLSDownload" />
+  <xs:complexType name="ArrayOfod230hResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="od230hResult" nillable="true" type="tns:od230hResult" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfod230hResult" nillable="true" type="tns:ArrayOfod230hResult" />
+  <xs:complexType name="od230hResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="PrintLine" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="od230hResult" nillable="true" type="tns:od230hResult" />
+</xs:schema>
