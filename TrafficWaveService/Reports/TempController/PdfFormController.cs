@@ -29,6 +29,7 @@ namespace TrafficWaveService.Reports.TempController
             //Десериализация строки
             string str = _requestString.Replace("None", "null").Replace("False", "false").Replace("True", "true");
             data = JsonConvert.DeserializeObject<Dictionary<string, object>>(str);
+            object products = data["products"];
         }
 
         public string GetTemplate()

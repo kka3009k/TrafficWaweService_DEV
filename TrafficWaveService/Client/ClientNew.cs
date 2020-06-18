@@ -99,9 +99,6 @@ namespace TrafficWaveService.Client
                         kl_otr = 90,
                         kl_osnvd = 580,
                         kl_keyw = "",
-                        
-
-
 
                     };
                     db.clients.Add(cl);

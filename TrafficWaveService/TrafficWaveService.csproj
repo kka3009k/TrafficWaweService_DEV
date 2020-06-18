@@ -308,6 +308,10 @@
     <Compile Include="Reports\TempController\PdfFormController.cs" />
     <Compile Include="Reports\TempController\MainController.cs" />
     <Compile Include="Reports\TemplateQuery.cs" />
+    <Compile Include="Reports\Utils\DocumentCommand.cs" />
+    <Compile Include="Reports\Utils\DocumentTableCommand.cs" />
+    <Compile Include="Reports\Utils\TableData.cs" />
+    <Compile Include="Reports\Utils\Util.cs" />
     <Compile Include="Result.cs" />
     <Compile Include="SearchReg_Result.cs">
       <DependentUpon>TrafficWaveModel.tt</DependentUpon>
