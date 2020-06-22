@@ -302,6 +302,7 @@
       <DependentUpon>TrafficWaveModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Reports\Converter.cs" />
+    <Compile Include="Reports\Data\Product.cs" />
     <Compile Include="Reports\ResultBase64.cs" />
     <Compile Include="Reports\SearchAndReplace.cs" />
     <Compile Include="Reports\TemlateMain.cs" />

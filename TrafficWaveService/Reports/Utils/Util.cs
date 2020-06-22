@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Web;
+using System.Web.Hosting;
 
 namespace TrafficWaveService.Reports.Utils
 {
@@ -121,7 +122,7 @@ namespace TrafficWaveService.Reports.Utils
 
         public static string createTempWorkFilePath(string fileName)
         {
-            return HttpContext.Current.Server.MapPath("~/xls/TEMP/") + fileName;
+            return HostingEnvironment.MapPath("~/Reports/Templates/Temp/") + fileName;
         }
 
         public class ExelCellHeader
@@ -391,7 +392,7 @@ namespace TrafficWaveService.Reports.Utils
 
             public static string copyTemplate(string fileName, bool overwrite)
             {
-                string templateFilePath = HttpContext.Current.Server.MapPath("~/xls/") + fileName;
+                string templateFilePath = HostingEnvironment.MapPath("~/Reports/Templates/") + fileName;
                 string tempWorkPath = createTempWorkFilePath(fileName);
 
                 File.Copy(templateFilePath, tempWorkPath, overwrite);

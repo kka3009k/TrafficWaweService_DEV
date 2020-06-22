@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using TrafficWaveService.Reports.Data;
 namespace TrafficWaveService.Reports.TempController
 {
     /// <summary>
@@ -29,14 +31,19 @@ namespace TrafficWaveService.Reports.TempController
             //Десериализация строки
             string str = _requestString.Replace("None", "null").Replace("False", "false").Replace("True", "true");
             data = JsonConvert.DeserializeObject<Dictionary<string, object>>(str);
-            object products = data["products"];
         }
 
         public string GetTemplate()
         {
             _mainController = new MainController();
-
-            return _mainController.createReportDocx(data);
+            if (data.ContainsKey("products"))
+            {
+                return _mainController.createReportDocx(data, _mainController.createComands(data));
+            }
+            else
+            {
+                return _mainController.createReportDocx(data, null);
+            }
 
         }
 

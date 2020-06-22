@@ -21,6 +21,8 @@ namespace TrafficWaveService
         /// <returns></returns>
         public async Task<SearchQuery> Search(SearchQuery pSearchQuery, SearchType pSearchType)
         {
+            pSearchQuery.QueryId = 20;
+            pSearchQuery.RequestId = 20;
             SearchFactory searchFactory = new SearchFactory(pSearchQuery);
             return await searchFactory.Search(pSearchType).Run();
         }

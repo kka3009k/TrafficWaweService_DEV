@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Web;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
+using System.Web.Hosting;
 
 namespace TrafficWaveService.Reports.Utils
 {
@@ -68,7 +69,7 @@ namespace TrafficWaveService.Reports.Utils
         {
             if (document != null && document.MainDocumentPart.Document.Body != null)
             {
-                string sourceFilePath = HttpContext.Current.Server.MapPath("~/xls/") + sourceFileName;
+                string sourceFilePath = HostingEnvironment.MapPath("~/Reports/Templates/") + sourceFileName;
                 string sourceTempFilePath = Util.createTempWorkFilePath(sourceFileName);
 
                 File.Copy(sourceFilePath, sourceTempFilePath, true);
