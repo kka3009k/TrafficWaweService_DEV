@@ -18,7 +18,7 @@ namespace TrafficWaveService.Client
         /// Строка запроса для доп. информации
         /// </summary>
         [DataMember]
-        public string RequestStringAddInform { get; set; }
+        public string RequestStringDopInfo { get; set; }
 
         ///// <summary>
         ///// Фамилия

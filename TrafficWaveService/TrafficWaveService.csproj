@@ -167,6 +167,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CreditApp\output.pdf" />
+    <Content Include="Reports\Templates\act_products_tab.docx" />
     <None Include="Service References\ReportServiceDev\ReportService.wsdl" />
     <None Include="Service References\ReportServiceDev\ReportService.xsd">
       <SubType>Designer</SubType>
@@ -268,6 +269,7 @@
     <Compile Include="CreditApp\CreditContract.cs" />
     <Compile Include="CreditApp\CreditController.cs" />
     <Compile Include="CreditApp\CreditQuery.cs" />
+    <Compile Include="CreditApp\LoanResult.cs" />
     <Compile Include="DataBase.cs" />
     <Compile Include="Client\ClientUpdate.cs" />
     <Compile Include="Client\ClientNew.cs" />

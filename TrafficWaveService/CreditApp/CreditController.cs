@@ -38,14 +38,14 @@ namespace TrafficWaveService.CreditApp
         /// 
         /// </summary>
         /// <returns></returns>
-        public async Task<Result> Run()
+        public async Task<LoanResult> Run()
         {
             return await Task.Run(() => CreditApp());
         }
 
-        private Result CreditApp()
+        private LoanResult CreditApp()
         {
-            Result res = new Result();
+            LoanResult res = new LoanResult();
             try
             {
 
@@ -56,25 +56,25 @@ namespace TrafficWaveService.CreditApp
                 {
                     case 1:
                         //Создание новой заявки
-                        res.Code = InsertCreditApp(_crApp);
+                        res.ID = InsertCreditApp(_crApp);
                         break;
                     case 2:
                         //Создание кредитнго договора
-                        res.Code = InsertCreditContract(_crApp);
+                        res.ID = InsertCreditContract(_crApp);
                         break;
                     case 3:
                         //Формирование договора в формате PDF
-                        res.Message = GetContractCredit(_crApp);
+                        res.Base64Str = GetContractCredit(_crApp);
                         break;
                     default:
-                        res.Code = 200;
+                        res.ID = 200;
                         break;
                 }
-                res.Message = res.Message == null || res.Message == "" ? "Заявка создана" : res.Message;
+                res.Base64Str = res.Base64Str == null || res.Base64Str == "" ? "Заявка создана" : res.Base64Str;
             }
             catch (Exception ex)
             {
-                res.Message = ex.Message;
+                res.Base64Str = ex.Message;
                 new DataBase().WriteLog(ex, "Run");
 
             }

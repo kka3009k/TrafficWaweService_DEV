@@ -33,7 +33,7 @@ namespace TrafficWaveService
         /// <param name="pCreditQuery"></param>
         /// <returns></returns>
         [OperationContract]
-        Task<Result> CreateLoanApp(CreditQuery pCreditQuery);
+        Task<LoanResult> CreateLoanApp(CreditQuery pCreditQuery);
 
     }
 }

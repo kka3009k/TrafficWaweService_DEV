@@ -79,7 +79,7 @@ namespace TrafficWaveService
         /// </summary>
         /// <param name="pCreditQuery">Параметры запроса</param>
         /// <returns></returns>
-        public async Task<Result> CreateLoanApp(CreditQuery pCreditQuery)
+        public async Task<LoanResult> CreateLoanApp(CreditQuery pCreditQuery)
         {
             CreditController credit = new CreditController(pCreditQuery);
             return await credit.Run();
