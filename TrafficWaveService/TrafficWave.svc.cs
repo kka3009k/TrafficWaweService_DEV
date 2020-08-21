@@ -6,6 +6,11 @@ using TrafficWaveService.Dictionaries;
 using TrafficWaveService.Reports;
 using TrafficWaveService.ClientSearch;
 using TrafficWaveService.CreditApp;
+using TrafficWaveService.Sprs;
+using System.ServiceModel.Web;
+using System.Net;
+using System.Collections.Generic;
+
 namespace TrafficWaveService
 {
     /// <summary>
@@ -13,6 +18,24 @@ namespace TrafficWaveService
     /// </summary>
     public class TrafficWave : ITrafficWave
     {
+        public TrafficWave()
+        {
+            Connection_StateChange();
+        }
+
+        private void Connection_StateChange()
+        {
+            IncomingWebRequestContext request = WebOperationContext.Current.IncomingRequest;
+            WebHeaderCollection headers = request.Headers;
+            string head = headers["pLogin"];
+            using (bankasiaNSEntities db = new bankasiaNSEntities())
+            {
+                db.SetContextInfo(headers["pLogin"],headers["pIpAddress"]);
+            }
+
+
+        }
+
         /// <summary>
         /// Метод поиска
         /// </summary>
@@ -83,6 +106,17 @@ namespace TrafficWaveService
         {
             CreditController credit = new CreditController(pCreditQuery);
             return await credit.Run();
+        }
+
+        /// <summary>
+        /// Загрузка справочника
+        /// </summary>
+        /// <param name="pCreditQuery"></param>
+        /// <returns></returns>
+        public async Task<string> GetSprs(SprQuery pSprQuery)
+        {
+            SprsController spr = new SprsController(pSprQuery);
+            return await spr.Run();
         }
 
 

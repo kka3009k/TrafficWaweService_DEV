@@ -54,6 +54,21 @@ namespace TrafficWaveService.Client
         public int id { get; set; }
         public string photo_url { get; set; }
     }
+
+    public class PropertyType
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+        public int id_odb { get; set; }
+    }
+
+    public class SocialStatus
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+        public int id_odb { get; set; }
+    }
+
     public class ClientInfo
     {
     public int id { get; set; }
@@ -104,7 +119,11 @@ namespace TrafficWaveService.Client
     public string pkb_state { get; set; }
     public object grs_get_date { get; set; }
     public object self_id { get; set; }
-    public object social_status { get; set; }
-    public object property_type { get; set; }
+    public SocialStatus social_status { get; set; }
+    public PropertyType property_type { get; set; }
+    public int odb_property_type { get; set; }
+    public int odb_social_status { get; set; }
+    public int odb_industry { get; set; }
+    public int odb_primary_occupation { get; set; }
     }
 }

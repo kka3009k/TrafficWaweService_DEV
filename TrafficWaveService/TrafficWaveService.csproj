@@ -141,6 +141,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -282,6 +283,12 @@
     <Compile Include="Factory\SearchFactory\SearchCriminals.cs" />
     <Compile Include="Factory\SearchFactory\SearchFactory.cs" />
     <Compile Include="Factory\SearchFactory\SearchQuery.cs" />
+    <Compile Include="Guarantee.cs">
+      <DependentUpon>TrafficWaveModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="klient_p482_spr.cs">
+      <DependentUpon>TrafficWaveModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="LoanApplication.cs">
       <DependentUpon>TrafficWaveModel.tt</DependentUpon>
     </Compile>
@@ -329,6 +336,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="spr.cs">
+      <DependentUpon>TrafficWaveModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sprs\SprQuery.cs" />
+    <Compile Include="Sprs\SprsController.cs" />
     <Compile Include="TrafficWave.svc.cs">
       <DependentUpon>TrafficWave.svc</DependentUpon>
     </Compile>

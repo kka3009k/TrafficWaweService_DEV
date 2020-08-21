@@ -20,24 +20,6 @@ namespace TrafficWaveService.Client
         [DataMember]
         public string RequestStringDopInfo { get; set; }
 
-        ///// <summary>
-        ///// Фамилия
-        ///// </summary>
-        //[DataMember]
-        //public string FirstName { get; set; }
-
-        ///// <summary>
-        ///// Имя
-        ///// </summary>
-        //[DataMember]
-        //public string LastName { get; set; }
-
-        ///// <summary>
-        ///// Отчество
-        ///// </summary>
-        //[DataMember]
-        //public string SecondName { get; set; }
-
         /// <summary>
         /// Резульатат
         /// </summary>

@@ -31,8 +31,23 @@ namespace TrafficWaveService.CreditApp
                     return lc.DgPozn;
                 }
                 var contract = db.LoanApplication_createLoanContract(pCr.IDLoan, (short)pCr.CreatorID).ToList();
+
                 return (int)pCr.IDLoan;
             }
+        }
+
+        private bool CreateGuarantee(CreditAppData pCr)
+        {
+            bool status = false;
+            try
+            {
+
+            }
+            catch(Exception ex)
+            {
+                new DataBase().WriteLog(ex, "Run");
+            }
+            return status;
         }
 
         /// <summary>
@@ -43,9 +58,11 @@ namespace TrafficWaveService.CreditApp
         {
             Dictionary<string, object> dict = CreateContractMeta();
             ReportServiceRef.ReportServiceClient client = new ReportServiceRef.ReportServiceClient();
-            
-            client.ClientCredentials.UserName.UserName = "60k.kargin";
-            client.ClientCredentials.UserName.Password = "W0Y0b8FPAhSAtZSiWIhugw==PAcw5B3SToLcFg";
+
+            /*client.ClientCredentials.UserName.UserName = "60k.kargin";
+            client.ClientCredentials.UserName.Password = "W0Y0b8FPAhSAtZSiWIhugw==PAcw5B3SToLcFg";*/
+            client.ClientCredentials.UserName.UserName = "60s.korostelev";
+            client.ClientCredentials.UserName.Password = "L8PY5ID5bsVS9k0PV5S3Kg==FCGgPat3KVIsbh";
             ServicePointManager.ServerCertificateValidationCallback += new System.Net.Security.RemoteCertificateValidationCallback((s, ce, ch, ssl)=>true);
             ReportServiceRef.XLSDownload xls = client.print_DOG_KREDIT(dict, 0);
             byte [] bytes = xls.XLSFile;

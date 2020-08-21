@@ -234,6 +234,22 @@
           <Property Name="service_sms_id" Type="int" />
           <Property Name="krProdId" Type="int" />
         </EntityType>
+        <EntityType Name="Guarantee">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DG_POZN" Type="int" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatorID" Type="int" Nullable="false" />
+          <Property Name="GuaranteeTypeID" Type="int" Nullable="false" />
+          <Property Name="GuaranteeHolderID" Type="int" />
+          <Property Name="GuaranteeClientID" Type="int" />
+          <Property Name="GuaranteeOwnerType" Type="int" />
+          <Property Name="GuaranteeName" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="BorrowerIsHolder" Type="bit" Nullable="false" />
+          <Property Name="KindshipID" Type="int" />
+        </EntityType>
         <EntityType Name="LoanApplication">
           <Key>
             <PropertyRef Name="ID" />
@@ -305,6 +321,29 @@
           <Property Name="ow_text" Type="nvarchar" MaxLength="200" />
           <Property Name="ow_edit" Type="int" />
           <Property Name="ow_open" Type="int" />
+        </EntityType>
+        <EntityType Name="spr">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="s_tip" Type="tinyint" Nullable="false" />
+          <Property Name="s_kod" Type="int" Nullable="false" />
+          <Property Name="s_nam" Type="varchar" MaxLength="250" />
+          <Property Name="s_kodnew" Type="char" MaxLength="3" />
+        </EntityType>
+        <EntityType Name="klient_p482_spr">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kod" Type="int" />
+          <Property Name="parent" Type="int" />
+          <Property Name="p482" Type="nvarchar" MaxLength="250" />
+          <Property Name="podoz" Type="tinyint" />
+          <Property Name="license" Type="bit" />
+          <Property Name="risk" Type="tinyint" />
+          <Property Name="IsActive" Type="bit" />
         </EntityType>
         <EntityType Name="LoanContracts">
           <Key>
@@ -459,6 +498,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Guarantee_clients">
+          <End Role="clients" Type="Self.clients" Multiplicity="0..1" />
+          <End Role="Guarantee" Type="Self.Guarantee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="kl_kod" />
+            </Principal>
+            <Dependent Role="Guarantee">
+              <PropertyRef Name="GuaranteeClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_LoanApplicaton_clients">
           <End Role="clients" Type="Self.clients" Multiplicity="1" />
           <End Role="LoanApplication" Type="Self.LoanApplication" Multiplicity="*" />
@@ -551,6 +602,10 @@
           <Parameter Name="pOtch" Type="varchar" Mode="In" />
           <Parameter Name="pStatus" Type="tinyint" Mode="In" />
         </Function>
+        <Function Name="SetContextInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pLogin" Type="nvarchar" Mode="In" />
+          <Parameter Name="pIpAdress" Type="nvarchar" Mode="In" />
+        </Function>
         <EntityContainer Name="Хранилище bankasiaNSModelContainer">
           <EntitySet Name="client_adress" EntityType="Self.client_adress" Schema="bankadm" store:Type="Tables" />
           <EntitySet Name="client_comp_details" EntityType="Self.client_comp_details" Schema="bankadm" store:Type="Tables" />
@@ -565,9 +620,12 @@
           <EntitySet Name="ClientProxy" EntityType="Self.ClientProxy" Schema="bankadm" store:Type="Tables" />
           <EntitySet Name="clients" EntityType="Self.clients" Schema="bankadm" store:Type="Tables" />
           <EntitySet Name="ENUMERATOR_SPR" EntityType="Self.ENUMERATOR_SPR" Schema="bankadm" store:Type="Tables" />
+          <EntitySet Name="Guarantee" EntityType="Self.Guarantee" Schema="bankadm" store:Type="Tables" />
           <EntitySet Name="LoanApplication" EntityType="Self.LoanApplication" Schema="bankadm" store:Type="Tables" />
           <EntitySet Name="LOG_APP" EntityType="Self.LOG_APP" Schema="bankadm" store:Type="Tables" />
           <EntitySet Name="ow" EntityType="Self.ow" Schema="bankadm" store:Type="Tables" />
+          <EntitySet Name="spr" EntityType="Self.spr" Schema="bankadm" store:Type="Tables" />
+          <EntitySet Name="klient_p482_spr" EntityType="Self.klient_p482_spr" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoanContracts" EntityType="Self.LoanContracts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoanCredits" EntityType="Self.LoanCredits" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="vLoanContract" EntityType="Self.vLoanContract" store:Type="Views" store:Schema="bankadm">
@@ -618,6 +676,10 @@
           <AssociationSet Name="FK_ClientOrg_clients1" Association="Self.FK_ClientOrg_clients1">
             <End Role="clients" EntitySet="clients" />
             <End Role="ClientOrg" EntitySet="ClientOrg" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Guarantee_clients" Association="Self.FK_Guarantee_clients">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="Guarantee" EntitySet="Guarantee" />
           </AssociationSet>
           <AssociationSet Name="FK_LoanApplicaton_clients" Association="Self.FK_LoanApplicaton_clients">
             <End Role="clients" EntitySet="clients" />
@@ -756,6 +818,17 @@
             <End Role="LoanCredits" EntitySet="LoanCredits" />
           </AssociationSet>
           <EntitySet Name="vLoanContract" EntityType="bankasiaNSModel.vLoanContract" />
+          <FunctionImport Name="SetContextInfo">
+            <Parameter Name="pLogin" Mode="In" Type="String" />
+            <Parameter Name="pIpAdress" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="spr" EntityType="bankasiaNSModel.spr" />
+          <EntitySet Name="klient_p482_spr" EntityType="bankasiaNSModel.klient_p482_spr" />
+          <EntitySet Name="Guarantee" EntityType="bankasiaNSModel.Guarantee" />
+          <AssociationSet Name="FK_Guarantee_clients" Association="bankasiaNSModel.FK_Guarantee_clients">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="Guarantee" EntitySet="Guarantee" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="SearchReg_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -1020,6 +1093,7 @@
           <NavigationProperty Name="LoanApplication" Relationship="bankasiaNSModel.FK_LoanApplicaton_clients" FromRole="clients" ToRole="LoanApplication" />
           <NavigationProperty Name="LoanContracts" Relationship="bankasiaNSModel.FK__LoanContr__KodKl__01816D51" FromRole="clients" ToRole="LoanContracts" />
           <NavigationProperty Name="LoanCredits" Relationship="bankasiaNSModel.FK__LoanCredi__KodKl__75A5A651" FromRole="clients" ToRole="LoanCredits" />
+          <NavigationProperty Name="Guarantee" Relationship="bankasiaNSModel.FK_Guarantee_clients" FromRole="clients" ToRole="Guarantee" />
         </EntityType>
         <Association Name="FK__client_ri__CR_KL__58360A52">
           <End Type="bankasiaNSModel.clients" Role="clients" Multiplicity="0..1" />
@@ -1250,6 +1324,58 @@
           <Property Name="IsEmployee" Type="Boolean" />
           <Property Name="DgPoznOld" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="spr">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="s_tip" Type="Byte" Nullable="false" />
+          <Property Name="s_kod" Type="Int32" Nullable="false" />
+          <Property Name="s_nam" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="s_kodnew" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="klient_p482_spr">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kod" Type="Int32" />
+          <Property Name="parent" Type="Int32" />
+          <Property Name="p482" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="podoz" Type="Byte" />
+          <Property Name="license" Type="Boolean" />
+          <Property Name="risk" Type="Byte" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Guarantee">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DG_POZN" Type="Int32" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatorID" Type="Int32" Nullable="false" />
+          <Property Name="GuaranteeTypeID" Type="Int32" Nullable="false" />
+          <Property Name="GuaranteeHolderID" Type="Int32" />
+          <Property Name="GuaranteeClientID" Type="Int32" />
+          <Property Name="GuaranteeOwnerType" Type="Int32" />
+          <Property Name="GuaranteeName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="BorrowerIsHolder" Type="Boolean" Nullable="false" />
+          <Property Name="KindshipID" Type="Int32" />
+          <NavigationProperty Name="clients" Relationship="bankasiaNSModel.FK_Guarantee_clients" FromRole="Guarantee" ToRole="clients" />
+        </EntityType>
+        <Association Name="FK_Guarantee_clients">
+          <End Type="bankasiaNSModel.clients" Role="clients" Multiplicity="0..1" />
+          <End Type="bankasiaNSModel.Guarantee" Role="Guarantee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="kl_kod" />
+            </Principal>
+            <Dependent Role="Guarantee">
+              <PropertyRef Name="GuaranteeClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1669,6 +1795,49 @@
                 <ScalarProperty Name="DG_DATEZ" ColumnName="DG_DATEZ" />
                 <ScalarProperty Name="DG_DATE" ColumnName="DG_DATE" />
                 <ScalarProperty Name="DG_POZN" ColumnName="DG_POZN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SetContextInfo" FunctionName="Хранилище bankasiaNSModel.SetContextInfo" />
+          <EntitySetMapping Name="spr">
+            <EntityTypeMapping TypeName="bankasiaNSModel.spr">
+              <MappingFragment StoreEntitySet="spr">
+                <ScalarProperty Name="s_kodnew" ColumnName="s_kodnew" />
+                <ScalarProperty Name="s_nam" ColumnName="s_nam" />
+                <ScalarProperty Name="s_kod" ColumnName="s_kod" />
+                <ScalarProperty Name="s_tip" ColumnName="s_tip" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="klient_p482_spr">
+            <EntityTypeMapping TypeName="bankasiaNSModel.klient_p482_spr">
+              <MappingFragment StoreEntitySet="klient_p482_spr">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="risk" ColumnName="risk" />
+                <ScalarProperty Name="license" ColumnName="license" />
+                <ScalarProperty Name="podoz" ColumnName="podoz" />
+                <ScalarProperty Name="p482" ColumnName="p482" />
+                <ScalarProperty Name="parent" ColumnName="parent" />
+                <ScalarProperty Name="kod" ColumnName="kod" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Guarantee">
+            <EntityTypeMapping TypeName="bankasiaNSModel.Guarantee">
+              <MappingFragment StoreEntitySet="Guarantee">
+                <ScalarProperty Name="KindshipID" ColumnName="KindshipID" />
+                <ScalarProperty Name="BorrowerIsHolder" ColumnName="BorrowerIsHolder" />
+                <ScalarProperty Name="GuaranteeName" ColumnName="GuaranteeName" />
+                <ScalarProperty Name="GuaranteeOwnerType" ColumnName="GuaranteeOwnerType" />
+                <ScalarProperty Name="GuaranteeClientID" ColumnName="GuaranteeClientID" />
+                <ScalarProperty Name="GuaranteeHolderID" ColumnName="GuaranteeHolderID" />
+                <ScalarProperty Name="GuaranteeTypeID" ColumnName="GuaranteeTypeID" />
+                <ScalarProperty Name="CreatorID" ColumnName="CreatorID" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="DG_POZN" ColumnName="DG_POZN" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

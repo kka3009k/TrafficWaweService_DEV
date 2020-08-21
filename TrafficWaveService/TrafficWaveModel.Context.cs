@@ -46,6 +46,9 @@ namespace TrafficWaveService
         public virtual DbSet<LoanContracts> LoanContracts { get; set; }
         public virtual DbSet<LoanCredits> LoanCredits { get; set; }
         public virtual DbSet<vLoanContract> vLoanContract { get; set; }
+        public virtual DbSet<spr> spr { get; set; }
+        public virtual DbSet<klient_p482_spr> klient_p482_spr { get; set; }
+        public virtual DbSet<Guarantee> Guarantee { get; set; }
     
         public virtual ObjectResult<SearchReg_Result> SearchReg(string pFam, string pName, string pOtch, Nullable<byte> pStatus)
         {
@@ -353,6 +356,19 @@ namespace TrafficWaveService
                 new ObjectParameter("CreatorID", typeof(short));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<LoanApplication_createLoanContract_Result>("LoanApplication_createLoanContract", applicationIDParameter, creatorIDParameter);
+        }
+    
+        public virtual int SetContextInfo(string pLogin, string pIpAdress)
+        {
+            var pLoginParameter = pLogin != null ?
+                new ObjectParameter("pLogin", pLogin) :
+                new ObjectParameter("pLogin", typeof(string));
+    
+            var pIpAdressParameter = pIpAdress != null ?
+                new ObjectParameter("pIpAdress", pIpAdress) :
+                new ObjectParameter("pIpAdress", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SetContextInfo", pLoginParameter, pIpAdressParameter);
         }
     }
 }

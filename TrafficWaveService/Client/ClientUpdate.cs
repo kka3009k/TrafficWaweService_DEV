@@ -77,6 +77,8 @@ namespace TrafficWaveService.Client
                     cl.kl_nam = pCl.first_name + " " + pCl.last_name + " " + pCl.patronymic;
                     cl.kl_tel1 = pCl.contact_phone;
                     cl.kl_tel2 = pCl.home_phone != null ? pCl.home_phone : cl.kl_tel2;
+                    cl.kl_otr = (short)pCl.odb_industry;
+                    cl.kl_vidsob = (byte)pCl.odb_property_type;
                     //kl_kodter = "01",
                     db.SaveChanges();
                     UpdateClientPaspData(pCl);

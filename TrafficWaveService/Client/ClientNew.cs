@@ -82,7 +82,7 @@ namespace TrafficWaveService.Client
                         kl_rzd = 1,
                         kl_rpat = false,
                         kl_rip = false,
-                        kl_vidsob = 5,
+                        kl_vidsob = (byte)pCl.odb_property_type,
                         kl_benefs = true,
                         kl_benefsname = "",
                         kl_benefs_paspdata = "",
@@ -96,8 +96,8 @@ namespace TrafficWaveService.Client
                         kl_dopvd = "",
                         kl_fatca = false,
                         kl_isys ="OD",
-                        kl_otr = 90,
-                        kl_osnvd = 580,
+                        kl_otr = (short)pCl.odb_industry,
+                        kl_osnvd = (short)pCl.odb_primary_occupation,
                         kl_keyw = "",
 
                     };
@@ -180,7 +180,7 @@ namespace TrafficWaveService.Client
                     dl_relig = false,
                     dl_offsh = false,
                     dl_rzd = 1,
-                    dl_socst =5,
+                    dl_socst =(byte)pCl.odb_social_status,
                     dl_datecreate = DateTime.Now,
                     dl_sortindx = 0
                 };

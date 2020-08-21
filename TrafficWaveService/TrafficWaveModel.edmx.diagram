@@ -31,6 +31,10 @@
         <AssociationConnector Association="bankasiaNSModel.FK__LoanContr__KodKl__01816D51" />
         <AssociationConnector Association="bankasiaNSModel.FK__LoanCredi__KodKl__75A5A651" />
         <EntityTypeShape EntityType="bankasiaNSModel.vLoanContract" Width="1.5" PointX="13.375" PointY="7.75" />
+        <EntityTypeShape EntityType="bankasiaNSModel.spr" Width="1.5" PointX="13.375" PointY="13.75" />
+        <EntityTypeShape EntityType="bankasiaNSModel.klient_p482_spr" Width="1.5" PointX="0.75" PointY="14.75" />
+        <EntityTypeShape EntityType="bankasiaNSModel.Guarantee" Width="1.5" PointX="8" PointY="33" />
+        <AssociationConnector Association="bankasiaNSModel.FK_Guarantee_clients" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

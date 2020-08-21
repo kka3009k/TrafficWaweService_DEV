@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace TrafficWaveService.Client
 {
@@ -20,6 +21,8 @@ namespace TrafficWaveService.Client
         /// Информация о клиенте
         /// </summary>
         private ClientInfo _clientInfo { get; set; }
+
+        Dictionary<string, object> _dopInfo;
 
         /// <summary>
         /// Конструктор
@@ -42,6 +45,10 @@ namespace TrafficWaveService.Client
             //Десериализация строки
             string str = _ClientQuery.RequestStringClient.Replace("None", "null").Replace("False", "false").Replace("True", "true");
             _clientInfo = JsonConvert.DeserializeObject<ClientInfo>(str);
+
+            //string strDop = _ClientQuery.RequestStringDopInfo.Replace("None", "null").Replace("False", "false").Replace("True", "true");
+            //_dopInfo = JsonConvert.DeserializeObject<Dictionary<string, object>>(strDop);
+            //var a = _dopInfo["business_info"];
         }
 
         /// <summary>

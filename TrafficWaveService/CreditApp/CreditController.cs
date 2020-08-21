@@ -63,7 +63,7 @@ namespace TrafficWaveService.CreditApp
                         res.ID = InsertCreditContract(_crApp);
                         break;
                     case 3:
-                        //Формирование договора в формате PDF
+                        //Формирование договора 
                         res.Base64Str = GetContractCredit(_crApp);
                         break;
                     default:
