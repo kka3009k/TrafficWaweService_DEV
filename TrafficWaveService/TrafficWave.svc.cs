@@ -20,10 +20,10 @@ namespace TrafficWaveService
     {
         public TrafficWave()
         {
-            Connection_StateChange();
+            Connection_State();
         }
 
-        private void Connection_StateChange()
+        private void Connection_State()
         {
             IncomingWebRequestContext request = WebOperationContext.Current.IncomingRequest;
             WebHeaderCollection headers = request.Headers;
@@ -118,6 +118,20 @@ namespace TrafficWaveService
             SprsController spr = new SprsController(pSprQuery);
             return await spr.Run();
         }
+
+        /// <summary>
+        /// Формирование графика погашения
+        /// </summary>
+        /// <param name="pSprQuery"></param>
+        /// <returns></returns>
+        public bool FormGraph(CreditAppData pCad)
+        {
+            CreditContract cc = new CreditContract(pCad);
+            cc.CreateLoanGraph();
+            return true;
+        }
+
+
 
 
 

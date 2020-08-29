@@ -49,6 +49,12 @@ namespace TrafficWaveService
         public virtual DbSet<spr> spr { get; set; }
         public virtual DbSet<klient_p482_spr> klient_p482_spr { get; set; }
         public virtual DbSet<Guarantee> Guarantee { get; set; }
+        public virtual DbSet<Guarantee_ProductsAndEquipment> Guarantee_ProductsAndEquipment { get; set; }
+        public virtual DbSet<LoanClassification> LoanClassification { get; set; }
+        public virtual DbSet<LoanGraph> LoanGraph { get; set; }
+        public virtual DbSet<LoanGraphSettings> LoanGraphSettings { get; set; }
+        public virtual DbSet<kalendar> kalendar { get; set; }
+        public virtual DbSet<LoanPercent> LoanPercent { get; set; }
     
         public virtual ObjectResult<SearchReg_Result> SearchReg(string pFam, string pName, string pOtch, Nullable<byte> pStatus)
         {

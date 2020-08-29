@@ -24,6 +24,9 @@ namespace TrafficWaveService
             this.LoanContracts = new HashSet<LoanContracts>();
             this.LoanCredits = new HashSet<LoanCredits>();
             this.Guarantee = new HashSet<Guarantee>();
+            this.LoanClassification = new HashSet<LoanClassification>();
+            this.LoanGraphSettings = new HashSet<LoanGraphSettings>();
+            this.LoanPercent = new HashSet<LoanPercent>();
         }
     
         public int kl_kod { get; set; }
@@ -94,5 +97,11 @@ namespace TrafficWaveService
         public virtual ICollection<LoanCredits> LoanCredits { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Guarantee> Guarantee { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LoanClassification> LoanClassification { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LoanGraphSettings> LoanGraphSettings { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LoanPercent> LoanPercent { get; set; }
     }
 }

@@ -35,6 +35,17 @@
         <EntityTypeShape EntityType="bankasiaNSModel.klient_p482_spr" Width="1.5" PointX="0.75" PointY="14.75" />
         <EntityTypeShape EntityType="bankasiaNSModel.Guarantee" Width="1.5" PointX="8" PointY="33" />
         <AssociationConnector Association="bankasiaNSModel.FK_Guarantee_clients" />
+        <EntityTypeShape EntityType="bankasiaNSModel.Guarantee_ProductsAndEquipment" Width="1.5" PointX="10.25" PointY="32.75" />
+        <AssociationConnector Association="bankasiaNSModel.FK_GuaranteeProductsAndEquipment_Guarantee" />
+        <EntityTypeShape EntityType="bankasiaNSModel.LoanClassification" Width="1.5" PointX="8" PointY="37.625" />
+        <AssociationConnector Association="bankasiaNSModel.FK__LoanClass__KodKl__7DB0DC6D" />
+        <EntityTypeShape EntityType="bankasiaNSModel.LoanGraph" Width="1.5" PointX="10.25" PointY="25.75" />
+        <EntityTypeShape EntityType="bankasiaNSModel.LoanGraphSettings" Width="1.5" PointX="8" PointY="40.875" />
+        <AssociationConnector Association="bankasiaNSModel.FK_LoanGraphSettings_KlKode_180502" />
+        <AssociationConnector Association="bankasiaNSModel.FK_LoanGraph_LoanCredits" />
+        <EntityTypeShape EntityType="bankasiaNSModel.kalendar" Width="1.5" PointX="10.375" PointY="14.75" />
+        <EntityTypeShape EntityType="bankasiaNSModel.LoanPercent" Width="1.5" PointX="8" PointY="46.375" />
+        <AssociationConnector Association="bankasiaNSModel.FK__LoanPerce__KodKl__6B922C32" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

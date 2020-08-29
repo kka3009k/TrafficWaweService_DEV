@@ -13,7 +13,7 @@ namespace TrafficWaveService.ClientSearch
     public class SearchClientQuery
     {
         /// <summary>
-        /// Номер шаблона документа
+        /// ИНН клиента
         /// </summary>
         [DataMember]
         public string INN { get; set; }

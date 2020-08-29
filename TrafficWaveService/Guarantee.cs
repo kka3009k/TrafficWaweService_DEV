@@ -14,6 +14,12 @@ namespace TrafficWaveService
     
     public partial class Guarantee
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Guarantee()
+        {
+            this.Guarantee_ProductsAndEquipment = new HashSet<Guarantee_ProductsAndEquipment>();
+        }
+    
         public int ID { get; set; }
         public int DG_POZN { get; set; }
         public System.DateTime CreateDate { get; set; }
@@ -27,5 +33,7 @@ namespace TrafficWaveService
         public Nullable<int> KindshipID { get; set; }
     
         public virtual clients clients { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Guarantee_ProductsAndEquipment> Guarantee_ProductsAndEquipment { get; set; }
     }
 }

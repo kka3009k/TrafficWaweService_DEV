@@ -9,7 +9,6 @@ using System.Web;
 using System.Web.Hosting;
 using TrafficWaveService.Reports.Data;
 using TrafficWaveService.Reports.Utils;
-using TrafficWaveService.Reports.Utils;
 
 namespace TrafficWaveService.Reports.TempController
 {

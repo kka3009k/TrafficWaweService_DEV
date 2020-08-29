@@ -269,6 +269,27 @@
     <Compile Include="CreditApp\CreditAppData.cs" />
     <Compile Include="CreditApp\CreditContract.cs" />
     <Compile Include="CreditApp\CreditController.cs" />
+    <Compile Include="CreditApp\CreditGraphCalculator\Algorithms\AlgorithmAbstract.cs" />
+    <Compile Include="CreditApp\CreditGraphCalculator\Algorithms\AnnuityAlgorithm.cs" />
+    <Compile Include="CreditApp\CreditGraphCalculator\Algorithms\IAlgorithm.cs" />
+    <Compile Include="CreditApp\CreditGraphCalculator\Algorithms\IndividualAlgorithm.cs" />
+    <Compile Include="CreditApp\CreditGraphCalculator\Attributes\AttrDisplayName.cs" />
+    <Compile Include="CreditApp\CreditGraphCalculator\Codes.cs" />
+    <Compile Include="CreditApp\CreditGraphCalculator\Entities\GraphResult.cs" />
+    <Compile Include="CreditApp\CreditGraphCalculator\Entities\GraphRow.cs" />
+    <Compile Include="CreditApp\CreditGraphCalculator\Entities\Percent.cs" />
+    <Compile Include="CreditApp\CreditGraphCalculator\Entities\Shema.cs" />
+    <Compile Include="CreditApp\CreditGraphCalculator\Entities\Tranch.cs" />
+    <Compile Include="CreditApp\CreditGraphCalculator\GraphCalculator.cs" />
+    <Compile Include="CreditApp\CreditGraphCalculator\GraphRowList.cs" />
+    <Compile Include="CreditApp\CreditGraphCalculator\Listeners\IGraphRowListener.cs" />
+    <Compile Include="CreditApp\CreditGraphCalculator\Listeners\OnGraphDone.cs" />
+    <Compile Include="CreditApp\CreditGraphCalculator\Observers\IGraphRowObservable.cs" />
+    <Compile Include="CreditApp\CreditGraphCalculator\Settings\GraphType.cs" />
+    <Compile Include="CreditApp\CreditGraphCalculator\Settings\IssueType.cs" />
+    <Compile Include="CreditApp\CreditGraphCalculator\Settings\RepayType.cs" />
+    <Compile Include="CreditApp\CreditGraphCalculator\Settings\Setting.cs" />
+    <Compile Include="CreditApp\CreditGraphCalculator\Utils.cs" />
     <Compile Include="CreditApp\CreditQuery.cs" />
     <Compile Include="CreditApp\LoanResult.cs" />
     <Compile Include="DataBase.cs" />
@@ -286,6 +307,12 @@
     <Compile Include="Guarantee.cs">
       <DependentUpon>TrafficWaveModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Guarantee_ProductsAndEquipment.cs">
+      <DependentUpon>TrafficWaveModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="kalendar.cs">
+      <DependentUpon>TrafficWaveModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="klient_p482_spr.cs">
       <DependentUpon>TrafficWaveModel.tt</DependentUpon>
     </Compile>
@@ -298,10 +325,22 @@
     <Compile Include="LoanApplication_update_Result.cs">
       <DependentUpon>TrafficWaveModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="LoanClassification.cs">
+      <DependentUpon>TrafficWaveModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="LoanContracts.cs">
       <DependentUpon>TrafficWaveModel.tt</DependentUpon>
     </Compile>
     <Compile Include="LoanCredits.cs">
+      <DependentUpon>TrafficWaveModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LoanGraph.cs">
+      <DependentUpon>TrafficWaveModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LoanGraphSettings.cs">
+      <DependentUpon>TrafficWaveModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LoanPercent.cs">
       <DependentUpon>TrafficWaveModel.tt</DependentUpon>
     </Compile>
     <Compile Include="LOG_APP.cs">

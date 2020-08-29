@@ -45,5 +45,13 @@ namespace TrafficWaveService
         [OperationContract]
         Task<string> GetSprs(SprQuery pSprQuery);
 
+        /// <summary>
+        /// Формирование графика погашения
+        /// </summary>
+        /// <param name="pCreditQuery"></param>
+        /// <returns></returns>
+        [OperationContract]
+        bool FormGraph(CreditAppData pCad);
+
     }
 }

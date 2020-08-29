@@ -250,6 +250,33 @@
           <Property Name="BorrowerIsHolder" Type="bit" Nullable="false" />
           <Property Name="KindshipID" Type="int" />
         </EntityType>
+        <EntityType Name="Guarantee_ProductsAndEquipment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GuaranteeID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="250" />
+          <Property Name="DocName" Type="varchar" MaxLength="250" />
+          <Property Name="StateID" Type="int" />
+          <Property Name="MakeDate" Type="date" />
+          <Property Name="InspectionDate" Type="date" />
+          <Property Name="Lowering" Type="numeric" Precision="3" Scale="0" />
+          <Property Name="MarketValue" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="AssessedValue" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="CurrentMarketValue" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="CurrentAssessedValue" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="StatusID" Type="int" />
+          <Property Name="Description" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="kalendar">
+          <Key>
+            <PropertyRef Name="K_DATE" />
+          </Key>
+          <Property Name="K_DATE" Type="date" Nullable="false" />
+          <Property Name="K_PRIZ" Type="tinyint" />
+          <Property Name="IsNbkrWorkDay" Type="bit" />
+        </EntityType>
         <EntityType Name="LoanApplication">
           <Key>
             <PropertyRef Name="ID" />
@@ -345,6 +372,18 @@
           <Property Name="risk" Type="tinyint" />
           <Property Name="IsActive" Type="bit" />
         </EntityType>
+        <EntityType Name="LoanClassification">
+          <Key>
+            <PropertyRef Name="DgPozn" />
+            <PropertyRef Name="KodKl" />
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="DgPozn" Type="int" Nullable="false" />
+          <Property Name="KodKl" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Kod" Type="int" />
+          <Property Name="Comment" Type="varchar" MaxLength="250" />
+        </EntityType>
         <EntityType Name="LoanContracts">
           <Key>
             <PropertyRef Name="DgPozn" />
@@ -390,6 +429,73 @@
           <Property Name="TypeEnd" Type="tinyint" />
           <Property Name="AmountEnd" Type="numeric" Precision="15" Scale="2" />
           <Property Name="CheckCredits" Type="smallint" />
+        </EntityType>
+        <EntityType Name="LoanGraph">
+          <Key>
+            <PropertyRef Name="DgPozn" />
+            <PropertyRef Name="KlKode" />
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="DgPozn" Type="int" Nullable="false" />
+          <Property Name="KlKode" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="PayoutNumber" Type="int" Nullable="false" />
+          <Property Name="Issue" Type="numeric" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="RemainderMS" Type="numeric" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="RepaymentMS" Type="numeric" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="RepaymentPercent" Type="numeric" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="RepaymentMSPer" Type="numeric" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="RepaymentNsp" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="TotalPayment" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="SaveDate" Type="date" Nullable="false" />
+          <Property Name="HistoryNum" Type="int" Nullable="false" />
+          <Property Name="OtvNum" Type="int" Nullable="false" />
+          <Property Name="GrSumPp1" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="GrSumPp2" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="PercentSumEpc" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="AmortizationSumEndPeriod" Type="numeric" Precision="15" Scale="3" />
+          <Property Name="AmortizationSum" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="OperSum" Type="numeric" Precision="15" Scale="2" />
+        </EntityType>
+        <EntityType Name="LoanGraphSettings">
+          <Key>
+            <PropertyRef Name="DgPozn" />
+            <PropertyRef Name="KlKode" />
+            <PropertyRef Name="DateStart" />
+            <PropertyRef Name="ActualGraphNum" />
+          </Key>
+          <Property Name="DgPozn" Type="int" Nullable="false" />
+          <Property Name="KlKode" Type="int" Nullable="false" />
+          <Property Name="DateStart" Type="date" Nullable="false" />
+          <Property Name="RepayType" Type="int" Nullable="false" />
+          <Property Name="PrivelegPeriodMS" Type="int" Nullable="false" />
+          <Property Name="PrivelegPeriodPercent" Type="int" Nullable="false" />
+          <Property Name="FiveDayPrincip" Type="bit" Nullable="false" />
+          <Property Name="IssueCondition" Type="bit" Nullable="false" />
+          <Property Name="ActualGraphDate" Type="date" Nullable="false" />
+          <Property Name="ActualGraphNum" Type="int" Nullable="false" />
+          <Property Name="SaveDate" Type="date" Nullable="false" />
+          <Property Name="OtvNum" Type="int" Nullable="false" />
+          <Property Name="GraphType" Type="int" Nullable="false" />
+          <Property Name="Sum" Type="numeric" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="MonthCount" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LoanPercent">
+          <Key>
+            <PropertyRef Name="DgPozn" />
+            <PropertyRef Name="KodKl" />
+            <PropertyRef Name="DateStart" />
+          </Key>
+          <Property Name="DgPozn" Type="int" Nullable="false" />
+          <Property Name="KodKl" Type="int" Nullable="false" />
+          <Property Name="DateStart" Type="date" Nullable="false" />
+          <Property Name="DateEnd" Type="date" Nullable="false" />
+          <Property Name="Percents" Type="numeric" Precision="10" Scale="6" Nullable="false" />
+          <Property Name="FinePercent" Type="numeric" Precision="10" Scale="6" Nullable="false" />
+          <Property Name="Amount" Type="numeric" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="Comment" Type="varchar" MaxLength="250" />
+          <Property Name="Irr" Type="numeric" Precision="38" Scale="10" />
+          <Property Name="AmortizationValue" Type="numeric" Precision="38" Scale="10" />
         </EntityType>
         <!--Ошибки, обнаруженные при создании:
 предупреждение 6002: В таблице или представлении "bankasiaNS.bankadm.vLoanContract" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
@@ -438,6 +544,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__LoanClass__KodKl__7DB0DC6D">
+          <End Role="clients" Type="Self.clients" Multiplicity="1" />
+          <End Role="LoanClassification" Type="Self.LoanClassification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="kl_kod" />
+            </Principal>
+            <Dependent Role="LoanClassification">
+              <PropertyRef Name="KodKl" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__LoanContr__KodKl__01816D51">
           <End Role="clients" Type="Self.clients" Multiplicity="1" />
           <End Role="LoanContracts" Type="Self.LoanContracts" Multiplicity="*" />
@@ -458,6 +576,18 @@
               <PropertyRef Name="kl_kod" />
             </Principal>
             <Dependent Role="LoanCredits">
+              <PropertyRef Name="KodKl" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LoanPerce__KodKl__6B922C32">
+          <End Role="clients" Type="Self.clients" Multiplicity="1" />
+          <End Role="LoanPercent" Type="Self.LoanPercent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="kl_kod" />
+            </Principal>
+            <Dependent Role="LoanPercent">
               <PropertyRef Name="KodKl" />
             </Dependent>
           </ReferentialConstraint>
@@ -510,6 +640,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_GuaranteeProductsAndEquipment_Guarantee">
+          <End Role="Guarantee" Type="Self.Guarantee" Multiplicity="1" />
+          <End Role="Guarantee_ProductsAndEquipment" Type="Self.Guarantee_ProductsAndEquipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Guarantee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Guarantee_ProductsAndEquipment">
+              <PropertyRef Name="GuaranteeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_LoanApplicaton_clients">
           <End Role="clients" Type="Self.clients" Multiplicity="1" />
           <End Role="LoanApplication" Type="Self.LoanApplication" Multiplicity="*" />
@@ -519,6 +661,32 @@
             </Principal>
             <Dependent Role="LoanApplication">
               <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoanGraph_LoanCredits">
+          <End Role="LoanCredits" Type="Self.LoanCredits" Multiplicity="1" />
+          <End Role="LoanGraph" Type="Self.LoanGraph" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoanCredits">
+              <PropertyRef Name="DgPozn" />
+              <PropertyRef Name="KodKl" />
+            </Principal>
+            <Dependent Role="LoanGraph">
+              <PropertyRef Name="DgPozn" />
+              <PropertyRef Name="KlKode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoanGraphSettings_KlKode_180502">
+          <End Role="clients" Type="Self.clients" Multiplicity="1" />
+          <End Role="LoanGraphSettings" Type="Self.LoanGraphSettings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="kl_kod" />
+            </Principal>
+            <Dependent Role="LoanGraphSettings">
+              <PropertyRef Name="KlKode" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -621,13 +789,19 @@
           <EntitySet Name="clients" EntityType="Self.clients" Schema="bankadm" store:Type="Tables" />
           <EntitySet Name="ENUMERATOR_SPR" EntityType="Self.ENUMERATOR_SPR" Schema="bankadm" store:Type="Tables" />
           <EntitySet Name="Guarantee" EntityType="Self.Guarantee" Schema="bankadm" store:Type="Tables" />
+          <EntitySet Name="Guarantee_ProductsAndEquipment" EntityType="Self.Guarantee_ProductsAndEquipment" Schema="bankadm" store:Type="Tables" />
+          <EntitySet Name="kalendar" EntityType="Self.kalendar" Schema="bankadm" store:Type="Tables" />
           <EntitySet Name="LoanApplication" EntityType="Self.LoanApplication" Schema="bankadm" store:Type="Tables" />
           <EntitySet Name="LOG_APP" EntityType="Self.LOG_APP" Schema="bankadm" store:Type="Tables" />
           <EntitySet Name="ow" EntityType="Self.ow" Schema="bankadm" store:Type="Tables" />
           <EntitySet Name="spr" EntityType="Self.spr" Schema="bankadm" store:Type="Tables" />
           <EntitySet Name="klient_p482_spr" EntityType="Self.klient_p482_spr" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoanClassification" EntityType="Self.LoanClassification" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoanContracts" EntityType="Self.LoanContracts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoanCredits" EntityType="Self.LoanCredits" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoanGraph" EntityType="Self.LoanGraph" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoanGraphSettings" EntityType="Self.LoanGraphSettings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoanPercent" EntityType="Self.LoanPercent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="vLoanContract" EntityType="Self.vLoanContract" store:Type="Views" store:Schema="bankadm">
             <DefiningQuery>SELECT 
     [vLoanContract].[DG_POZN] AS [DG_POZN], 
@@ -657,6 +831,10 @@
             <End Role="clients" EntitySet="clients" />
             <End Role="client_risk" EntitySet="client_risk" />
           </AssociationSet>
+          <AssociationSet Name="FK__LoanClass__KodKl__7DB0DC6D" Association="Self.FK__LoanClass__KodKl__7DB0DC6D">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="LoanClassification" EntitySet="LoanClassification" />
+          </AssociationSet>
           <AssociationSet Name="FK__LoanContr__KodKl__01816D51" Association="Self.FK__LoanContr__KodKl__01816D51">
             <End Role="clients" EntitySet="clients" />
             <End Role="LoanContracts" EntitySet="LoanContracts" />
@@ -664,6 +842,10 @@
           <AssociationSet Name="FK__LoanCredi__KodKl__75A5A651" Association="Self.FK__LoanCredi__KodKl__75A5A651">
             <End Role="clients" EntitySet="clients" />
             <End Role="LoanCredits" EntitySet="LoanCredits" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LoanPerce__KodKl__6B922C32" Association="Self.FK__LoanPerce__KodKl__6B922C32">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="LoanPercent" EntitySet="LoanPercent" />
           </AssociationSet>
           <AssociationSet Name="FK_200420_ClCode" Association="Self.FK_200420_ClCode">
             <End Role="clients" EntitySet="clients" />
@@ -681,9 +863,21 @@
             <End Role="clients" EntitySet="clients" />
             <End Role="Guarantee" EntitySet="Guarantee" />
           </AssociationSet>
+          <AssociationSet Name="FK_GuaranteeProductsAndEquipment_Guarantee" Association="Self.FK_GuaranteeProductsAndEquipment_Guarantee">
+            <End Role="Guarantee" EntitySet="Guarantee" />
+            <End Role="Guarantee_ProductsAndEquipment" EntitySet="Guarantee_ProductsAndEquipment" />
+          </AssociationSet>
           <AssociationSet Name="FK_LoanApplicaton_clients" Association="Self.FK_LoanApplicaton_clients">
             <End Role="clients" EntitySet="clients" />
             <End Role="LoanApplication" EntitySet="LoanApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoanGraph_LoanCredits" Association="Self.FK_LoanGraph_LoanCredits">
+            <End Role="LoanCredits" EntitySet="LoanCredits" />
+            <End Role="LoanGraph" EntitySet="LoanGraph" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoanGraphSettings_KlKode_180502" Association="Self.FK_LoanGraphSettings_KlKode_180502">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="LoanGraphSettings" EntitySet="LoanGraphSettings" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -828,6 +1022,32 @@
           <AssociationSet Name="FK_Guarantee_clients" Association="bankasiaNSModel.FK_Guarantee_clients">
             <End Role="clients" EntitySet="clients" />
             <End Role="Guarantee" EntitySet="Guarantee" />
+          </AssociationSet>
+          <EntitySet Name="Guarantee_ProductsAndEquipment" EntityType="bankasiaNSModel.Guarantee_ProductsAndEquipment" />
+          <AssociationSet Name="FK_GuaranteeProductsAndEquipment_Guarantee" Association="bankasiaNSModel.FK_GuaranteeProductsAndEquipment_Guarantee">
+            <End Role="Guarantee" EntitySet="Guarantee" />
+            <End Role="Guarantee_ProductsAndEquipment" EntitySet="Guarantee_ProductsAndEquipment" />
+          </AssociationSet>
+          <EntitySet Name="LoanClassification" EntityType="bankasiaNSModel.LoanClassification" />
+          <AssociationSet Name="FK__LoanClass__KodKl__7DB0DC6D" Association="bankasiaNSModel.FK__LoanClass__KodKl__7DB0DC6D">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="LoanClassification" EntitySet="LoanClassification" />
+          </AssociationSet>
+          <EntitySet Name="LoanGraph" EntityType="bankasiaNSModel.LoanGraph" />
+          <EntitySet Name="LoanGraphSettings" EntityType="bankasiaNSModel.LoanGraphSettings" />
+          <AssociationSet Name="FK_LoanGraphSettings_KlKode_180502" Association="bankasiaNSModel.FK_LoanGraphSettings_KlKode_180502">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="LoanGraphSettings" EntitySet="LoanGraphSettings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoanGraph_LoanCredits" Association="bankasiaNSModel.FK_LoanGraph_LoanCredits">
+            <End Role="LoanCredits" EntitySet="LoanCredits" />
+            <End Role="LoanGraph" EntitySet="LoanGraph" />
+          </AssociationSet>
+          <EntitySet Name="kalendar" EntityType="bankasiaNSModel.kalendar" />
+          <EntitySet Name="LoanPercent" EntityType="bankasiaNSModel.LoanPercent" />
+          <AssociationSet Name="FK__LoanPerce__KodKl__6B922C32" Association="bankasiaNSModel.FK__LoanPerce__KodKl__6B922C32">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="LoanPercent" EntitySet="LoanPercent" />
           </AssociationSet>
         </EntityContainer>
         <ComplexType Name="SearchReg_Result">
@@ -1094,6 +1314,9 @@
           <NavigationProperty Name="LoanContracts" Relationship="bankasiaNSModel.FK__LoanContr__KodKl__01816D51" FromRole="clients" ToRole="LoanContracts" />
           <NavigationProperty Name="LoanCredits" Relationship="bankasiaNSModel.FK__LoanCredi__KodKl__75A5A651" FromRole="clients" ToRole="LoanCredits" />
           <NavigationProperty Name="Guarantee" Relationship="bankasiaNSModel.FK_Guarantee_clients" FromRole="clients" ToRole="Guarantee" />
+          <NavigationProperty Name="LoanClassification" Relationship="bankasiaNSModel.FK__LoanClass__KodKl__7DB0DC6D" FromRole="clients" ToRole="LoanClassification" />
+          <NavigationProperty Name="LoanGraphSettings" Relationship="bankasiaNSModel.FK_LoanGraphSettings_KlKode_180502" FromRole="clients" ToRole="LoanGraphSettings" />
+          <NavigationProperty Name="LoanPercent" Relationship="bankasiaNSModel.FK__LoanPerce__KodKl__6B922C32" FromRole="clients" ToRole="LoanPercent" />
         </EntityType>
         <Association Name="FK__client_ri__CR_KL__58360A52">
           <End Type="bankasiaNSModel.clients" Role="clients" Multiplicity="0..1" />
@@ -1266,6 +1489,7 @@
           <Property Name="AmountEnd" Type="Decimal" Precision="15" Scale="2" />
           <Property Name="CheckCredits" Type="Int16" />
           <NavigationProperty Name="clients" Relationship="bankasiaNSModel.FK__LoanCredi__KodKl__75A5A651" FromRole="LoanCredits" ToRole="clients" />
+          <NavigationProperty Name="LoanGraph" Relationship="bankasiaNSModel.FK_LoanGraph_LoanCredits" FromRole="LoanCredits" ToRole="LoanGraph" />
         </EntityType>
         <Association Name="FK__LoanContr__KodKl__01816D51">
           <End Type="bankasiaNSModel.clients" Role="clients" Multiplicity="1" />
@@ -1363,6 +1587,7 @@
           <Property Name="BorrowerIsHolder" Type="Boolean" Nullable="false" />
           <Property Name="KindshipID" Type="Int32" />
           <NavigationProperty Name="clients" Relationship="bankasiaNSModel.FK_Guarantee_clients" FromRole="Guarantee" ToRole="clients" />
+          <NavigationProperty Name="Guarantee_ProductsAndEquipment" Relationship="bankasiaNSModel.FK_GuaranteeProductsAndEquipment_Guarantee" FromRole="Guarantee" ToRole="Guarantee_ProductsAndEquipment" />
         </EntityType>
         <Association Name="FK_Guarantee_clients">
           <End Type="bankasiaNSModel.clients" Role="clients" Multiplicity="0..1" />
@@ -1373,6 +1598,179 @@
             </Principal>
             <Dependent Role="Guarantee">
               <PropertyRef Name="GuaranteeClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Guarantee_ProductsAndEquipment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GuaranteeID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="DocName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StateID" Type="Int32" />
+          <Property Name="MakeDate" Type="DateTime" Precision="0" />
+          <Property Name="InspectionDate" Type="DateTime" Precision="0" />
+          <Property Name="Lowering" Type="Decimal" Precision="3" Scale="0" />
+          <Property Name="MarketValue" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="AssessedValue" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CurrentMarketValue" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CurrentAssessedValue" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="StatusID" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Guarantee" Relationship="bankasiaNSModel.FK_GuaranteeProductsAndEquipment_Guarantee" FromRole="Guarantee_ProductsAndEquipment" ToRole="Guarantee" />
+        </EntityType>
+        <Association Name="FK_GuaranteeProductsAndEquipment_Guarantee">
+          <End Type="bankasiaNSModel.Guarantee" Role="Guarantee" Multiplicity="1" />
+          <End Type="bankasiaNSModel.Guarantee_ProductsAndEquipment" Role="Guarantee_ProductsAndEquipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Guarantee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Guarantee_ProductsAndEquipment">
+              <PropertyRef Name="GuaranteeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="LoanClassification">
+          <Key>
+            <PropertyRef Name="DgPozn" />
+            <PropertyRef Name="KodKl" />
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="DgPozn" Type="Int32" Nullable="false" />
+          <Property Name="KodKl" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Kod" Type="Int32" />
+          <Property Name="Comment" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="clients" Relationship="bankasiaNSModel.FK__LoanClass__KodKl__7DB0DC6D" FromRole="LoanClassification" ToRole="clients" />
+        </EntityType>
+        <Association Name="FK__LoanClass__KodKl__7DB0DC6D">
+          <End Type="bankasiaNSModel.clients" Role="clients" Multiplicity="1" />
+          <End Type="bankasiaNSModel.LoanClassification" Role="LoanClassification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="kl_kod" />
+            </Principal>
+            <Dependent Role="LoanClassification">
+              <PropertyRef Name="KodKl" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="LoanGraph">
+          <Key>
+            <PropertyRef Name="DgPozn" />
+            <PropertyRef Name="KlKode" />
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="DgPozn" Type="Int32" Nullable="false" />
+          <Property Name="KlKode" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PayoutNumber" Type="Int32" Nullable="false" />
+          <Property Name="Issue" Type="Decimal" Nullable="false" Precision="15" Scale="2" />
+          <Property Name="RemainderMS" Type="Decimal" Nullable="false" Precision="15" Scale="2" />
+          <Property Name="RepaymentMS" Type="Decimal" Nullable="false" Precision="15" Scale="2" />
+          <Property Name="RepaymentPercent" Type="Decimal" Nullable="false" Precision="15" Scale="2" />
+          <Property Name="RepaymentMSPer" Type="Decimal" Nullable="false" Precision="15" Scale="2" />
+          <Property Name="RepaymentNsp" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="TotalPayment" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="SaveDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="HistoryNum" Type="Int32" Nullable="false" />
+          <Property Name="OtvNum" Type="Int32" Nullable="false" />
+          <Property Name="GrSumPp1" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="GrSumPp2" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="PercentSumEpc" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="AmortizationSumEndPeriod" Type="Decimal" Precision="15" Scale="3" />
+          <Property Name="AmortizationSum" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="OperSum" Type="Decimal" Precision="15" Scale="2" />
+          <NavigationProperty Name="LoanCredits" Relationship="bankasiaNSModel.FK_LoanGraph_LoanCredits" FromRole="LoanGraph" ToRole="LoanCredits" />
+        </EntityType>
+        <EntityType Name="LoanGraphSettings">
+          <Key>
+            <PropertyRef Name="DgPozn" />
+            <PropertyRef Name="KlKode" />
+            <PropertyRef Name="DateStart" />
+            <PropertyRef Name="ActualGraphNum" />
+          </Key>
+          <Property Name="DgPozn" Type="Int32" Nullable="false" />
+          <Property Name="KlKode" Type="Int32" Nullable="false" />
+          <Property Name="DateStart" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="RepayType" Type="Int32" Nullable="false" />
+          <Property Name="PrivelegPeriodMS" Type="Int32" Nullable="false" />
+          <Property Name="PrivelegPeriodPercent" Type="Int32" Nullable="false" />
+          <Property Name="FiveDayPrincip" Type="Boolean" Nullable="false" />
+          <Property Name="IssueCondition" Type="Boolean" Nullable="false" />
+          <Property Name="ActualGraphDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ActualGraphNum" Type="Int32" Nullable="false" />
+          <Property Name="SaveDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="OtvNum" Type="Int32" Nullable="false" />
+          <Property Name="GraphType" Type="Int32" Nullable="false" />
+          <Property Name="Sum" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="MonthCount" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="clients" Relationship="bankasiaNSModel.FK_LoanGraphSettings_KlKode_180502" FromRole="LoanGraphSettings" ToRole="clients" />
+        </EntityType>
+        <Association Name="FK_LoanGraphSettings_KlKode_180502">
+          <End Type="bankasiaNSModel.clients" Role="clients" Multiplicity="1" />
+          <End Type="bankasiaNSModel.LoanGraphSettings" Role="LoanGraphSettings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="kl_kod" />
+            </Principal>
+            <Dependent Role="LoanGraphSettings">
+              <PropertyRef Name="KlKode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoanGraph_LoanCredits">
+          <End Type="bankasiaNSModel.LoanCredits" Role="LoanCredits" Multiplicity="1" />
+          <End Type="bankasiaNSModel.LoanGraph" Role="LoanGraph" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoanCredits">
+              <PropertyRef Name="DgPozn" />
+              <PropertyRef Name="KodKl" />
+            </Principal>
+            <Dependent Role="LoanGraph">
+              <PropertyRef Name="DgPozn" />
+              <PropertyRef Name="KlKode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="kalendar">
+          <Key>
+            <PropertyRef Name="K_DATE" />
+          </Key>
+          <Property Name="K_DATE" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="K_PRIZ" Type="Byte" />
+          <Property Name="IsNbkrWorkDay" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="LoanPercent">
+          <Key>
+            <PropertyRef Name="DgPozn" />
+            <PropertyRef Name="KodKl" />
+            <PropertyRef Name="DateStart" />
+          </Key>
+          <Property Name="DgPozn" Type="Int32" Nullable="false" />
+          <Property Name="KodKl" Type="Int32" Nullable="false" />
+          <Property Name="DateStart" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DateEnd" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Percents" Type="Decimal" Nullable="false" Precision="10" Scale="6" />
+          <Property Name="FinePercent" Type="Decimal" Nullable="false" Precision="10" Scale="6" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="15" Scale="2" />
+          <Property Name="Comment" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Irr" Type="Decimal" Precision="38" Scale="10" />
+          <Property Name="AmortizationValue" Type="Decimal" Precision="38" Scale="10" />
+          <NavigationProperty Name="clients" Relationship="bankasiaNSModel.FK__LoanPerce__KodKl__6B922C32" FromRole="LoanPercent" ToRole="clients" />
+        </EntityType>
+        <Association Name="FK__LoanPerce__KodKl__6B922C32">
+          <End Type="bankasiaNSModel.clients" Role="clients" Multiplicity="1" />
+          <End Type="bankasiaNSModel.LoanPercent" Role="LoanPercent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="kl_kod" />
+            </Principal>
+            <Dependent Role="LoanPercent">
+              <PropertyRef Name="KodKl" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1838,6 +2236,109 @@
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="DG_POZN" ColumnName="DG_POZN" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Guarantee_ProductsAndEquipment">
+            <EntityTypeMapping TypeName="bankasiaNSModel.Guarantee_ProductsAndEquipment">
+              <MappingFragment StoreEntitySet="Guarantee_ProductsAndEquipment">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="CurrentAssessedValue" ColumnName="CurrentAssessedValue" />
+                <ScalarProperty Name="CurrentMarketValue" ColumnName="CurrentMarketValue" />
+                <ScalarProperty Name="AssessedValue" ColumnName="AssessedValue" />
+                <ScalarProperty Name="MarketValue" ColumnName="MarketValue" />
+                <ScalarProperty Name="Lowering" ColumnName="Lowering" />
+                <ScalarProperty Name="InspectionDate" ColumnName="InspectionDate" />
+                <ScalarProperty Name="MakeDate" ColumnName="MakeDate" />
+                <ScalarProperty Name="StateID" ColumnName="StateID" />
+                <ScalarProperty Name="DocName" ColumnName="DocName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="GuaranteeID" ColumnName="GuaranteeID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoanClassification">
+            <EntityTypeMapping TypeName="bankasiaNSModel.LoanClassification">
+              <MappingFragment StoreEntitySet="LoanClassification">
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Kod" ColumnName="Kod" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="KodKl" ColumnName="KodKl" />
+                <ScalarProperty Name="DgPozn" ColumnName="DgPozn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoanGraph">
+            <EntityTypeMapping TypeName="bankasiaNSModel.LoanGraph">
+              <MappingFragment StoreEntitySet="LoanGraph">
+                <ScalarProperty Name="OperSum" ColumnName="OperSum" />
+                <ScalarProperty Name="AmortizationSum" ColumnName="AmortizationSum" />
+                <ScalarProperty Name="AmortizationSumEndPeriod" ColumnName="AmortizationSumEndPeriod" />
+                <ScalarProperty Name="PercentSumEpc" ColumnName="PercentSumEpc" />
+                <ScalarProperty Name="GrSumPp2" ColumnName="GrSumPp2" />
+                <ScalarProperty Name="GrSumPp1" ColumnName="GrSumPp1" />
+                <ScalarProperty Name="OtvNum" ColumnName="OtvNum" />
+                <ScalarProperty Name="HistoryNum" ColumnName="HistoryNum" />
+                <ScalarProperty Name="SaveDate" ColumnName="SaveDate" />
+                <ScalarProperty Name="TotalPayment" ColumnName="TotalPayment" />
+                <ScalarProperty Name="RepaymentNsp" ColumnName="RepaymentNsp" />
+                <ScalarProperty Name="RepaymentMSPer" ColumnName="RepaymentMSPer" />
+                <ScalarProperty Name="RepaymentPercent" ColumnName="RepaymentPercent" />
+                <ScalarProperty Name="RepaymentMS" ColumnName="RepaymentMS" />
+                <ScalarProperty Name="RemainderMS" ColumnName="RemainderMS" />
+                <ScalarProperty Name="Issue" ColumnName="Issue" />
+                <ScalarProperty Name="PayoutNumber" ColumnName="PayoutNumber" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="KlKode" ColumnName="KlKode" />
+                <ScalarProperty Name="DgPozn" ColumnName="DgPozn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoanGraphSettings">
+            <EntityTypeMapping TypeName="bankasiaNSModel.LoanGraphSettings">
+              <MappingFragment StoreEntitySet="LoanGraphSettings">
+                <ScalarProperty Name="MonthCount" ColumnName="MonthCount" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
+                <ScalarProperty Name="GraphType" ColumnName="GraphType" />
+                <ScalarProperty Name="OtvNum" ColumnName="OtvNum" />
+                <ScalarProperty Name="SaveDate" ColumnName="SaveDate" />
+                <ScalarProperty Name="ActualGraphNum" ColumnName="ActualGraphNum" />
+                <ScalarProperty Name="ActualGraphDate" ColumnName="ActualGraphDate" />
+                <ScalarProperty Name="IssueCondition" ColumnName="IssueCondition" />
+                <ScalarProperty Name="FiveDayPrincip" ColumnName="FiveDayPrincip" />
+                <ScalarProperty Name="PrivelegPeriodPercent" ColumnName="PrivelegPeriodPercent" />
+                <ScalarProperty Name="PrivelegPeriodMS" ColumnName="PrivelegPeriodMS" />
+                <ScalarProperty Name="RepayType" ColumnName="RepayType" />
+                <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+                <ScalarProperty Name="KlKode" ColumnName="KlKode" />
+                <ScalarProperty Name="DgPozn" ColumnName="DgPozn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="kalendar">
+            <EntityTypeMapping TypeName="bankasiaNSModel.kalendar">
+              <MappingFragment StoreEntitySet="kalendar">
+                <ScalarProperty Name="IsNbkrWorkDay" ColumnName="IsNbkrWorkDay" />
+                <ScalarProperty Name="K_PRIZ" ColumnName="K_PRIZ" />
+                <ScalarProperty Name="K_DATE" ColumnName="K_DATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoanPercent">
+            <EntityTypeMapping TypeName="bankasiaNSModel.LoanPercent">
+              <MappingFragment StoreEntitySet="LoanPercent">
+                <ScalarProperty Name="AmortizationValue" ColumnName="AmortizationValue" />
+                <ScalarProperty Name="Irr" ColumnName="Irr" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="FinePercent" ColumnName="FinePercent" />
+                <ScalarProperty Name="Percents" ColumnName="Percents" />
+                <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
+                <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+                <ScalarProperty Name="KodKl" ColumnName="KodKl" />
+                <ScalarProperty Name="DgPozn" ColumnName="DgPozn" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

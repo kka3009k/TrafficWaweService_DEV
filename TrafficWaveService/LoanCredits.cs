@@ -14,6 +14,12 @@ namespace TrafficWaveService
     
     public partial class LoanCredits
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public LoanCredits()
+        {
+            this.LoanGraph = new HashSet<LoanGraph>();
+        }
+    
         public int DgPozn { get; set; }
         public int KodKl { get; set; }
         public int Pozn_Old { get; set; }
@@ -42,5 +48,7 @@ namespace TrafficWaveService
         public Nullable<short> CheckCredits { get; set; }
     
         public virtual clients clients { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LoanGraph> LoanGraph { get; set; }
     }
 }

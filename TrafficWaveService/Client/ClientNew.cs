@@ -87,8 +87,8 @@ namespace TrafficWaveService.Client
                         kl_benefsname = "",
                         kl_benefs_paspdata = "",
                         kl_tel3 = "",
-                        kl_wdoljn = "Прочее",
-                        kl_wfio = "Прочее",
+                        kl_wdoljn = "Payer",
+                        kl_wfio = "Payer",
                         kl_wname = "Прочее",
                         kl_otvcreate = 3009,
                         kl_ins = false,
@@ -115,6 +115,11 @@ namespace TrafficWaveService.Client
             }
         }
 
+        /// <summary>
+        /// Изменение формата телефона для ОДБ
+        /// </summary>
+        /// <param name="pNum"></param>
+        /// <returns></returns>
         private string ParsPhone(string pNum)
         {
             string phone = "(996)" + pNum.Remove(0, 5).Remove(4);
@@ -123,6 +128,7 @@ namespace TrafficWaveService.Client
             string num_3 = pNum.Remove(0, 13);
             return phone + num_1 + num_2 + num_3;
         }
+
         /// <summary>
         /// Добавление паспортных данных - таблица client_paspdata
         /// </summary>

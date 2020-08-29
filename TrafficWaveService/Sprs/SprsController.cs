@@ -67,6 +67,10 @@ namespace TrafficWaveService.Sprs
                         sprs_json = JsonConvert.SerializeObject(
                             db.klient_p482_spr.Where(x=>(bool)x.IsActive).OrderBy(x=>x.p482.Trim()).ToList<object>());
                         break;
+                    default:
+                        sprs_json = JsonConvert.SerializeObject(
+                           db.spr.ToList<object>());
+                        break;
 
                 }
             }
