@@ -103,24 +103,25 @@ namespace TrafficWaveService.Client
         {
             using (bankasiaNSEntities db = new bankasiaNSEntities())
             {
-                client_paspdata cl_pasp = db.client_paspdata.FirstOrDefault(x => x.kl_kod == _ClCode);
-                cl_pasp.p_fam = pCl.last_name;
-                cl_pasp.p_name = pCl.first_name;
-                cl_pasp.p_otch = pCl.patronymic;
-                //p_grajd = "417",
-                cl_pasp.p_viddoksfr = Convert.ToDateTime(pCl.passport_info.issued_date) >= DateTime.Parse("2017-01-01") ? "15" : "05";
-                cl_pasp.p_viddok = pCl.passport_info.passport_type;
-                cl_pasp.p_srdok = pCl.passport_info.series;
-                cl_pasp.p_ndok = pCl.passport_info.number;
-                cl_pasp.p_mvd = pCl.passport_info.issued_by;
-                cl_pasp.p_enddok = Convert.ToDateTime(pCl.passport_info.deadline);
-                cl_pasp.p_datev = Convert.ToDateTime(pCl.passport_info.issued_date);
-                    //p_strb = "417",
-                    //p_db = Convert.ToDateTime(pCl.birthday),
-                    //p_pol = pCl.gender == null ? (byte)0 : (byte)1,
-                    //p_nation = pCl.nationality,
-                    //p_family_status = 1
-                db.SaveChanges();
+                //client_paspdata cl_pasp = db.client_paspdata.FirstOrDefault(x => x.kl_kod == _ClCode);
+                //cl_pasp.p_fam = pCl.last_name;
+                //cl_pasp.p_name = pCl.first_name;
+                //cl_pasp.p_otch = pCl.patronymic;
+                ////p_grajd = "417",
+                //cl_pasp.p_viddoksfr = Convert.ToDateTime(pCl.passport_info.issued_date) >= DateTime.Parse("2017-01-01") ? "15" : "05";
+                //cl_pasp.p_viddok = pCl.passport_info.passport_type;
+                //cl_pasp.p_srdok = pCl.passport_info.series;
+                //cl_pasp.p_ndok = pCl.passport_info.number;
+                //cl_pasp.p_mvd = pCl.passport_info.issued_by;
+                //cl_pasp.p_enddok = Convert.ToDateTime(pCl.passport_info.deadline);
+                //cl_pasp.p_datev = Convert.ToDateTime(pCl.passport_info.issued_date);
+                //    //p_strb = "417",
+                //    //p_db = Convert.ToDateTime(pCl.birthday),
+                //    //p_pol = pCl.gender == null ? (byte)0 : (byte)1,
+                //    //p_nation = pCl.nationality,
+                //    //p_family_status = 1
+                
+                //db.SaveChanges();
                 UpdateClienAdress(pCl);
             }
         }

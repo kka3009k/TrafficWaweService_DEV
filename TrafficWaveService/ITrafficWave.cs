@@ -53,5 +53,14 @@ namespace TrafficWaveService
         [OperationContract]
         bool FormGraph(CreditAppData pCad);
 
+        /// <summary>
+        /// Формирование анкеты клиента
+        /// </summary>
+        /// <param name="IdClient"></param>
+        /// <returns></returns>
+        [OperationContract]
+        Task<Dictionary<string, object>> GetClientProfile(int IdClient, int IdOtv);
+       
+
     }
 }

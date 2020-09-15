@@ -834,6 +834,18 @@ namespace TrafficWaveService.ReportServiceDev {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/kr807002", ReplyAction="http://tempuri.org/IReportService/kr807002Response")]
         System.Threading.Tasks.Task<TrafficWaveService.ReportServiceDev.XLSDownload> kr807002Async(int[] pId, int pFormNum);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/od205340", ReplyAction="http://tempuri.org/IReportService/od205340Response")]
+        TrafficWaveService.ReportServiceDev.XLSDownload od205340(int pReportId, System.DateTime dtStart, System.DateTime dtEnd, int pFormNum);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/od205340", ReplyAction="http://tempuri.org/IReportService/od205340Response")]
+        System.Threading.Tasks.Task<TrafficWaveService.ReportServiceDev.XLSDownload> od205340Async(int pReportId, System.DateTime dtStart, System.DateTime dtEnd, int pFormNum);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/od205350", ReplyAction="http://tempuri.org/IReportService/od205350Response")]
+        TrafficWaveService.ReportServiceDev.XLSDownload od205350(int pReportQueryId, string pReportName, TrafficWaveService.ReportServiceDev.reportsParam[] pLstParams, int pFormNum);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/od205350", ReplyAction="http://tempuri.org/IReportService/od205350Response")]
+        System.Threading.Tasks.Task<TrafficWaveService.ReportServiceDev.XLSDownload> od205350Async(int pReportQueryId, string pReportName, TrafficWaveService.ReportServiceDev.reportsParam[] pLstParams, int pFormNum);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/od205260XmlApp7", ReplyAction="http://tempuri.org/IReportService/od205260XmlApp7Response")]
         TrafficWaveService.ReportServiceDev.SS_Operation_Result od205260XmlApp7(System.DateTime pDate, int pFormNum);
         
@@ -1135,10 +1147,10 @@ namespace TrafficWaveService.ReportServiceDev {
         System.Threading.Tasks.Task<TrafficWaveService.ReportServiceDev.XLSDownload> SDB_DAY_REPORTAsync(System.DateTime pDate, string pKodb, string pOtv, int pFormNum);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/SDB_AGREEMENT", ReplyAction="http://tempuri.org/IReportService/SDB_AGREEMENTResponse")]
-        TrafficWaveService.ReportServiceDev.XLSDownload SDB_AGREEMENT(short pKodb, short pKodc, int pKlKod, int pSdbAccId, short pClientType, int pFormNum);
+        TrafficWaveService.ReportServiceDev.XLSDownload SDB_AGREEMENT(short pKodb, short pKodc, int pKlKod, int pSdbAccId, short pClientType, string pLang, int pFormNum);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/SDB_AGREEMENT", ReplyAction="http://tempuri.org/IReportService/SDB_AGREEMENTResponse")]
-        System.Threading.Tasks.Task<TrafficWaveService.ReportServiceDev.XLSDownload> SDB_AGREEMENTAsync(short pKodb, short pKodc, int pKlKod, int pSdbAccId, short pClientType, int pFormNum);
+        System.Threading.Tasks.Task<TrafficWaveService.ReportServiceDev.XLSDownload> SDB_AGREEMENTAsync(short pKodb, short pKodc, int pKlKod, int pSdbAccId, short pClientType, string pLang, int pFormNum);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/SDB_STATEMENTS", ReplyAction="http://tempuri.org/IReportService/SDB_STATEMENTSResponse")]
         TrafficWaveService.ReportServiceDev.XLSDownload SDB_STATEMENTS(int pSdbAccId, short pReportType, short pKodb, short pKodc, int pFormNum);
@@ -3456,6 +3468,22 @@ namespace TrafficWaveService.ReportServiceDev {
             return base.Channel.kr807002Async(pId, pFormNum);
         }
         
+        public TrafficWaveService.ReportServiceDev.XLSDownload od205340(int pReportId, System.DateTime dtStart, System.DateTime dtEnd, int pFormNum) {
+            return base.Channel.od205340(pReportId, dtStart, dtEnd, pFormNum);
+        }
+        
+        public System.Threading.Tasks.Task<TrafficWaveService.ReportServiceDev.XLSDownload> od205340Async(int pReportId, System.DateTime dtStart, System.DateTime dtEnd, int pFormNum) {
+            return base.Channel.od205340Async(pReportId, dtStart, dtEnd, pFormNum);
+        }
+        
+        public TrafficWaveService.ReportServiceDev.XLSDownload od205350(int pReportQueryId, string pReportName, TrafficWaveService.ReportServiceDev.reportsParam[] pLstParams, int pFormNum) {
+            return base.Channel.od205350(pReportQueryId, pReportName, pLstParams, pFormNum);
+        }
+        
+        public System.Threading.Tasks.Task<TrafficWaveService.ReportServiceDev.XLSDownload> od205350Async(int pReportQueryId, string pReportName, TrafficWaveService.ReportServiceDev.reportsParam[] pLstParams, int pFormNum) {
+            return base.Channel.od205350Async(pReportQueryId, pReportName, pLstParams, pFormNum);
+        }
+        
         public TrafficWaveService.ReportServiceDev.SS_Operation_Result od205260XmlApp7(System.DateTime pDate, int pFormNum) {
             return base.Channel.od205260XmlApp7(pDate, pFormNum);
         }
@@ -3856,12 +3884,12 @@ namespace TrafficWaveService.ReportServiceDev {
             return base.Channel.SDB_DAY_REPORTAsync(pDate, pKodb, pOtv, pFormNum);
         }
         
-        public TrafficWaveService.ReportServiceDev.XLSDownload SDB_AGREEMENT(short pKodb, short pKodc, int pKlKod, int pSdbAccId, short pClientType, int pFormNum) {
-            return base.Channel.SDB_AGREEMENT(pKodb, pKodc, pKlKod, pSdbAccId, pClientType, pFormNum);
+        public TrafficWaveService.ReportServiceDev.XLSDownload SDB_AGREEMENT(short pKodb, short pKodc, int pKlKod, int pSdbAccId, short pClientType, string pLang, int pFormNum) {
+            return base.Channel.SDB_AGREEMENT(pKodb, pKodc, pKlKod, pSdbAccId, pClientType, pLang, pFormNum);
         }
         
-        public System.Threading.Tasks.Task<TrafficWaveService.ReportServiceDev.XLSDownload> SDB_AGREEMENTAsync(short pKodb, short pKodc, int pKlKod, int pSdbAccId, short pClientType, int pFormNum) {
-            return base.Channel.SDB_AGREEMENTAsync(pKodb, pKodc, pKlKod, pSdbAccId, pClientType, pFormNum);
+        public System.Threading.Tasks.Task<TrafficWaveService.ReportServiceDev.XLSDownload> SDB_AGREEMENTAsync(short pKodb, short pKodc, int pKlKod, int pSdbAccId, short pClientType, string pLang, int pFormNum) {
+            return base.Channel.SDB_AGREEMENTAsync(pKodb, pKodc, pKlKod, pSdbAccId, pClientType, pLang, pFormNum);
         }
         
         public TrafficWaveService.ReportServiceDev.XLSDownload SDB_STATEMENTS(int pSdbAccId, short pReportType, short pKodb, short pKodc, int pFormNum) {

@@ -222,6 +222,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Auth.cs" />
     <Compile Include="ClientSearch\DataClient.cs" />
     <Compile Include="ClientSearch\ResultData.cs" />
     <Compile Include="ClientSearch\SeachMain.cs" />
@@ -242,6 +243,7 @@
     <Compile Include="clients.cs">
       <DependentUpon>TrafficWaveModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Client\ClientReport.cs" />
     <Compile Include="client_adress.cs">
       <DependentUpon>TrafficWaveModel.tt</DependentUpon>
     </Compile>
@@ -316,6 +318,9 @@
     <Compile Include="klient_p482_spr.cs">
       <DependentUpon>TrafficWaveModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="LoanAccountNumber.cs">
+      <DependentUpon>TrafficWaveModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="LoanApplication.cs">
       <DependentUpon>TrafficWaveModel.tt</DependentUpon>
     </Compile>
@@ -328,6 +333,9 @@
     <Compile Include="LoanClassification.cs">
       <DependentUpon>TrafficWaveModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="LoanCommision.cs">
+      <DependentUpon>TrafficWaveModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="LoanContracts.cs">
       <DependentUpon>TrafficWaveModel.tt</DependentUpon>
     </Compile>
@@ -338,6 +346,9 @@
       <DependentUpon>TrafficWaveModel.tt</DependentUpon>
     </Compile>
     <Compile Include="LoanGraphSettings.cs">
+      <DependentUpon>TrafficWaveModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LoanIssue.cs">
       <DependentUpon>TrafficWaveModel.tt</DependentUpon>
     </Compile>
     <Compile Include="LoanPercent.cs">
@@ -376,6 +387,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="spr.cs">
+      <DependentUpon>TrafficWaveModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sprotv.cs">
       <DependentUpon>TrafficWaveModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Sprs\SprQuery.cs" />

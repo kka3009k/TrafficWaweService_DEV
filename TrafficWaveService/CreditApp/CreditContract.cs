@@ -15,6 +15,7 @@ namespace TrafficWaveService.CreditApp
     public class CreditContract
     {
         CreditAppData _Cr;
+        LoanApplication _ln;
         bankasiaNSEntities _db;
         public CreditContract()
         {
@@ -26,45 +27,47 @@ namespace TrafficWaveService.CreditApp
             _Cr = pCr;
         }
 
-        public int CreateCreditContract(CreditAppData pCr)
+        public int CreateCreditContract()
         {
-            using (bankasiaNSEntities db = new bankasiaNSEntities())
+            _ln = _db.LoanApplication.FirstOrDefault(x => x.ID == _Cr.IDLoan);
+            LoanCredits lc = _db.LoanCredits.FirstOrDefault(x => x.DgPozn == _Cr.IDLoanContract);
+            if (lc != null)
             {
-                LoanCredits lc = db.LoanCredits.FirstOrDefault(x => x.DgPozn == pCr.IDLoanContract);
-                if(lc != null)
-                {
-                    return lc.DgPozn;
-                }
-                var contract = db.LoanApplication_createLoanContract(pCr.IDLoan, (short)pCr.CreatorID).ToList();
-                if (CreateGuarantee(pCr, db, pCr.IDLoan))
-                {
-                    return (int)pCr.IDLoan;
-                }
-                else
-                {
-                    return -1;
-                }
+                return lc.DgPozn;
+            }
+            var contract = _db.LoanApplication_createLoanContract(_Cr.IDLoan, (short)_Cr.CreatorID).ToList();
+            if (CreateGuarantee(_Cr.IDLoan) && _ln != null)
+            {
+                return (int)_Cr.IDLoan;
+            }
+            else
+            {
+                return -1;
             }
         }
 
-        private bool CreateGuarantee(CreditAppData pCr, bankasiaNSEntities db, int id)
+        private bool CreateGuarantee(int id)
         {
             bool status = false;
             try
             {
-                Guarantee gr = new Guarantee
+                Guarantee gr = _db.Guarantee.FirstOrDefault(x => x.DG_POZN == id);
+                if (gr == null)
                 {
-                    DG_POZN = id,
-                    CreateDate = DateTime.Now,
-                    CreatorID = pCr.CreatorID,
-                    GuaranteeTypeID = 3,
-                    GuaranteeClientID = pCr.ClientID,
-                    GuaranteeName = pCr.BankConnection,
-                    BorrowerIsHolder = true
-                };
-                db.Guarantee.Add(gr);
-                db.SaveChanges();
-                status = CreateGuaranteeProduct(pCr,db,gr.ID);
+                    gr = new Guarantee
+                    {
+                        DG_POZN = id,
+                        CreateDate = DateTime.Now,
+                        CreatorID = _ln.CreatorID,
+                        GuaranteeTypeID = 3,
+                        GuaranteeClientID = _ln.ClientID,
+                        GuaranteeName = _ln.BankConnection,
+                        BorrowerIsHolder = true
+                    };
+                    _db.Guarantee.Add(gr);
+                    _db.SaveChanges();
+                }
+                status = CreateGuaranteeProduct(gr.ID);
 
             }
             catch(Exception ex)
@@ -74,26 +77,30 @@ namespace TrafficWaveService.CreditApp
             return status;
         }
 
-        private bool CreateGuaranteeProduct(CreditAppData pCr, bankasiaNSEntities db, int id)
+        private bool CreateGuaranteeProduct(int id)
         {
             bool status = false;
             try
             {
-                Guarantee_ProductsAndEquipment gpre = new Guarantee_ProductsAndEquipment
+                Guarantee_ProductsAndEquipment gpre = _db.Guarantee_ProductsAndEquipment.FirstOrDefault(x => x.GuaranteeID == id);
+                if (gpre == null)
                 {
-                    GuaranteeID = id,
-                    Name = pCr.BankConnection,
-                    DocName = "Акт передачи товара",
-                    StateID = 1,
-                    MakeDate = pCr.DateCreate,
-                    InspectionDate = DateTime.Now,
-                    Lowering = (decimal)0.7,
-                    MarketValue = (decimal)pCr.Amount,
-                    StatusID = 1
-                };
-                db.Guarantee_ProductsAndEquipment.Add(gpre);
-                db.SaveChanges();
-                status = true;
+                    gpre = new Guarantee_ProductsAndEquipment
+                    {
+                        GuaranteeID = id,
+                        Name = _ln.BankConnection,
+                        DocName = "Акт передачи товара",
+                        StateID = 1,
+                        MakeDate = _ln.DateCreate,
+                        InspectionDate = DateTime.Now,
+                        Lowering = (decimal)0.7,
+                        MarketValue = (decimal)_ln.Amount,
+                        StatusID = 1
+                    };
+                    _db.Guarantee_ProductsAndEquipment.Add(gpre);
+                    _db.SaveChanges();
+                }
+                status = CreateLoanClassification();
             }
             catch (Exception ex)
             {
@@ -102,29 +109,57 @@ namespace TrafficWaveService.CreditApp
             return status;
         }
 
+        private bool CreateLoanClassification()
+        {
+            bool status = false;
+            try
+            {
+                LoanClassification lc = new LoanClassification
+                {
+                    DgPozn = _Cr.IDLoan,
+                    Date = DateTime.Now,
+                    Kod = 450,
+                    KodKl = _ln.ClientID
+                };
+                _db.LoanClassification.Add(lc);
+                _db.SaveChanges();
+                status = true;
+            }
+            catch(Exception ex)
+            {
+                new DataBase().WriteLog(ex, "Run");
+            }
+            return status;
+              
+        }
+
         public bool CreateLoanGraph()
         {
            // _db.LoanContracts.FirstOrDefault(x=>x.);
             bool status = false;
-            vLoanContract vLC = _db.vLoanContract.FirstOrDefault(x => x.DG_POZN == _Cr.IDLoan && x.DG_KODKL == _Cr.ClientID);
-            LoanApplication la = _db.LoanApplication.FirstOrDefault(x => x.ID == _Cr.IDLoan);
-            Setting settings = FormSettingGraph(_Cr);
-            GraphCalculator calculator = new GraphCalculator();
-            AddLoanRows(calculator.createGraph(settings), settings, la, vLC);
+            try
+            {
+                vLoanContract vLC = _db.vLoanContract.FirstOrDefault(x => x.DG_POZN == _Cr.IDLoan && x.DG_KODKL == _Cr.ClientID);
+                LoanApplication la = _db.LoanApplication.FirstOrDefault(x => x.ID == _Cr.IDLoan);
+                Setting settings = FormSettingGraph();
+                status = AddLoanRowsWithSettings(settings, la, vLC);
+            }
+            catch(Exception ex)
+            {
+                new DataBase().WriteLog(ex, "Run");
+            }
             return status;
         }
 
-        private Setting FormSettingGraph(CreditAppData pCr)
+        private Setting FormSettingGraph()
         {
-
-           
             Setting settings = new Setting();
             try
             {
-                vLoanContract vLC = _db.vLoanContract.FirstOrDefault(x => x.DG_POZN == pCr.IDLoan && x.DG_KODKL == pCr.ClientID);
-                LoanApplication la = _db.LoanApplication.FirstOrDefault(x => x.ID == pCr.IDLoan);
+                vLoanContract vLC = _db.vLoanContract.FirstOrDefault(x => x.DG_POZN == _Cr.IDLoan && x.DG_KODKL == _Cr.ClientID);
+                LoanApplication la = _db.LoanApplication.FirstOrDefault(x => x.ID == _Cr.IDLoan);
                 //Начальный конфиг
-                settings.GraphType = GraphType.Annuity;
+                settings.GraphType = GraphType.Individual;
                 settings.RepayType = RepayType.OneTimeInMonth;
                 settings.IssueType = IssueType.OneSum;
                 settings.Shema = Shema.SH_360_30;
@@ -141,7 +176,7 @@ namespace TrafficWaveService.CreditApp
                 k.K_DATE <= endDate && k.K_PRIZ == 1).Select(x => x.K_DATE));
                 //Проценты
                 settings.Percents.Clear();
-                settings.Percents.AddRange(_db.LoanPercent.Where(lp => lp.DgPozn == pCr.IDLoan && lp.KodKl == pCr.ClientID).Select(lp =>
+                settings.Percents.AddRange(_db.LoanPercent.Where(lp => lp.DgPozn == _Cr.IDLoan && lp.KodKl == _Cr.ClientID).Select(lp =>
                     new Percent()
                     {
                         DateStart = lp.DateStart,
@@ -158,38 +193,37 @@ namespace TrafficWaveService.CreditApp
                 settings.PrivelegyMainSum = 0;
                 settings.PrivelegyPersent = 0;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-
+                new DataBase().WriteLog(ex, "Run");
             }
 
             return settings;
         }
 
-        private void AddLoanRows(GraphResult pGr, Setting settings, LoanApplication pLa, vLoanContract pVlc)
+        private bool AddLoanRowsWithSettings(Setting settings, LoanApplication pLa, vLoanContract pVlc)
         {
+            bool status = false;
             try
             {
                 LoanGraph lg;
-                LoanGraphSettings lgs = new LoanGraphSettings
-                {
-                    DgPozn = pLa.ID,
-                    KlKode = pLa.ClientID,
-                    DateStart = settings.IssueDate,
-                    PrivelegPeriodMS = settings.PrivelegyMainSum,
-                    FiveDayPrincip = false,
-                    RepayType = (int)settings.RepayType,
-                    PrivelegPeriodPercent = settings.PrivelegyPersent,
-                    GraphType = (int)settings.GraphType,
-                    IssueCondition = false,
-                    OtvNum = pLa.CreatorID,
-                    ActualGraphNum = 1,
-                    MonthCount = settings.MounthCount
-                };
-                _db.LoanGraphSettings.Add(lgs);
-                _db.SaveChanges();
+                //Расчет графика
+                GraphCalculator calculator = new GraphCalculator();
+                GraphResult pGr = calculator.createGraph(settings);
+                //Сохранение настроек
+                LoanGraphSettings lgsNew = SaveSettings(settings, pLa);
+                if(lgsNew == null){ return false; }
+                //Сохранение графика
+                int countRow = _db.LoanGraph.Count(x => x.DgPozn == pLa.ID && x.KlKode == pLa.ClientID);
+                int index = 1;
                 foreach (GraphRow row in pGr.GraphRows)
                 {
+                    int hisNum = 1;
+                    LoanGraph toUpdate = _db.LoanGraph.FirstOrDefault(x => x.DgPozn == pLa.ID && x.KlKode == pLa.ClientID && x.Date == row.Date.Date);
+                    if (toUpdate != null)
+                    {
+                        hisNum = lgsNew.ActualGraphNum;
+                    }
                     lg = new LoanGraph
                     {
                         Date = row.Date,
@@ -200,24 +234,107 @@ namespace TrafficWaveService.CreditApp
                         RepaymentMS = row.RepaymentMainSum,
                         RepaymentNsp = row.RepaymentNsp,
                         TotalPayment = row.TotalPayment,
-                        SaveDate = row.SaveDate,
-                        HistoryNum = 1,
+                        SaveDate = DateTime.Now,
+                        HistoryNum = hisNum,
                         DgPozn = pLa.ID,
                         KlKode = pLa.ClientID,
-                        OtvNum = pLa.CreatorID
+                        OtvNum = pLa.CreatorID,
+                        PayoutNumber = index
                     };
-                    _db.LoanGraph.Add(lg);
+                    _db.LoanGraph.Add(lg);              
+                    index++;
                 }
+                _db.SaveChanges();
+                status = true;
+            }
+            catch(Exception ex)
+            {
+                new DataBase().WriteLog(ex, "Run");
+            }
+            return status;
+        }
+
+
+
+        private LoanGraphSettings SaveSettings(Setting settings, LoanApplication pLa)
+        {
+            LoanGraphSettings lgs = _db.LoanGraphSettings.FirstOrDefault(x => x.DgPozn == pLa.ID && x.KlKode == pLa.ClientID);
+            LoanGraphSettings lgsNew = new LoanGraphSettings
+            {
+                DgPozn = pLa.ID,
+                KlKode = pLa.ClientID,
+                DateStart = settings.IssueDate,
+                PrivelegPeriodMS = settings.PrivelegyMainSum,
+                FiveDayPrincip = false,
+                RepayType = (int)settings.RepayType,
+                PrivelegPeriodPercent = settings.PrivelegyPersent,
+                GraphType = (int)settings.GraphType,
+                IssueCondition = false,
+                OtvNum = pLa.CreatorID,
+                ActualGraphNum = 1,
+                MonthCount = settings.MounthCount
+            };
+            try
+            {
+                if (lgs == null)
+                {
+                    _db.LoanGraphSettings.Add(lgsNew);
+                }
+                else
+                {
+                    lgsNew.ActualGraphNum = lgs.ActualGraphNum + 1;
+                    _db.LoanGraphSettings.Remove(lgs);
+                    _db.LoanGraphSettings.Add(lgsNew);
+                }
+                _db.SaveChanges();
+            }
+            catch { lgsNew = null; }
+            return lgsNew;
+        }
+
+
+        public bool IssueLoan()
+        {
+            bool status = false;
+            _ln = _db.LoanApplication.FirstOrDefault(x => x.ID == _Cr.IDLoanContract);
+            vLoanContract vlC = _db.vLoanContract.FirstOrDefault(x => x.DG_POZN == _ln.ID);
+            LoanAccountNumber lan = _db.LoanAccountNumber.FirstOrDefault(x => x.DgPozn == _ln.ID);
+            if (_ln != null)
+            {
+                LoanIssue loanIssue = new LoanIssue
+                {
+                    DgPozn = _ln.ID,
+                    KodKl = _ln.ClientID,
+                    Date = DateTime.Now,
+                    Amount = _ln.Amount,
+                    Description = $"Выдача кредита «Товар в рассрочку» № «{vlC.DG_NOM}» от «{vlC.DG_DATE}",
+                    Status = 2,
+                    Kodb = _ln.BranchID,
+                    Kodc = vlC.kodc,
+                    LC_Loan = lan.LC_Loan,
+                    //LC_Delivery = lan.
+                    AmountCommision = 0,
+                    AmountInsurance = 0,
+                    Otv = _ln.CreatorID,
+                    Cash = false,
+                    HisOffice = true,
+                    DeliveryKodb = _ln.BranchID,
+                    DeliveryKodc = vlC.kodc
+                };
+            }
+            try
+            {
                 _db.SaveChanges();
             }
             catch(Exception ex)
             {
-
+                new DataBase().WriteLog(ex, "IssueLoan");
             }
+            return status;
         }
 
 
-        
+
 
         /// <summary>
         /// Формирование шаблона в формате docx
@@ -241,33 +358,29 @@ namespace TrafficWaveService.CreditApp
 
         private Dictionary<string, object> CreateContractMeta()
         {
-            using (bankasiaNSEntities db = new bankasiaNSEntities())
+            Dictionary<string, object> dict = new Dictionary<string, object>();
+            vLoanContract loanContract = _db.vLoanContract.FirstOrDefault(x => x.DG_POZN == _Cr.IDLoanContract);
+            if (loanContract != null)
             {
-                Dictionary<string, object> dict = new Dictionary<string, object>();
-                vLoanContract loanContract = db.vLoanContract.FirstOrDefault(x => x.DG_POZN == _Cr.IDLoanContract);
-                if(loanContract != null)
-                {
-                    dict.Add("<DG_NOM>", loanContract.DG_NOM);
-                    dict.Add("<NAIMGRUP>", loanContract.GroupName);
-                    dict.Add("<RV_NPUKT>", "PUNCT");
-                    dict.Add("<OT_FIO>", "Каргин Константин");
-                    dict.Add("<RV_PODRAZD>", "PODRAZD");
-                    dict.Add("<DG_POZN>", loanContract.DG_POZN);
-                    //dict.Add("<RV_REKVIZIT>", dicRekvizitsData[eTypeRekvizitData.rv_rekvizit]);
-                    //dict.Add("<RV_DOLJN_FIO_RP>", dicRekvizitsData[eTypeRekvizitData.rv_doljn_fio_rp]);
-                    //dict.Add("<RV_DOK>", dicRekvizitsData[eTypeRekvizitData.rv_doc]);
-                    //dict.Add("<RV_FIO>", dicRekvizitsData[eTypeRekvizitData.rv_fio]);
-                    //dict.Add("<RV_DOLJN>", dicRekvizitsData[eTypeRekvizitData.rv_doljn]);
-                    dict.Add("LANGUAGE", "RU");
-                    //if (vGuarantee != null)
-                    //    dicTemplateData.Add("GUARANTEE_ID", vGuarantee.ID);
-                    dict.Add("AGREEMENT_TYPE", 110);
-                    dict.Add("IS_TYPE_INSURANCE", 0);
-                    dict.Add("IS_TYPE_GKS", 0);
-                }
-                return dict;
+                dict.Add("<DG_NOM>", loanContract.DG_NOM);
+                dict.Add("<NAIMGRUP>", loanContract.GroupName);
+                dict.Add("<RV_NPUKT>", "PUNCT");
+                dict.Add("<OT_FIO>", "Каргин Константин");
+                dict.Add("<RV_PODRAZD>", "PODRAZD");
+                dict.Add("<DG_POZN>", loanContract.DG_POZN);
+                //dict.Add("<RV_REKVIZIT>", dicRekvizitsData[eTypeRekvizitData.rv_rekvizit]);
+                //dict.Add("<RV_DOLJN_FIO_RP>", dicRekvizitsData[eTypeRekvizitData.rv_doljn_fio_rp]);
+                //dict.Add("<RV_DOK>", dicRekvizitsData[eTypeRekvizitData.rv_doc]);
+                //dict.Add("<RV_FIO>", dicRekvizitsData[eTypeRekvizitData.rv_fio]);
+                //dict.Add("<RV_DOLJN>", dicRekvizitsData[eTypeRekvizitData.rv_doljn]);
+                dict.Add("LANGUAGE", "RU");
+                //if (vGuarantee != null)
+                //    dicTemplateData.Add("GUARANTEE_ID", vGuarantee.ID);
+                dict.Add("AGREEMENT_TYPE", 110);
+                dict.Add("IS_TYPE_INSURANCE", 0);
+                dict.Add("IS_TYPE_GKS", 0);
             }
-
+            return dict;
         }
 
         private void FileWriteStream(byte[] pBytes, string pFileName)

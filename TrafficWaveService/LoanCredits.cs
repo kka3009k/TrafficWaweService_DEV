@@ -50,5 +50,6 @@ namespace TrafficWaveService
         public virtual clients clients { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LoanGraph> LoanGraph { get; set; }
+        public virtual sprotv sprotv { get; set; }
     }
 }

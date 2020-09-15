@@ -20,7 +20,7 @@ namespace TrafficWaveService
     {
         public TrafficWave()
         {
-            Connection_State();
+           // Connection_State();
         }
 
         private void Connection_State()
@@ -32,8 +32,16 @@ namespace TrafficWaveService
             {
                 db.SetContextInfo(headers["pLogin"],headers["pIpAddress"]);
             }
+            CheckUser(headers);
+        }
 
-
+        private void CheckUser(WebHeaderCollection headers)
+        {
+            Auth auth = new Auth(headers);
+            if (auth.CheckUser())
+            {
+                throw new WebFaultException(HttpStatusCode.Forbidden);
+            }
         }
 
         /// <summary>
@@ -113,6 +121,7 @@ namespace TrafficWaveService
         /// </summary>
         /// <param name="pCreditQuery"></param>
         /// <returns></returns>
+      
         public async Task<string> GetSprs(SprQuery pSprQuery)
         {
             SprsController spr = new SprsController(pSprQuery);
@@ -130,7 +139,17 @@ namespace TrafficWaveService
             cc.CreateLoanGraph();
             return true;
         }
-
+        
+        /// <summary>
+        /// Формирование анкеты клиента
+        /// </summary>
+        /// <param name="IdClient"></param>
+        /// <returns></returns>
+        public async Task<Dictionary<string,object>> GetClientProfile(int IdClient, int IdOtv)
+        {
+            ClientReport cr = new ClientReport(IdClient, IdOtv);
+            return await cr.GetClientProfile();
+        }
 
 
 

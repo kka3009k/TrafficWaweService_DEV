@@ -157,7 +157,16 @@ namespace TrafficWaveService.CreditApp.CreditGraphCalculator.Algorithm
             decimal i = (percents / 12) / 100;
             double dA = Math.Pow(Convert.ToDouble((1 + i)), Convert.ToDouble(mounthCount));
             decimal a = Convert.ToDecimal(dA);
-            return ((i * a) / (a - 1)) * sum;
+            decimal res = 0;
+            try
+            {
+                res = ((i * a) / (a - 1)) * sum;
+            }
+            catch(Exception ex)
+            {
+
+            }
+            return res;
         }
 
         public static decimal GetAnnuitySumDay(decimal sum, decimal percents, decimal mounthCount)

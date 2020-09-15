@@ -224,6 +224,18 @@
   <wsdl:message name="IReportService_kr807002_OutputMessage">
     <wsdl:part name="parameters" element="tns:kr807002Response" />
   </wsdl:message>
+  <wsdl:message name="IReportService_od205340_InputMessage">
+    <wsdl:part name="parameters" element="tns:od205340" />
+  </wsdl:message>
+  <wsdl:message name="IReportService_od205340_OutputMessage">
+    <wsdl:part name="parameters" element="tns:od205340Response" />
+  </wsdl:message>
+  <wsdl:message name="IReportService_od205350_InputMessage">
+    <wsdl:part name="parameters" element="tns:od205350" />
+  </wsdl:message>
+  <wsdl:message name="IReportService_od205350_OutputMessage">
+    <wsdl:part name="parameters" element="tns:od205350Response" />
+  </wsdl:message>
   <wsdl:message name="IReportService_od205260XmlApp7_InputMessage">
     <wsdl:part name="parameters" element="tns:od205260XmlApp7" />
   </wsdl:message>
@@ -2257,6 +2269,14 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IReportService/kr807002" message="tns:IReportService_kr807002_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IReportService/kr807002Response" message="tns:IReportService_kr807002_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="od205340">
+      <wsdl:input wsaw:Action="http://tempuri.org/IReportService/od205340" message="tns:IReportService_od205340_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IReportService/od205340Response" message="tns:IReportService_od205340_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="od205350">
+      <wsdl:input wsaw:Action="http://tempuri.org/IReportService/od205350" message="tns:IReportService_od205350_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IReportService/od205350Response" message="tns:IReportService_od205350_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="od205260XmlApp7">
       <wsdl:input wsaw:Action="http://tempuri.org/IReportService/od205260XmlApp7" message="tns:IReportService_od205260XmlApp7_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IReportService/od205260XmlApp7Response" message="tns:IReportService_od205260XmlApp7_OutputMessage" />
@@ -3786,6 +3806,24 @@
     </wsdl:operation>
     <wsdl:operation name="kr807002">
       <soap12:operation soapAction="http://tempuri.org/IReportService/kr807002" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="od205340">
+      <soap12:operation soapAction="http://tempuri.org/IReportService/od205340" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="od205350">
+      <soap12:operation soapAction="http://tempuri.org/IReportService/od205350" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

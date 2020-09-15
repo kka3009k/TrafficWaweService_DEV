@@ -144,8 +144,8 @@ namespace TrafficWaveService.CreditApp
         /// <param name="pCr"></param>
         private int InsertCreditContract(CreditAppData pCr)
         {
-            CreditContract cr = new CreditContract();
-            return cr.CreateCreditContract(pCr);
+            CreditContract cr = new CreditContract(pCr);
+            return cr.CreateCreditContract();
         }
 
         /// <summary>

@@ -326,81 +326,6 @@ namespace TrafficWaveService.ReportServiceRef {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SS_Operation_Result", Namespace="http://schemas.datacontract.org/2004/07/OdRepService.Data")]
-    [System.SerializableAttribute()]
-    public partial class SS_Operation_Result : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int errField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string err_msgField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int err {
-            get {
-                return this.errField;
-            }
-            set {
-                if ((this.errField.Equals(value) != true)) {
-                    this.errField = value;
-                    this.RaisePropertyChanged("err");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string err_msg {
-            get {
-                return this.err_msgField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.err_msgField, value) != true)) {
-                    this.err_msgField = value;
-                    this.RaisePropertyChanged("err_msg");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="TYPE_STATEMENT", Namespace="http://schemas.datacontract.org/2004/07/FrontIPC_Service")]
-    public enum TYPE_STATEMENT : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Mixed = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Transaction = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Authorisation = 2,
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="reportsParam", Namespace="http://schemas.datacontract.org/2004/07/OdRepService.Data")]
     [System.SerializableAttribute()]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(TrafficWaveService.ReportServiceRef.TYPE_STATEMENT))]
@@ -408,8 +333,8 @@ namespace TrafficWaveService.ReportServiceRef {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(TrafficWaveService.ReportServiceRef.RepResult))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.List<TrafficWaveService.ReportServiceRef.prbo_29b_report>))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(TrafficWaveService.ReportServiceRef.prbo_29b_report))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(TrafficWaveService.ReportServiceRef.SS_Operation_Result))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.List<TrafficWaveService.ReportServiceRef.reportsParam>))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(TrafficWaveService.ReportServiceRef.SS_Operation_Result))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.List<TrafficWaveService.ReportServiceRef.XLSDownload>))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.List<TrafficWaveService.ReportServiceRef.ClearingMapItem>))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(TrafficWaveService.ReportServiceRef.ClearingMapItem))]
@@ -478,6 +403,81 @@ namespace TrafficWaveService.ReportServiceRef {
                 if ((object.ReferenceEquals(this.ValueObjField, value) != true)) {
                     this.ValueObjField = value;
                     this.RaisePropertyChanged("ValueObj");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TYPE_STATEMENT", Namespace="http://schemas.datacontract.org/2004/07/FrontIPC_Service")]
+    public enum TYPE_STATEMENT : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Mixed = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Transaction = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Authorisation = 2,
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SS_Operation_Result", Namespace="http://schemas.datacontract.org/2004/07/OdRepService.Data")]
+    [System.SerializableAttribute()]
+    public partial class SS_Operation_Result : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int errField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string err_msgField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int err {
+            get {
+                return this.errField;
+            }
+            set {
+                if ((this.errField.Equals(value) != true)) {
+                    this.errField = value;
+                    this.RaisePropertyChanged("err");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string err_msg {
+            get {
+                return this.err_msgField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.err_msgField, value) != true)) {
+                    this.err_msgField = value;
+                    this.RaisePropertyChanged("err_msg");
                 }
             }
         }
@@ -690,6 +690,12 @@ namespace TrafficWaveService.ReportServiceRef {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/kr807002", ReplyAction="http://tempuri.org/IReportService/kr807002Response")]
         TrafficWaveService.ReportServiceRef.XLSDownload kr807002(System.Collections.Generic.List<int> pId, int pFormNum);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/od205340", ReplyAction="http://tempuri.org/IReportService/od205340Response")]
+        TrafficWaveService.ReportServiceRef.XLSDownload od205340(int pReportId, System.DateTime dtStart, System.DateTime dtEnd, int pFormNum);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/od205350", ReplyAction="http://tempuri.org/IReportService/od205350Response")]
+        TrafficWaveService.ReportServiceRef.XLSDownload od205350(int pReportQueryId, string pReportName, System.Collections.Generic.List<TrafficWaveService.ReportServiceRef.reportsParam> pLstParams, int pFormNum);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/od205260App6", ReplyAction="http://tempuri.org/IReportService/od205260App6Response")]
         TrafficWaveService.ReportServiceRef.SS_Operation_Result od205260App6(System.DateTime pDate, int pFormNum);
         
@@ -844,7 +850,7 @@ namespace TrafficWaveService.ReportServiceRef {
         TrafficWaveService.ReportServiceRef.XLSDownload SDB_DAY_REPORT(System.DateTime pDate, string pKodb, string pOtv, int pFormNum);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/SDB_AGREEMENT", ReplyAction="http://tempuri.org/IReportService/SDB_AGREEMENTResponse")]
-        TrafficWaveService.ReportServiceRef.XLSDownload SDB_AGREEMENT(short pKodb, short pKodc, int pKlKod, int pSdbAccId, short pClientType, int pFormNum);
+        TrafficWaveService.ReportServiceRef.XLSDownload SDB_AGREEMENT(short pKodb, short pKodc, int pKlKod, int pSdbAccId, short pClientType, string pLang, int pFormNum);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/SDB_STATEMENTS", ReplyAction="http://tempuri.org/IReportService/SDB_STATEMENTSResponse")]
         TrafficWaveService.ReportServiceRef.XLSDownload SDB_STATEMENTS(int pSdbAccId, short pReportType, short pKodb, short pKodc, int pFormNum);
@@ -1995,6 +2001,14 @@ namespace TrafficWaveService.ReportServiceRef {
             return base.Channel.kr807002(pId, pFormNum);
         }
         
+        public TrafficWaveService.ReportServiceRef.XLSDownload od205340(int pReportId, System.DateTime dtStart, System.DateTime dtEnd, int pFormNum) {
+            return base.Channel.od205340(pReportId, dtStart, dtEnd, pFormNum);
+        }
+        
+        public TrafficWaveService.ReportServiceRef.XLSDownload od205350(int pReportQueryId, string pReportName, System.Collections.Generic.List<TrafficWaveService.ReportServiceRef.reportsParam> pLstParams, int pFormNum) {
+            return base.Channel.od205350(pReportQueryId, pReportName, pLstParams, pFormNum);
+        }
+        
         public TrafficWaveService.ReportServiceRef.SS_Operation_Result od205260App6(System.DateTime pDate, int pFormNum) {
             return base.Channel.od205260App6(pDate, pFormNum);
         }
@@ -2199,8 +2213,8 @@ namespace TrafficWaveService.ReportServiceRef {
             return base.Channel.SDB_DAY_REPORT(pDate, pKodb, pOtv, pFormNum);
         }
         
-        public TrafficWaveService.ReportServiceRef.XLSDownload SDB_AGREEMENT(short pKodb, short pKodc, int pKlKod, int pSdbAccId, short pClientType, int pFormNum) {
-            return base.Channel.SDB_AGREEMENT(pKodb, pKodc, pKlKod, pSdbAccId, pClientType, pFormNum);
+        public TrafficWaveService.ReportServiceRef.XLSDownload SDB_AGREEMENT(short pKodb, short pKodc, int pKlKod, int pSdbAccId, short pClientType, string pLang, int pFormNum) {
+            return base.Channel.SDB_AGREEMENT(pKodb, pKodc, pKlKod, pSdbAccId, pClientType, pLang, pFormNum);
         }
         
         public TrafficWaveService.ReportServiceRef.XLSDownload SDB_STATEMENTS(int pSdbAccId, short pReportType, short pKodb, short pKodc, int pFormNum) {

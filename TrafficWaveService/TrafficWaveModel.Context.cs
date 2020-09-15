@@ -55,6 +55,10 @@ namespace TrafficWaveService
         public virtual DbSet<LoanGraphSettings> LoanGraphSettings { get; set; }
         public virtual DbSet<kalendar> kalendar { get; set; }
         public virtual DbSet<LoanPercent> LoanPercent { get; set; }
+        public virtual DbSet<sprotv> sprotv { get; set; }
+        public virtual DbSet<LoanAccountNumber> LoanAccountNumber { get; set; }
+        public virtual DbSet<LoanCommision> LoanCommision { get; set; }
+        public virtual DbSet<LoanIssue> LoanIssue { get; set; }
     
         public virtual ObjectResult<SearchReg_Result> SearchReg(string pFam, string pName, string pOtch, Nullable<byte> pStatus)
         {

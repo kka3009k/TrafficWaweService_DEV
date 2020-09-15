@@ -35,13 +35,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="prbo_29b_report" nillable="true" type="tns:prbo_29b_report" />
-  <xs:complexType name="SS_Operation_Result">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="err" type="xs:int" />
-      <xs:element minOccurs="0" name="err_msg" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="SS_Operation_Result" nillable="true" type="tns:SS_Operation_Result" />
   <xs:complexType name="ArrayOfreportsParam">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="reportsParam" nillable="true" type="tns:reportsParam" />
@@ -56,6 +49,13 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="reportsParam" nillable="true" type="tns:reportsParam" />
+  <xs:complexType name="SS_Operation_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="err" type="xs:int" />
+      <xs:element minOccurs="0" name="err_msg" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SS_Operation_Result" nillable="true" type="tns:SS_Operation_Result" />
   <xs:complexType name="ArrayOfXLSDownload">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="XLSDownload" nillable="true" type="tns:XLSDownload" />

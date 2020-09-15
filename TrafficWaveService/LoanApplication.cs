@@ -51,5 +51,6 @@ namespace TrafficWaveService
         public Nullable<byte> PercentType { get; set; }
     
         public virtual clients clients { get; set; }
+        public virtual sprotv sprotv { get; set; }
     }
 }
