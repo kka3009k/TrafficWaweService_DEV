@@ -13,6 +13,9 @@ namespace TrafficWaveService.CreditApp
         public int ID { get; set; }
 
         [DataMember]
+        public string IDString { get; set; }
+
+        [DataMember]
         public string Base64Str { get; set; }
 
     }

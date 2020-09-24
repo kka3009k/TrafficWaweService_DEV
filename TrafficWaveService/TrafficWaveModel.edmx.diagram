@@ -54,6 +54,12 @@
         <EntityTypeShape EntityType="bankasiaNSModel.LoanIssue" Width="1.5" PointX="3.375" PointY="15.75" />
         <AssociationConnector Association="bankasiaNSModel.FK__LoanAccou__Kodkl__184FC410" />
         <AssociationConnector Association="bankasiaNSModel.FK__LoanCommi__Kodkl__0A4BBD7C" />
+        <EntityTypeShape EntityType="bankasiaNSModel.sprotv_k" Width="1.5" PointX="15.375" PointY="10" />
+        <AssociationConnector Association="bankasiaNSModel.FK_LoanApplicaton_sprotv" />
+        <EntityTypeShape EntityType="bankasiaNSModel.vGuarantee" Width="1.5" PointX="15.375" PointY="13.75" />
+        <EntityTypeShape EntityType="bankasiaNSModel.rekvizit" Width="1.5" PointX="12.375" PointY="16.75" />
+        <EntityTypeShape EntityType="bankasiaNSModel.LoanIncomeKodv" Width="1.5" PointX="8" PointY="61.375" />
+        <AssociationConnector Association="bankasiaNSModel.FK__LoanIncom__KodKl__0551FE35" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -26,6 +26,12 @@ namespace TrafficWaveService.Reports
             
         }
 
+        public byte[] ConvertToDocx()
+        {
+            return getBytes(_filePaht + _fileName);
+
+        }
+
         /// <summary>
         /// Возврат байтов файла
         /// </summary>

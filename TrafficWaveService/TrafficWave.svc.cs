@@ -18,6 +18,7 @@ namespace TrafficWaveService
     /// </summary>
     public class TrafficWave : ITrafficWave
     {
+        WebHeaderCollection _headers;
         public TrafficWave()
         {
            // Connection_State();
@@ -26,18 +27,18 @@ namespace TrafficWaveService
         private void Connection_State()
         {
             IncomingWebRequestContext request = WebOperationContext.Current.IncomingRequest;
-            WebHeaderCollection headers = request.Headers;
-            string head = headers["pLogin"];
+            _headers = request.Headers;
+            string head = _headers["pLogin"];
             using (bankasiaNSEntities db = new bankasiaNSEntities())
             {
-                db.SetContextInfo(headers["pLogin"],headers["pIpAddress"]);
+                db.SetContextInfo(_headers["pLogin"], _headers["pIpAddress"]);
             }
-            CheckUser(headers);
+            CheckUser();
         }
 
-        private void CheckUser(WebHeaderCollection headers)
+        private void CheckUser()
         {
-            Auth auth = new Auth(headers);
+            Auth auth = new Auth(_headers);
             if (auth.CheckUser())
             {
                 throw new WebFaultException(HttpStatusCode.Forbidden);
@@ -149,6 +150,17 @@ namespace TrafficWaveService
         {
             ClientReport cr = new ClientReport(IdClient, IdOtv);
             return await cr.GetClientProfile();
+        }
+
+        /// <summary>
+        /// Подтверждение выдачи кредита
+        /// </summary>
+        /// <param name="pCreditQuery">Параметры запроса</param>
+        /// <returns></returns>
+        public async Task<bool> ConfirmCredit(CreditQuery pCreditQuery)
+        {
+            CreditController credit = new CreditController(pCreditQuery);
+            return await credit.ConfirmCredit();
         }
 
 

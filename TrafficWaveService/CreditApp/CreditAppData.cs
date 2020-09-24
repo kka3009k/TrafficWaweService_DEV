@@ -7,7 +7,7 @@ namespace TrafficWaveService.CreditApp
 {
     public class CreditAppData
     {
-       public string ApplicationNumber { get; set; }
+        public string ApplicationNumber { get; set; }
         public int BranchID { get; set; }
         public int OfficeID { get; set; }
         public int CurrencyID { get; set; }
@@ -42,10 +42,12 @@ namespace TrafficWaveService.CreditApp
         public int PercentType { get; set; }
 
         public int IDLoan { get; set; }
-        public int IDLoanContract { get; set; }
+        public string IDLoanContract { get; set; }
 
         //Тип операция 1 создание заявки 2 создание договора 3 формирование договора
         public int TypeOperation { get; set; }
+
+        public string Products {get;set ;}
 
     }
 }

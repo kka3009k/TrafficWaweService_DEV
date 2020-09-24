@@ -52,5 +52,6 @@ namespace TrafficWaveService
     
         public virtual clients clients { get; set; }
         public virtual sprotv sprotv { get; set; }
+        public virtual sprotv_k sprotv_k { get; set; }
     }
 }

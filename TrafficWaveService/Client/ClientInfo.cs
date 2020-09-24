@@ -22,6 +22,7 @@ namespace TrafficWaveService.Client
         public int id { get; set; }
         public string country { get; set; }
         public string region { get; set; }
+        public string locality { get; set; }
         public string street { get; set; }
         public string house { get; set; }
         public string apartment { get; set; }
@@ -32,6 +33,7 @@ namespace TrafficWaveService.Client
         public int id { get; set; }
         public string country { get; set; }
         public string region { get; set; }
+        public string locality { get; set; }
         public string street { get; set; }
         public string house { get; set; }
         public string apartment { get; set; }

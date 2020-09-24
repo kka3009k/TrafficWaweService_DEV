@@ -14,7 +14,7 @@ namespace TrafficWaveService.Reports.TempController
 {
     public class MainController
     {
-        public string createReportDocx(Dictionary<string, object> data, List<DocumentCommand> commands)
+        public string createReportDocx(Dictionary<string, object> data, List<DocumentCommand> commands, bool isPdf = true)
         {
             string tmplname = data["TEMPLATE_FILE_NAME"].ToString();
             string tempWorkPath = copyTemplate(tmplname, true);
@@ -53,11 +53,21 @@ namespace TrafficWaveService.Reports.TempController
                 document.MainDocumentPart.Document.Save();
                 document.Close();
             }
-            Converter con = new Converter(createTempWorkPath(),tmplname);
-            byte[] outputBytes = con.ConvertToPdf();
-            File.Delete(tempWorkPath);
-            File.Delete(createTempWorkPath() + "output.pdf");
-            return Convert.ToBase64String(outputBytes);
+
+            Converter con = new Converter(createTempWorkPath(), tmplname);
+            if (isPdf)
+            {
+                byte[] outputBytes = con.ConvertToPdf();
+                File.Delete(tempWorkPath);
+                File.Delete(createTempWorkPath() + "output.pdf");
+                return Convert.ToBase64String(outputBytes);
+            }
+            else
+            {
+                byte[] outputBytes = con.ConvertToDocx();
+                File.Delete(tempWorkPath);
+                return Convert.ToBase64String(outputBytes);
+            }
         }
 
         public static string copyTemplate(string fileName, bool overwrite)
@@ -131,6 +141,6 @@ namespace TrafficWaveService.Reports.TempController
             return commands;
         }
 
-       // public void createObjects
+        // public void createObjects
     }
 }

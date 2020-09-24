@@ -18,6 +18,8 @@ namespace TrafficWaveService.CreditApp
         [DataMember]
         public string RequestStringCreditData { get; set; }
 
-    
+
+
+
     }
 }

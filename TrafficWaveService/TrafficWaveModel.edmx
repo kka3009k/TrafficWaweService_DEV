@@ -349,6 +349,64 @@
           <Property Name="ow_edit" Type="int" />
           <Property Name="ow_open" Type="int" />
         </EntityType>
+        <EntityType Name="rekvizit">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KODB" Type="smallint" Nullable="false" />
+          <Property Name="KODC" Type="smallint" Nullable="false" />
+          <Property Name="rv_npunkt" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="rv_podrazd" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="rv_fio" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="rv_doljn" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="rv_doljn_rp" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="rv_doljn_fio_rp" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="rv_dok" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="rv_fio2" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="rv_doljn2" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="rv_doljn_rp2" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="rv_doljn_fio_rp2" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="rv_dok2" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="rv_fio3" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="rv_doljn3" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="rv_doljn_rp3" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="rv_doljn_fio_rp3" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="rv_dok3" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="rv_adr" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="rv_rekvizit" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="rv_rekvizit2" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="rv_rekvizit3" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="rv_dop1" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="rv_dop2" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="rv_dop3" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="rv_podrazd_ru" Type="nvarchar" MaxLength="350" />
+          <Property Name="rv_podrazd_eng" Type="nvarchar" MaxLength="350" />
+          <Property Name="rv_podrazd_kg" Type="nvarchar" MaxLength="350" />
+          <Property Name="rv_doljn_ru" Type="nvarchar" MaxLength="350" />
+          <Property Name="rv_doljn_eng" Type="nvarchar" MaxLength="350" />
+          <Property Name="rv_doljn_kg" Type="nvarchar" MaxLength="350" />
+          <Property Name="rv_fio_ru" Type="nvarchar" MaxLength="255" />
+          <Property Name="rv_fio_eng" Type="nvarchar" MaxLength="255" />
+          <Property Name="rv_fio_kg" Type="nvarchar" MaxLength="255" />
+          <Property Name="rv_doljn_ca_ru" Type="nvarchar" MaxLength="255" />
+          <Property Name="rv_doljn_ca_eng" Type="nvarchar" MaxLength="255" />
+          <Property Name="rv_doljn_ca_kg" Type="nvarchar" MaxLength="255" />
+          <Property Name="rv_fio_ca_ru" Type="nvarchar" MaxLength="255" />
+          <Property Name="rv_fio_ca_eng" Type="nvarchar" MaxLength="255" />
+          <Property Name="rv_fio_ca_kg" Type="nvarchar" MaxLength="255" />
+          <Property Name="rv_npunkt_kg" Type="varchar" MaxLength="255" />
+          <Property Name="rv_doljn2_kg" Type="varchar" MaxLength="350" />
+          <Property Name="rv_rekvizit_kg" Type="varchar" MaxLength="250" />
+          <Property Name="rv_dok_kg" Type="varchar" MaxLength="255" />
+          <Property Name="rv_dok2_kg" Type="varchar" MaxLength="255" />
+          <Property Name="rvPosition5" Type="varchar" MaxLength="255" />
+          <Property Name="rvPosition5Rp" Type="varchar" MaxLength="255" />
+          <Property Name="rvPosition5Fio" Type="varchar" MaxLength="255" />
+          <Property Name="rvPosition5FioRp" Type="varchar" MaxLength="255" />
+          <Property Name="rvIsEnablePosition5" Type="bit" />
+          <Property Name="rvPosition5DocNumber" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="spr">
           <Key>
             <PropertyRef Name="id" />
@@ -562,6 +620,26 @@
           <Property Name="Sum" Type="numeric" Precision="12" Scale="2" Nullable="false" />
           <Property Name="MonthCount" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="LoanIncomeKodv">
+          <Key>
+            <PropertyRef Name="DgPozn" />
+            <PropertyRef Name="KodKl" />
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="DgPozn" Type="int" Nullable="false" />
+          <Property Name="KodKl" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Kodv1" Type="smallint" Nullable="false" />
+          <Property Name="Percent1" Type="numeric" Precision="10" Scale="4" Nullable="false" />
+          <Property Name="Kodv2" Type="smallint" />
+          <Property Name="Percent2" Type="numeric" Precision="10" Scale="4" />
+          <Property Name="Kodv3" Type="smallint" />
+          <Property Name="Percent3" Type="numeric" Precision="10" Scale="4" />
+          <Property Name="Kodv4" Type="smallint" />
+          <Property Name="Percent4" Type="numeric" Precision="10" Scale="4" />
+          <Property Name="Kodv5" Type="smallint" />
+          <Property Name="Percent5" Type="numeric" Precision="10" Scale="4" />
+        </EntityType>
         <EntityType Name="LoanIssue">
           <Key>
             <PropertyRef Name="DgPozn" />
@@ -606,6 +684,41 @@
           <Property Name="Comment" Type="varchar" MaxLength="250" />
           <Property Name="Irr" Type="numeric" Precision="38" Scale="10" />
           <Property Name="AmortizationValue" Type="numeric" Precision="38" Scale="10" />
+        </EntityType>
+        <EntityType Name="sprotv_k">
+          <Key>
+            <PropertyRef Name="OT_NOM" />
+          </Key>
+          <Property Name="OT_NOM" Type="decimal" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="OT_FIO" Type="char" MaxLength="40" />
+          <Property Name="OT_NOMOD" Type="decimal" Precision="4" Scale="0" />
+          <Property Name="OT_PASSPORT" Type="char" MaxLength="50" />
+          <Property Name="OT_ADRESS" Type="char" MaxLength="100" />
+          <Property Name="kodb" Type="numeric" Precision="3" Scale="0" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "bankasiaNS.bankadm.vGuarantee" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="vGuarantee">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="DG_POZN" />
+            <PropertyRef Name="CreateDate" />
+            <PropertyRef Name="CreatorID" />
+            <PropertyRef Name="GuaranteeTypeID" />
+            <PropertyRef Name="GuaranteeName" />
+          </Key>
+          <Property Name="RowNumber" Type="bigint" />
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="DG_POZN" Type="int" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatorID" Type="int" Nullable="false" />
+          <Property Name="GuaranteeTypeID" Type="int" Nullable="false" />
+          <Property Name="GtName" Type="nvarchar" MaxLength="50" />
+          <Property Name="GuaranteeHolderID" Type="int" />
+          <Property Name="GuaranteeClientID" Type="int" />
+          <Property Name="GuaranteeOwnerType" Type="int" />
+          <Property Name="GuaranteeName" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="GuaranteeHolderName" Type="nvarchar" MaxLength="120" />
         </EntityType>
         <!--Ошибки, обнаруженные при создании:
 предупреждение 6002: В таблице или представлении "bankasiaNS.bankadm.vLoanContract" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
@@ -726,6 +839,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__LoanIncom__KodKl__0551FE35">
+          <End Role="clients" Type="Self.clients" Multiplicity="1" />
+          <End Role="LoanIncomeKodv" Type="Self.LoanIncomeKodv" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="kl_kod" />
+            </Principal>
+            <Dependent Role="LoanIncomeKodv">
+              <PropertyRef Name="KodKl" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__LoanPerce__KodKl__6B922C32">
           <End Role="clients" Type="Self.clients" Multiplicity="1" />
           <End Role="LoanPercent" Type="Self.LoanPercent" Multiplicity="*" />
@@ -807,6 +932,18 @@
             </Principal>
             <Dependent Role="LoanApplication">
               <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoanApplicaton_sprotv">
+          <End Role="sprotv_k" Type="Self.sprotv_k" Multiplicity="1" />
+          <End Role="LoanApplication" Type="Self.LoanApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sprotv_k">
+              <PropertyRef Name="OT_NOM" />
+            </Principal>
+            <Dependent Role="LoanApplication">
+              <PropertyRef Name="PersonID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -952,6 +1089,7 @@
           <EntitySet Name="LoanApplication" EntityType="Self.LoanApplication" Schema="bankadm" store:Type="Tables" />
           <EntitySet Name="LOG_APP" EntityType="Self.LOG_APP" Schema="bankadm" store:Type="Tables" />
           <EntitySet Name="ow" EntityType="Self.ow" Schema="bankadm" store:Type="Tables" />
+          <EntitySet Name="rekvizit" EntityType="Self.rekvizit" Schema="bankadm" store:Type="Tables" />
           <EntitySet Name="spr" EntityType="Self.spr" Schema="bankadm" store:Type="Tables" />
           <EntitySet Name="sprotv" EntityType="Self.sprotv" Schema="bankadm" store:Type="Tables" />
           <EntitySet Name="klient_p482_spr" EntityType="Self.klient_p482_spr" Schema="dbo" store:Type="Tables" />
@@ -962,8 +1100,26 @@
           <EntitySet Name="LoanCredits" EntityType="Self.LoanCredits" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoanGraph" EntityType="Self.LoanGraph" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoanGraphSettings" EntityType="Self.LoanGraphSettings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoanIncomeKodv" EntityType="Self.LoanIncomeKodv" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoanIssue" EntityType="Self.LoanIssue" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoanPercent" EntityType="Self.LoanPercent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sprotv_k" EntityType="Self.sprotv_k" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vGuarantee" EntityType="Self.vGuarantee" store:Type="Views" store:Schema="bankadm">
+            <DefiningQuery>SELECT 
+    [vGuarantee].[RowNumber] AS [RowNumber], 
+    [vGuarantee].[ID] AS [ID], 
+    [vGuarantee].[DG_POZN] AS [DG_POZN], 
+    [vGuarantee].[CreateDate] AS [CreateDate], 
+    [vGuarantee].[CreatorID] AS [CreatorID], 
+    [vGuarantee].[GuaranteeTypeID] AS [GuaranteeTypeID], 
+    [vGuarantee].[GtName] AS [GtName], 
+    [vGuarantee].[GuaranteeHolderID] AS [GuaranteeHolderID], 
+    [vGuarantee].[GuaranteeClientID] AS [GuaranteeClientID], 
+    [vGuarantee].[GuaranteeOwnerType] AS [GuaranteeOwnerType], 
+    [vGuarantee].[GuaranteeName] AS [GuaranteeName], 
+    [vGuarantee].[GuaranteeHolderName] AS [GuaranteeHolderName]
+    FROM [bankadm].[vGuarantee] AS [vGuarantee]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vLoanContract" EntityType="Self.vLoanContract" store:Type="Views" store:Schema="bankadm">
             <DefiningQuery>SELECT 
     [vLoanContract].[DG_POZN] AS [DG_POZN], 
@@ -1017,6 +1173,10 @@
             <End Role="clients" EntitySet="clients" />
             <End Role="LoanCredits" EntitySet="LoanCredits" />
           </AssociationSet>
+          <AssociationSet Name="FK__LoanIncom__KodKl__0551FE35" Association="Self.FK__LoanIncom__KodKl__0551FE35">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="LoanIncomeKodv" EntitySet="LoanIncomeKodv" />
+          </AssociationSet>
           <AssociationSet Name="FK__LoanPerce__KodKl__6B922C32" Association="Self.FK__LoanPerce__KodKl__6B922C32">
             <End Role="clients" EntitySet="clients" />
             <End Role="LoanPercent" EntitySet="LoanPercent" />
@@ -1043,6 +1203,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_LoanApplicaton_clients" Association="Self.FK_LoanApplicaton_clients">
             <End Role="clients" EntitySet="clients" />
+            <End Role="LoanApplication" EntitySet="LoanApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoanApplicaton_sprotv" Association="Self.FK_LoanApplicaton_sprotv">
+            <End Role="sprotv_k" EntitySet="sprotv_k" />
             <End Role="LoanApplication" EntitySet="LoanApplication" />
           </AssociationSet>
           <AssociationSet Name="FK_LoanApplicaton_sprotv1" Association="Self.FK_LoanApplicaton_sprotv1">
@@ -1246,6 +1410,18 @@
           <AssociationSet Name="FK__LoanCommi__Kodkl__0A4BBD7C" Association="bankasiaNSModel.FK__LoanCommi__Kodkl__0A4BBD7C">
             <End Role="clients" EntitySet="clients" />
             <End Role="LoanCommision" EntitySet="LoanCommision" />
+          </AssociationSet>
+          <EntitySet Name="sprotv_k" EntityType="bankasiaNSModel.sprotv_k" />
+          <AssociationSet Name="FK_LoanApplicaton_sprotv" Association="bankasiaNSModel.FK_LoanApplicaton_sprotv">
+            <End Role="sprotv_k" EntitySet="sprotv_k" />
+            <End Role="LoanApplication" EntitySet="LoanApplication" />
+          </AssociationSet>
+          <EntitySet Name="vGuarantee" EntityType="bankasiaNSModel.vGuarantee" />
+          <EntitySet Name="rekvizit" EntityType="bankasiaNSModel.rekvizit" />
+          <EntitySet Name="LoanIncomeKodv" EntityType="bankasiaNSModel.LoanIncomeKodv" />
+          <AssociationSet Name="FK__LoanIncom__KodKl__0551FE35" Association="bankasiaNSModel.FK__LoanIncom__KodKl__0551FE35">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="LoanIncomeKodv" EntitySet="LoanIncomeKodv" />
           </AssociationSet>
         </EntityContainer>
         <ComplexType Name="SearchReg_Result">
@@ -1517,6 +1693,7 @@
           <NavigationProperty Name="LoanPercent" Relationship="bankasiaNSModel.FK__LoanPerce__KodKl__6B922C32" FromRole="clients" ToRole="LoanPercent" />
           <NavigationProperty Name="LoanAccountNumber" Relationship="bankasiaNSModel.FK__LoanAccou__Kodkl__184FC410" FromRole="clients" ToRole="LoanAccountNumber" />
           <NavigationProperty Name="LoanCommision" Relationship="bankasiaNSModel.FK__LoanCommi__Kodkl__0A4BBD7C" FromRole="clients" ToRole="LoanCommision" />
+          <NavigationProperty Name="LoanIncomeKodv" Relationship="bankasiaNSModel.FK__LoanIncom__KodKl__0551FE35" FromRole="clients" ToRole="LoanIncomeKodv" />
         </EntityType>
         <Association Name="FK__client_ri__CR_KL__58360A52">
           <End Type="bankasiaNSModel.clients" Role="clients" Multiplicity="0..1" />
@@ -1630,6 +1807,7 @@
           <Property Name="PercentType" Type="Byte" />
           <NavigationProperty Name="clients" Relationship="bankasiaNSModel.FK_LoanApplicaton_clients" FromRole="LoanApplication" ToRole="clients" />
           <NavigationProperty Name="sprotv" Relationship="bankasiaNSModel.FK_LoanApplicaton_sprotv1" FromRole="LoanApplication" ToRole="sprotv" />
+          <NavigationProperty Name="sprotv_k" Relationship="bankasiaNSModel.FK_LoanApplicaton_sprotv" FromRole="LoanApplication" ToRole="sprotv_k" />
         </EntityType>
         <Association Name="FK_LoanApplicaton_clients">
           <End Type="bankasiaNSModel.clients" Role="clients" Multiplicity="1" />
@@ -2135,6 +2313,143 @@
             </Principal>
             <Dependent Role="LoanCommision">
               <PropertyRef Name="Kodkl" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="sprotv_k">
+          <Key>
+            <PropertyRef Name="OT_NOM" />
+          </Key>
+          <Property Name="OT_NOM" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+          <Property Name="OT_FIO" Type="String" MaxLength="40" FixedLength="true" Unicode="false" />
+          <Property Name="OT_NOMOD" Type="Decimal" Precision="4" Scale="0" />
+          <Property Name="OT_PASSPORT" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="OT_ADRESS" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+          <Property Name="kodb" Type="Decimal" Precision="3" Scale="0" />
+          <NavigationProperty Name="LoanApplication" Relationship="bankasiaNSModel.FK_LoanApplicaton_sprotv" FromRole="sprotv_k" ToRole="LoanApplication" />
+        </EntityType>
+        <Association Name="FK_LoanApplicaton_sprotv">
+          <End Type="bankasiaNSModel.sprotv_k" Role="sprotv_k" Multiplicity="1" />
+          <End Type="bankasiaNSModel.LoanApplication" Role="LoanApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sprotv_k">
+              <PropertyRef Name="OT_NOM" />
+            </Principal>
+            <Dependent Role="LoanApplication">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="vGuarantee">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="DG_POZN" />
+            <PropertyRef Name="CreateDate" />
+            <PropertyRef Name="CreatorID" />
+            <PropertyRef Name="GuaranteeTypeID" />
+            <PropertyRef Name="GuaranteeName" />
+          </Key>
+          <Property Name="RowNumber" Type="Int64" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="DG_POZN" Type="Int32" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatorID" Type="Int32" Nullable="false" />
+          <Property Name="GuaranteeTypeID" Type="Int32" Nullable="false" />
+          <Property Name="GtName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GuaranteeHolderID" Type="Int32" />
+          <Property Name="GuaranteeClientID" Type="Int32" />
+          <Property Name="GuaranteeOwnerType" Type="Int32" />
+          <Property Name="GuaranteeName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="GuaranteeHolderName" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="rekvizit">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KODB" Type="Int16" Nullable="false" />
+          <Property Name="KODC" Type="Int16" Nullable="false" />
+          <Property Name="rv_npunkt" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="rv_podrazd" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="rv_fio" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="rv_doljn" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="rv_doljn_rp" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="rv_doljn_fio_rp" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="rv_dok" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="rv_fio2" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="rv_doljn2" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="rv_doljn_rp2" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="rv_doljn_fio_rp2" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="rv_dok2" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="rv_fio3" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="rv_doljn3" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="rv_doljn_rp3" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="rv_doljn_fio_rp3" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="rv_dok3" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="rv_adr" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="rv_rekvizit" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="rv_rekvizit2" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="rv_rekvizit3" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="rv_dop1" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="rv_dop2" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="rv_dop3" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="rv_podrazd_ru" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="rv_podrazd_eng" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="rv_podrazd_kg" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="rv_doljn_ru" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="rv_doljn_eng" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="rv_doljn_kg" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="rv_fio_ru" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="rv_fio_eng" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="rv_fio_kg" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="rv_doljn_ca_ru" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="rv_doljn_ca_eng" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="rv_doljn_ca_kg" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="rv_fio_ca_ru" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="rv_fio_ca_eng" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="rv_fio_ca_kg" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="rv_npunkt_kg" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="rv_doljn2_kg" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+          <Property Name="rv_rekvizit_kg" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="rv_dok_kg" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="rv_dok2_kg" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="rvPosition5" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="rvPosition5Rp" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="rvPosition5Fio" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="rvPosition5FioRp" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="rvIsEnablePosition5" Type="Boolean" />
+          <Property Name="rvPosition5DocNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="LoanIncomeKodv">
+          <Key>
+            <PropertyRef Name="DgPozn" />
+            <PropertyRef Name="KodKl" />
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="DgPozn" Type="Int32" Nullable="false" />
+          <Property Name="KodKl" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Kodv1" Type="Int16" Nullable="false" />
+          <Property Name="Percent1" Type="Decimal" Nullable="false" Precision="10" Scale="4" />
+          <Property Name="Kodv2" Type="Int16" />
+          <Property Name="Percent2" Type="Decimal" Precision="10" Scale="4" />
+          <Property Name="Kodv3" Type="Int16" />
+          <Property Name="Percent3" Type="Decimal" Precision="10" Scale="4" />
+          <Property Name="Kodv4" Type="Int16" />
+          <Property Name="Percent4" Type="Decimal" Precision="10" Scale="4" />
+          <Property Name="Kodv5" Type="Int16" />
+          <Property Name="Percent5" Type="Decimal" Precision="10" Scale="4" />
+          <NavigationProperty Name="clients" Relationship="bankasiaNSModel.FK__LoanIncom__KodKl__0551FE35" FromRole="LoanIncomeKodv" ToRole="clients" />
+        </EntityType>
+        <Association Name="FK__LoanIncom__KodKl__0551FE35">
+          <End Type="bankasiaNSModel.clients" Role="clients" Multiplicity="1" />
+          <End Type="bankasiaNSModel.LoanIncomeKodv" Role="LoanIncomeKodv" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="kl_kod" />
+            </Principal>
+            <Dependent Role="LoanIncomeKodv">
+              <PropertyRef Name="KodKl" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2809,6 +3124,114 @@
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="KodKl" ColumnName="KodKl" />
+                <ScalarProperty Name="DgPozn" ColumnName="DgPozn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sprotv_k">
+            <EntityTypeMapping TypeName="bankasiaNSModel.sprotv_k">
+              <MappingFragment StoreEntitySet="sprotv_k">
+                <ScalarProperty Name="kodb" ColumnName="kodb" />
+                <ScalarProperty Name="OT_ADRESS" ColumnName="OT_ADRESS" />
+                <ScalarProperty Name="OT_PASSPORT" ColumnName="OT_PASSPORT" />
+                <ScalarProperty Name="OT_NOMOD" ColumnName="OT_NOMOD" />
+                <ScalarProperty Name="OT_FIO" ColumnName="OT_FIO" />
+                <ScalarProperty Name="OT_NOM" ColumnName="OT_NOM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vGuarantee">
+            <EntityTypeMapping TypeName="bankasiaNSModel.vGuarantee">
+              <MappingFragment StoreEntitySet="vGuarantee">
+                <ScalarProperty Name="GuaranteeHolderName" ColumnName="GuaranteeHolderName" />
+                <ScalarProperty Name="GuaranteeName" ColumnName="GuaranteeName" />
+                <ScalarProperty Name="GuaranteeOwnerType" ColumnName="GuaranteeOwnerType" />
+                <ScalarProperty Name="GuaranteeClientID" ColumnName="GuaranteeClientID" />
+                <ScalarProperty Name="GuaranteeHolderID" ColumnName="GuaranteeHolderID" />
+                <ScalarProperty Name="GtName" ColumnName="GtName" />
+                <ScalarProperty Name="GuaranteeTypeID" ColumnName="GuaranteeTypeID" />
+                <ScalarProperty Name="CreatorID" ColumnName="CreatorID" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="DG_POZN" ColumnName="DG_POZN" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RowNumber" ColumnName="RowNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rekvizit">
+            <EntityTypeMapping TypeName="bankasiaNSModel.rekvizit">
+              <MappingFragment StoreEntitySet="rekvizit">
+                <ScalarProperty Name="rvPosition5DocNumber" ColumnName="rvPosition5DocNumber" />
+                <ScalarProperty Name="rvIsEnablePosition5" ColumnName="rvIsEnablePosition5" />
+                <ScalarProperty Name="rvPosition5FioRp" ColumnName="rvPosition5FioRp" />
+                <ScalarProperty Name="rvPosition5Fio" ColumnName="rvPosition5Fio" />
+                <ScalarProperty Name="rvPosition5Rp" ColumnName="rvPosition5Rp" />
+                <ScalarProperty Name="rvPosition5" ColumnName="rvPosition5" />
+                <ScalarProperty Name="rv_dok2_kg" ColumnName="rv_dok2_kg" />
+                <ScalarProperty Name="rv_dok_kg" ColumnName="rv_dok_kg" />
+                <ScalarProperty Name="rv_rekvizit_kg" ColumnName="rv_rekvizit_kg" />
+                <ScalarProperty Name="rv_doljn2_kg" ColumnName="rv_doljn2_kg" />
+                <ScalarProperty Name="rv_npunkt_kg" ColumnName="rv_npunkt_kg" />
+                <ScalarProperty Name="rv_fio_ca_kg" ColumnName="rv_fio_ca_kg" />
+                <ScalarProperty Name="rv_fio_ca_eng" ColumnName="rv_fio_ca_eng" />
+                <ScalarProperty Name="rv_fio_ca_ru" ColumnName="rv_fio_ca_ru" />
+                <ScalarProperty Name="rv_doljn_ca_kg" ColumnName="rv_doljn_ca_kg" />
+                <ScalarProperty Name="rv_doljn_ca_eng" ColumnName="rv_doljn_ca_eng" />
+                <ScalarProperty Name="rv_doljn_ca_ru" ColumnName="rv_doljn_ca_ru" />
+                <ScalarProperty Name="rv_fio_kg" ColumnName="rv_fio_kg" />
+                <ScalarProperty Name="rv_fio_eng" ColumnName="rv_fio_eng" />
+                <ScalarProperty Name="rv_fio_ru" ColumnName="rv_fio_ru" />
+                <ScalarProperty Name="rv_doljn_kg" ColumnName="rv_doljn_kg" />
+                <ScalarProperty Name="rv_doljn_eng" ColumnName="rv_doljn_eng" />
+                <ScalarProperty Name="rv_doljn_ru" ColumnName="rv_doljn_ru" />
+                <ScalarProperty Name="rv_podrazd_kg" ColumnName="rv_podrazd_kg" />
+                <ScalarProperty Name="rv_podrazd_eng" ColumnName="rv_podrazd_eng" />
+                <ScalarProperty Name="rv_podrazd_ru" ColumnName="rv_podrazd_ru" />
+                <ScalarProperty Name="rv_dop3" ColumnName="rv_dop3" />
+                <ScalarProperty Name="rv_dop2" ColumnName="rv_dop2" />
+                <ScalarProperty Name="rv_dop1" ColumnName="rv_dop1" />
+                <ScalarProperty Name="rv_rekvizit3" ColumnName="rv_rekvizit3" />
+                <ScalarProperty Name="rv_rekvizit2" ColumnName="rv_rekvizit2" />
+                <ScalarProperty Name="rv_rekvizit" ColumnName="rv_rekvizit" />
+                <ScalarProperty Name="rv_adr" ColumnName="rv_adr" />
+                <ScalarProperty Name="rv_dok3" ColumnName="rv_dok3" />
+                <ScalarProperty Name="rv_doljn_fio_rp3" ColumnName="rv_doljn_fio_rp3" />
+                <ScalarProperty Name="rv_doljn_rp3" ColumnName="rv_doljn_rp3" />
+                <ScalarProperty Name="rv_doljn3" ColumnName="rv_doljn3" />
+                <ScalarProperty Name="rv_fio3" ColumnName="rv_fio3" />
+                <ScalarProperty Name="rv_dok2" ColumnName="rv_dok2" />
+                <ScalarProperty Name="rv_doljn_fio_rp2" ColumnName="rv_doljn_fio_rp2" />
+                <ScalarProperty Name="rv_doljn_rp2" ColumnName="rv_doljn_rp2" />
+                <ScalarProperty Name="rv_doljn2" ColumnName="rv_doljn2" />
+                <ScalarProperty Name="rv_fio2" ColumnName="rv_fio2" />
+                <ScalarProperty Name="rv_dok" ColumnName="rv_dok" />
+                <ScalarProperty Name="rv_doljn_fio_rp" ColumnName="rv_doljn_fio_rp" />
+                <ScalarProperty Name="rv_doljn_rp" ColumnName="rv_doljn_rp" />
+                <ScalarProperty Name="rv_doljn" ColumnName="rv_doljn" />
+                <ScalarProperty Name="rv_fio" ColumnName="rv_fio" />
+                <ScalarProperty Name="rv_podrazd" ColumnName="rv_podrazd" />
+                <ScalarProperty Name="rv_npunkt" ColumnName="rv_npunkt" />
+                <ScalarProperty Name="KODC" ColumnName="KODC" />
+                <ScalarProperty Name="KODB" ColumnName="KODB" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoanIncomeKodv">
+            <EntityTypeMapping TypeName="bankasiaNSModel.LoanIncomeKodv">
+              <MappingFragment StoreEntitySet="LoanIncomeKodv">
+                <ScalarProperty Name="Percent5" ColumnName="Percent5" />
+                <ScalarProperty Name="Kodv5" ColumnName="Kodv5" />
+                <ScalarProperty Name="Percent4" ColumnName="Percent4" />
+                <ScalarProperty Name="Kodv4" ColumnName="Kodv4" />
+                <ScalarProperty Name="Percent3" ColumnName="Percent3" />
+                <ScalarProperty Name="Kodv3" ColumnName="Kodv3" />
+                <ScalarProperty Name="Percent2" ColumnName="Percent2" />
+                <ScalarProperty Name="Kodv2" ColumnName="Kodv2" />
+                <ScalarProperty Name="Percent1" ColumnName="Percent1" />
+                <ScalarProperty Name="Kodv1" ColumnName="Kodv1" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="KodKl" ColumnName="KodKl" />
                 <ScalarProperty Name="DgPozn" ColumnName="DgPozn" />

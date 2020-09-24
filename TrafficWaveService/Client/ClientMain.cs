@@ -24,6 +24,8 @@ namespace TrafficWaveService.Client
 
         Dictionary<string, object> _dopInfo;
 
+       
+
         /// <summary>
         /// Конструктор
         /// </summary>
@@ -42,13 +44,19 @@ namespace TrafficWaveService.Client
 
         private void Init()
         {
-            //Десериализация строки
-            string str = _ClientQuery.RequestStringClient.Replace("None", "null").Replace("False", "false").Replace("True", "true");
-            _clientInfo = JsonConvert.DeserializeObject<ClientInfo>(str);
+            try
+            {
+                //Десериализация строки
+                string str = _ClientQuery.RequestStringClient.Replace("None", "null").Replace("False", "false").Replace("True", "true");
+                _clientInfo = JsonConvert.DeserializeObject<ClientInfo>(str);
 
-            //string strDop = _ClientQuery.RequestStringDopInfo.Replace("None", "null").Replace("False", "false").Replace("True", "true");
-            //_dopInfo = JsonConvert.DeserializeObject<Dictionary<string, object>>(strDop);
-            //var a = _dopInfo["business_info"];
+                string strDop = _ClientQuery.RequestStringDopInfo.Replace("None", "null").Replace("False", "false").Replace("True", "true");
+                _dopInfo = JsonConvert.DeserializeObject<Dictionary<string, object>>(strDop);
+            }
+            catch(Exception ex)
+            {
+                new DataBase().WriteLog(ex, "CreateClient");
+            }
         }
 
         /// <summary>
@@ -88,7 +96,7 @@ namespace TrafficWaveService.Client
                 clients cl = db.clients.FirstOrDefault(x => x.kl_inn.Trim() == _clientInfo.inn.Trim());
                 if (cl == null)
                 {
-                    ClientNew clNew = new ClientNew(_clientInfo);
+                    ClientNew clNew = new ClientNew(_clientInfo, _dopInfo);
                     return clNew.Add();
                 }
                 else

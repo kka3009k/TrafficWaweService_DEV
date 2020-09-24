@@ -24,6 +24,10 @@ namespace TrafficWaveService.Reports.TempController
             _requestString = pReqStr;
             Init();
         }
+        public PdfFormController(Dictionary<string, object> pData)
+        {
+            data = pData;
+        }
 
         private void Init()
         {

@@ -60,11 +60,15 @@ namespace TrafficWaveService.CreditApp
                         break;
                     case 2:
                         //Создание кредитнго договора
-                        res.ID = InsertCreditContract(_crApp);
+                        res.IDString = InsertCreditContract(_crApp);
                         break;
                     case 3:
                         //Формирование договора 
                         res.Base64Str = GetContractCredit(_crApp);
+                        break;
+                    case 4:
+                        //Формирование договора 
+                        res.Base64Str = GetContractPledge(_crApp);
                         break;
                     default:
                         res.ID = 200;
@@ -89,52 +93,65 @@ namespace TrafficWaveService.CreditApp
         {
             using (bankasiaNSEntities db = new bankasiaNSEntities())
             {
-                LoanApplication ln = db.LoanApplication.FirstOrDefault(x => x.ID == pCr.IDLoan);
-                if (ln != null)
+                try
                 {
-                    return ln.ID;
-                }
-                var creditId = db.LoanApplication_create(
-                    (short)pCr.BranchID,
-                    (short)pCr.OfficeID,
-                    (short)pCr.CurrencyID,
-                    pCr.ClientID,
-                    (decimal)pCr.Amount,
-                    (decimal)pCr.LoanPercent,
-                    pCr.PeriodInMonth,
-                    pCr.GroupName,
-                    (decimal)pCr.FirstPaymentInPercent,
-                    (byte)pCr.AttractionCanalID,
-                    pCr.ProductID,
-                    (byte)pCr.ClientClassID,
-                    (byte)pCr.TypeClientID,
-                    pCr.AuctionSourceID,
-                    (byte)pCr.PurposeID,
-                    (byte)pCr.PaymentSourceID,
-                    pCr.GuaranteeID,
-                    (byte)pCr.StatusID,
-                    (short)pCr.TypeCreditID,
-                    pCr.EnterpriseID,
-                    (byte)pCr.LoanSubTypeID,
-                    pCr.AimsID,
-                    pCr.AimsComment,
-                    //Дата первого контакта
-                    DateTime.Now,
-                    //Дата анализа
-                    DateTime.Now,
-                    DateTime.Now,
-                    (short)pCr.PersonID,
-                    (short)pCr.CreatorID,
-                    pCr.BankConnection,
-                    //Комментарий
-                    " ",
-                    //Коментарий клиента
-                    " ",
-                    (byte)pCr.PercentType
+                    LoanApplication ln = db.LoanApplication.FirstOrDefault(x => x.ID == pCr.IDLoan);
+                    sprotv_k otvK = db.sprotv_k.FirstOrDefault(x => x.OT_NOMOD == pCr.CreatorID);
+                    if (ln != null)
+                    {
+                        return ln.ID;
+                    }
+                    if (otvK != null)
+                    {
+                        var creditId = db.LoanApplication_create(
+                            (short)pCr.BranchID,
+                            (short)pCr.OfficeID,
+                            (short)pCr.CurrencyID,
+                            pCr.ClientID,
+                            (decimal)pCr.Amount,
+                            (decimal)pCr.LoanPercent,
+                            pCr.PeriodInMonth,
+                            pCr.GroupName,
+                            (decimal)pCr.FirstPaymentInPercent,
+                            (byte)pCr.AttractionCanalID,
+                            pCr.ProductID,
+                            (byte)pCr.ClientClassID,
+                            (byte)pCr.TypeClientID,
+                            pCr.AuctionSourceID,
+                            (byte)pCr.PurposeID,
+                            (byte)pCr.PaymentSourceID,
+                            pCr.GuaranteeID,
+                            (byte)pCr.StatusID,
+                            (short)pCr.TypeCreditID,
+                            pCr.EnterpriseID,
+                            (byte)pCr.LoanSubTypeID,
+                            pCr.AimsID,
+                            pCr.AimsComment,
+                            //Дата первого контакта
+                            DateTime.Now,
+                            //Дата анализа
+                            DateTime.Now,
+                            DateTime.Now,
+                            (short)otvK.OT_NOM,
+                            (short)otvK.OT_NOM,
+                            pCr.BankConnection,
+                            //Комментарий
+                            " ",
+                            //Коментарий клиента
+                            " ",
+                            (byte)pCr.PercentType
 
-                    ).ToList();
-                db.SaveChanges();
-                return creditId.First().Value;
+                            ).ToList();
+                        db.SaveChanges();
+                        return creditId.First().Value;
+                    }
+                }
+                catch(Exception ex)
+                {
+                    new DataBase().WriteLog(ex, "CreateLoan");
+                    return -1;
+                }
+                return -1;
             }
         }
 
@@ -142,7 +159,7 @@ namespace TrafficWaveService.CreditApp
         /// Создание нового договора
         /// </summary>
         /// <param name="pCr"></param>
-        private int InsertCreditContract(CreditAppData pCr)
+        private string InsertCreditContract(CreditAppData pCr)
         {
             CreditContract cr = new CreditContract(pCr);
             return cr.CreateCreditContract();
@@ -157,6 +174,34 @@ namespace TrafficWaveService.CreditApp
         {
             CreditContract cr = new CreditContract(pCr);
             return cr.CreateCreditContractDocx();
+        }
+        private string GetContractPledge(CreditAppData pCr)
+        {
+            CreditContract cr = new CreditContract(pCr);
+            return cr.CreateCreditPledgeDocx();
+        }
+
+        public async Task<bool> ConfirmCredit()
+        {
+            return await Task.Run(() =>
+            {
+                bool status = false;
+                try
+                {
+
+                    //Десериализация строки
+                    string str = _CreditQuery.RequestStringCreditData.Replace("None", "null").Replace("False", "false").Replace("True", "true");
+                    _crApp = JsonConvert.DeserializeObject<CreditAppData>(str);
+                    CreditContract cr = new CreditContract(_crApp);
+                    status = cr.IssueLoan();
+                }
+                catch (Exception ex)
+                {
+                    new DataBase().WriteLog(ex, "Run");
+
+                }
+                return status;
+            });
         }
     }
 }

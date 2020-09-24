@@ -74,7 +74,7 @@ namespace TrafficWaveService.Client
                 using (bankasiaNSEntities db = new bankasiaNSEntities())
                 {
                     clients cl = db.clients.FirstOrDefault(x => x.kl_kod == _ClCode);
-                    cl.kl_nam = pCl.first_name + " " + pCl.last_name + " " + pCl.patronymic;
+                    cl.kl_nam =  pCl.last_name+ " " + pCl.first_name + " " + pCl.patronymic;
                     cl.kl_tel1 = pCl.contact_phone;
                     cl.kl_tel2 = pCl.home_phone != null ? pCl.home_phone : cl.kl_tel2;
                     cl.kl_otr = (short)pCl.odb_industry;
@@ -103,25 +103,27 @@ namespace TrafficWaveService.Client
         {
             using (bankasiaNSEntities db = new bankasiaNSEntities())
             {
-                //client_paspdata cl_pasp = db.client_paspdata.FirstOrDefault(x => x.kl_kod == _ClCode);
-                //cl_pasp.p_fam = pCl.last_name;
-                //cl_pasp.p_name = pCl.first_name;
-                //cl_pasp.p_otch = pCl.patronymic;
-                ////p_grajd = "417",
-                //cl_pasp.p_viddoksfr = Convert.ToDateTime(pCl.passport_info.issued_date) >= DateTime.Parse("2017-01-01") ? "15" : "05";
-                //cl_pasp.p_viddok = pCl.passport_info.passport_type;
-                //cl_pasp.p_srdok = pCl.passport_info.series;
-                //cl_pasp.p_ndok = pCl.passport_info.number;
-                //cl_pasp.p_mvd = pCl.passport_info.issued_by;
-                //cl_pasp.p_enddok = Convert.ToDateTime(pCl.passport_info.deadline);
-                //cl_pasp.p_datev = Convert.ToDateTime(pCl.passport_info.issued_date);
-                //    //p_strb = "417",
-                //    //p_db = Convert.ToDateTime(pCl.birthday),
-                //    //p_pol = pCl.gender == null ? (byte)0 : (byte)1,
-                //    //p_nation = pCl.nationality,
-                //    //p_family_status = 1
-                
-                //db.SaveChanges();
+                client_paspdata cl_pasp = db.client_paspdata.FirstOrDefault(x => x.kl_kod == _ClCode);
+                if (cl_pasp != null)
+                {
+                    cl_pasp.p_fam = pCl.last_name;
+                    cl_pasp.p_name = pCl.first_name;
+                    cl_pasp.p_otch = pCl.patronymic;
+                    cl_pasp.p_viddoksfr = Convert.ToDateTime(pCl.passport_info.issued_date) >= DateTime.Parse("2017-01-01") ? "15" : "05";
+                    cl_pasp.p_viddok = Convert.ToDateTime(pCl.passport_info.issued_date) >= DateTime.Parse("2017-01-01") ? "Идентификационная карта" : "Паспорт";
+                    cl_pasp.p_srdok = pCl.passport_info.series;
+                    cl_pasp.p_ndok = pCl.passport_info.number;
+                    cl_pasp.p_mvd = pCl.passport_info.issued_by;
+                    cl_pasp.p_enddok = Convert.ToDateTime(pCl.passport_info.deadline);
+                    cl_pasp.p_datev = Convert.ToDateTime(pCl.passport_info.issued_date);
+                    //    //p_strb = "417",
+                    //    //p_db = Convert.ToDateTime(pCl.birthday),
+                    //    //p_pol = pCl.gender == null ? (byte)0 : (byte)1,
+                    //    //p_nation = pCl.nationality,
+                    //    //p_family_status = 1
+
+                    db.SaveChanges();
+                }
                 UpdateClienAdress(pCl);
             }
         }
@@ -142,6 +144,8 @@ namespace TrafficWaveService.Client
                 cl_addr_f.a_dom = pCl.real_address.house;
                 cl_addr_f.a_kvart = pCl.real_address.apartment;
                 cl_addr_f.a_ul = pCl.real_address.street;
+                cl_addr_f.a_np = pCl.real_address.locality;
+                cl_addr_f.a_obl = pCl.real_address.region;
 
                 db.SaveChanges();
 
@@ -150,6 +154,8 @@ namespace TrafficWaveService.Client
                 cl_addr_u.a_dom = pCl.jur_address.house;
                 cl_addr_u.a_kvart = pCl.jur_address.apartment;
                 cl_addr_u.a_ul = pCl.jur_address.street;
+                cl_addr_u.a_np = pCl.jur_address.locality;
+                cl_addr_u.a_obl = pCl.jur_address.region;
 
                 db.SaveChanges();
 

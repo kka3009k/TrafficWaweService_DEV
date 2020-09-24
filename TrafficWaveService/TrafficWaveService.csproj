@@ -169,6 +169,8 @@
   <ItemGroup>
     <Content Include="CreditApp\output.pdf" />
     <Content Include="Reports\Templates\act_products_tab.docx" />
+    <Content Include="Reports\Templates\credit_contarct_pledge.docx" />
+    <Content Include="Reports\Templates\pledges_tab.docx" />
     <None Include="Service References\ReportServiceDev\ReportService.wsdl" />
     <None Include="Service References\ReportServiceDev\ReportService.xsd">
       <SubType>Designer</SubType>
@@ -348,6 +350,9 @@
     <Compile Include="LoanGraphSettings.cs">
       <DependentUpon>TrafficWaveModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="LoanIncomeKodv.cs">
+      <DependentUpon>TrafficWaveModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="LoanIssue.cs">
       <DependentUpon>TrafficWaveModel.tt</DependentUpon>
     </Compile>
@@ -357,7 +362,11 @@
     <Compile Include="LOG_APP.cs">
       <DependentUpon>TrafficWaveModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GuaranteePledge.cs" />
     <Compile Include="ow.cs">
+      <DependentUpon>TrafficWaveModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="rekvizit.cs">
       <DependentUpon>TrafficWaveModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Reports\Converter.cs" />
@@ -392,6 +401,9 @@
     <Compile Include="sprotv.cs">
       <DependentUpon>TrafficWaveModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="sprotv_k.cs">
+      <DependentUpon>TrafficWaveModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Sprs\SprQuery.cs" />
     <Compile Include="Sprs\SprsController.cs" />
     <Compile Include="TrafficWave.svc.cs">
@@ -413,6 +425,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TrafficWaveModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="vGuarantee.cs">
+      <DependentUpon>TrafficWaveModel.tt</DependentUpon>
     </Compile>
     <Compile Include="vLoanContract.cs">
       <DependentUpon>TrafficWaveModel.tt</DependentUpon>

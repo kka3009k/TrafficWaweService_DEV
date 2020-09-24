@@ -60,7 +60,16 @@ namespace TrafficWaveService
         /// <returns></returns>
         [OperationContract]
         Task<Dictionary<string, object>> GetClientProfile(int IdClient, int IdOtv);
-       
+
+        /// <summary>
+        /// Подтверждение выдачи кредита
+        /// </summary>
+        /// <param name="pCreditQuery"></param>
+        /// <returns></returns>
+        [OperationContract]
+        Task<bool> ConfirmCredit(CreditQuery pCreditQuery);
+
+
 
     }
 }

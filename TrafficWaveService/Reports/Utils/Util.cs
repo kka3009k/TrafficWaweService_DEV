@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -43,6 +44,60 @@ namespace TrafficWaveService.Reports.Utils
                 res = res.Replace(".", ",");
             }
             return res;
+        }
+
+        /// <summary>
+        /// Превратить числовые данные к прописьным
+        /// </summary>
+        /// <param name="value">Числовой тип (int, double, decimal...)</param>
+        /// <param name="dsOD">DomainServiceOD обект</param>
+        /// <returns>Число прописью</returns>
+        public static string toRecipe(object value, int Language)
+        {
+            Dictionary<string, string> toResReplace = new Dictionary<string, string>
+            {
+                {"уч", "үч"},
+                {"Уч", "Үч"},
+                {"торт", "төрт"},
+                {"Торт", "Төрт"},
+                {"элуу", "элүү"},
+                {"Элуу", "Элүү"},
+                {"жуз", "жүз"},
+                {"Жуз", "Жүз"},
+                {"мин", "миң"},
+                {"Мин", "Миң"},
+
+                {" сома  ", ", "},
+                {" сом  ", ", "},
+                {" тыйын", ""},
+                {", 00", ""}
+            };
+            //if (dsOD == null)
+            //    return "";
+            try
+            {
+                using (bankasiaNSEntities db = new bankasiaNSEntities())
+                {
+                    double doubleVal = value is double ? castTo<double>(value) : Convert.ToDouble(value);
+                    string dValStr = doubleVal.ToString().Replace(",", ".");
+                    DbRawSqlQuery<string> res;
+                    string recipedDouble = "";
+                    if (Language == 0) res = db.Database.SqlQuery<string>("SELECT [dbo].[od701r]({0}, {1})", dValStr, 417);
+                    else res = db.Database.SqlQuery<string>("SELECT [dbo].[od702r]({0}, {1})", dValStr, 417);
+                    recipedDouble = res.FirstOrDefault();
+                    foreach (string key in toResReplace.Keys)
+                    {
+                        recipedDouble = recipedDouble.Replace(key, toResReplace[key]);
+                    }
+
+                    return recipedDouble;
+                }
+            }
+            catch (Exception ex)
+            {
+                new DataBase().WriteLog(ex, "Error by trying convert object to double.");
+                return "0";
+            }
         }
 
         public static string parseDateTime(string pattern, DateTime? dTime)
@@ -430,5 +485,6 @@ namespace TrafficWaveService.Reports.Utils
                 return outputBytes;
             }
         }
+
     }
 }
