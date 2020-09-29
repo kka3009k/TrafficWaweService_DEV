@@ -127,5 +127,6 @@ namespace TrafficWaveService.Client
     public int odb_social_status { get; set; }
     public int odb_industry { get; set; }
     public int odb_primary_occupation { get; set; }
+    public string position { get; set; }
     }
 }

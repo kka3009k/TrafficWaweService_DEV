@@ -63,6 +63,8 @@ namespace TrafficWaveService
         public virtual DbSet<vGuarantee> vGuarantee { get; set; }
         public virtual DbSet<rekvizit> rekvizit { get; set; }
         public virtual DbSet<LoanIncomeKodv> LoanIncomeKodv { get; set; }
+        public virtual DbSet<SharedProperty> SharedProperty { get; set; }
+        public virtual DbSet<dogkr> dogkr { get; set; }
     
         public virtual ObjectResult<SearchReg_Result> SearchReg(string pFam, string pName, string pOtch, Nullable<byte> pStatus)
         {

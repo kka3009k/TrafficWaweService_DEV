@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace TrafficWaveService.Client
 {
@@ -15,6 +16,8 @@ namespace TrafficWaveService.Client
         /// Объект для передачи информациии о клиенте
         /// </summary>
         private ClientInfo _ClientInfo { get; set; }
+
+        private Dictionary<string, object> _dopInfo;
 
         /// <summary>
         /// Код клиента 
@@ -38,6 +41,17 @@ namespace TrafficWaveService.Client
         public ClientUpdate(ClientInfo pClientInfo, int pClCode, byte pDlCode)
         {
             _ClientInfo = pClientInfo;
+            _ClCode = pClCode;
+            _DlCode = pDlCode;
+        }
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="pClientInfo">Информация о клиенте</param>
+        public ClientUpdate(ClientInfo pClientInfo, Dictionary<string, object> pDopInfo, int pClCode, byte pDlCode)
+        {
+            _ClientInfo = pClientInfo;
+            _dopInfo = pDopInfo;
             _ClCode = pClCode;
             _DlCode = pDlCode;
         }
@@ -79,7 +93,8 @@ namespace TrafficWaveService.Client
                     cl.kl_tel2 = pCl.home_phone != null ? pCl.home_phone : cl.kl_tel2;
                     cl.kl_otr = (short)pCl.odb_industry;
                     cl.kl_vidsob = (byte)pCl.odb_property_type;
-                    //kl_kodter = "01",
+                    cl.kl_wdoljn = pCl.position != null ? pCl.position : "";
+                    cl.kl_wname = _dopInfo["work_adress"] != null && _dopInfo["work_adress"].ToString() != "" ? _dopInfo["work_adress"].ToString() : "";
                     db.SaveChanges();
                     UpdateClientPaspData(pCl);
 
@@ -116,6 +131,7 @@ namespace TrafficWaveService.Client
                     cl_pasp.p_mvd = pCl.passport_info.issued_by;
                     cl_pasp.p_enddok = Convert.ToDateTime(pCl.passport_info.deadline);
                     cl_pasp.p_datev = Convert.ToDateTime(pCl.passport_info.issued_date);
+                    cl_pasp.p_pol = pCl.gender == null ? (byte)1 : int.Parse(pCl.gender.ToString()) == 0 ? (byte)1 : (byte)2;
                     //    //p_strb = "417",
                     //    //p_db = Convert.ToDateTime(pCl.birthday),
                     //    //p_pol = pCl.gender == null ? (byte)0 : (byte)1,

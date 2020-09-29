@@ -16,6 +16,7 @@ using TrafficWaveService.Reports.TempController;
 using TrafficWaveService.Reports.Utils;
 using TrafficWaveService.Models;
 using DocumentFormat.OpenXml.Wordprocessing;
+using DocumentFormat.OpenXml;
 
 namespace TrafficWaveService.CreditApp
 {
@@ -101,7 +102,7 @@ namespace TrafficWaveService.CreditApp
                             StateID = 1,
                             MakeDate = DateTime.Parse($"{x.date_production.Trim()}-{DateTime.Now.Month}-{DateTime.Now.Day}"),
                             InspectionDate = DateTime.Now,
-                            Lowering = (decimal)0.7,
+                            Lowering = (decimal)70,
                             AssessedValue = (decimal.Parse(x.price_product) / 100) * 70,
                             MarketValue = decimal.Parse(x.price_product),
                             StatusID = 1,
@@ -159,7 +160,7 @@ namespace TrafficWaveService.CreditApp
                     {
                         DgPozn = _Cr.IDLoan,
                         Date = DateTime.Now,
-                        Percent1 = (decimal)0.100,
+                        Percent1 = (decimal)1,
                         Kodv1 = 417,
                         KodKl = _ln.ClientID
                     };
@@ -210,8 +211,9 @@ namespace TrafficWaveService.CreditApp
                 settings.Sum = la.Amount;
                 settings.MounthCount = la.PeriodInMonth;
                 settings.IssueDate = la.DateCreate != null ? la.DateCreate : DateTime.Now;
-                settings.FirstRepayDate = la.DateCreate != null ? la.DateCreate.AddMonths(1) : DateTime.Now.AddMonths(1);
+                settings.FirstRepayDate = _Cr.FirstRepayDate != null ? DateTime.Parse(_Cr.FirstRepayDate) : DateTime.Now.AddMonths(1);
                 settings.IsEmployee = false;
+                
                 //Не рабочие дни
                 DateTime endDate = settings.IssueDate.AddMonths(settings.MounthCount);
                 settings.NotWorkDays.Clear();
@@ -309,7 +311,7 @@ namespace TrafficWaveService.CreditApp
             {
                 DgPozn = pLa.ID,
                 KlKode = pLa.ClientID,
-                DateStart = settings.IssueDate,
+                DateStart = settings.FirstRepayDate,
                 PrivelegPeriodMS = settings.PrivelegyMainSum,
                 FiveDayPrincip = false,
                 RepayType = (int)settings.RepayType,
@@ -318,21 +320,24 @@ namespace TrafficWaveService.CreditApp
                 IssueCondition = false,
                 OtvNum = pLa.CreatorID,
                 ActualGraphNum = 1,
-                MonthCount = settings.MounthCount
+                MonthCount = settings.MounthCount,
+                ActualGraphDate = DateTime.Now,
+                SaveDate = DateTime.Now
             };
             try
             {
                 if (lgs == null)
                 {
                     _db.LoanGraphSettings.Add(lgsNew);
+                    _db.SaveChanges();
                 }
                 else
                 {
-                    lgsNew.ActualGraphNum = lgs.ActualGraphNum + 1;
+                    return lgs;
+                    /*lgsNew.ActualGraphNum = 1;//lgs.ActualGraphNum + 1;
                     _db.LoanGraphSettings.Remove(lgs);
-                    _db.LoanGraphSettings.Add(lgsNew);
+                    _db.LoanGraphSettings.Add(lgsNew);*/
                 }
-                _db.SaveChanges();
             }
             catch { lgsNew = null; }
             return lgsNew;
@@ -417,7 +422,6 @@ namespace TrafficWaveService.CreditApp
             {
                 dict.Add("<DG_NOM>", loanContract.DG_NOM);
                 dict.Add("<NAIMGRUP>", loanContract.GroupName);
-                dict.Add("<RV_NPUKT>", "PUNCT");
                 dict.Add("<OT_FIO>", otv.OT_FIO);
                 dict.Add("<RV_PODRAZD>", rek.rv_podrazd);
                 dict.Add("<DG_POZN>", loanContract.DG_POZN);
@@ -461,31 +465,120 @@ namespace TrafficWaveService.CreditApp
             dict.Add("<RV_PODRAZD>", rek.rv_podrazd);
             dict.Add("<RV_REKVIZIT>", rek.rv_rekvizit);
             dict.Add("<OT_FIO>", otv.OT_FIO);
-            dict.Add("<Данные 1>", GetClientData(client));
-           // dict.Add("<OT_DOLJN>", otv.);
+            dict.Add("<OT_DOLJN>", "Торговый агент");
             dict.Add("<DG_DATE>", DateTime.Now.ToString().Remove(10));
             dict.Add("<RV_DOK>", DateTime.Now);
             dict.Add("<DG_POZN>", loanContract.DG_POZN);
             dict.Add("<DG_SUM>", loanContract.DG_SUM);
-            dict.Add("<DG_KODV>", loanContract.DG_KODV);
+            dict.Add("<DG_KODV>", "сом");
             dict.Add("<PROCENT>", 0.0);
             dict.Add("<RV_FIO>", client.kl_nam);
-            dict.Add("<DG_SUM_RECIPE>", $"{loanContract.DG_SUM} ({Util.toRecipe(loanContract.DG_SUM, 0)})");
+            dict.Add("<DG_SUM_RECIPE>", $"{loanContract.DG_SUM} {Util.toRecipe(loanContract.DG_SUM, 0)}");
             dict.Add("TEMPLATE_FILE_NAME", "credit_contarct_pledge.docx");
+            IQueryable<SharedProperty> qSharProp = _db.SharedProperty.Where(shp => shp.Key.Contains("kr800PAT_Data"));
+            List<SharedProperty> sharedProperties = qSharProp != null ? qSharProp.ToList() : new List<SharedProperty>();
+            Dictionary<string, string> dataCl = GetClientData(client);
+            dict["<Данные 1>"] = createReplaceString(sharedProperties, "kr800PAT_Data1_2",
+                                       "<B_NAM>", client.kl_nam,
+                                       "<B_PASP>", dataCl["passData"]);
+
+            dict["<Данные 2>"] = createReplaceString(sharedProperties, "kr800PAT_Data2_2",
+                "<B_NAM>", client.kl_nam,
+                "<B_PASP>", dataCl["passData"],
+                "<B_ADR_J>", dataCl["addressU"],
+                "<B_ADR_F>", dataCl["addressF"]);
+
+            dict["<Данные 3>"] = " ";
             return dict;
         }
 
-        private string GetClientData(clients pCl)
+
+        private Dictionary<string,string> GetClientData(clients pCl)
         {
-            string data = "";
-            data += pCl.kl_nam + " ";
-            client_paspdata clPasp = _db.client_paspdata.FirstOrDefault(x => x.kl_kod == pCl.kl_kod);
-            if(clPasp != null)
+            Dictionary<string, string> dataCl = new Dictionary<string, string>();
+            string klientAdrJ = "";
+            string klientAdrF = "";
+            //Адреса клиента
+            if (pCl != null)
             {
-                data += $"{pCl.kl_inn} {clPasp.p_srdok}{clPasp.p_ndok} от "+
-                    $"{DateTime.Parse(clPasp.p_datev.ToString()).Date.ToString().Remove(11)}";
+                List<client_adress> clAddresses = _db.client_adress.Where(gha => gha.kl_kod == pCl.kl_kod).ToList();
+                client_adress clAddressU = clAddresses.Where(gha => gha.a_typeadress == "U").FirstOrDefault();
+                client_adress clAddressF = clAddresses.Where(gha => gha.a_typeadress == "F").FirstOrDefault();
+
+                klientAdrF = clAddressF != null
+                    ? (clAddressF.a_obl != ""
+                          ? clAddressF.a_obl + (clAddressF.a_obl.Contains("обл") ? ", " : " обл., ")
+                          : "")
+                      + (clAddressF.a_raion != "" ? clAddressF.a_raion + ", " : "")
+                      + clAddressF.a_np + ", "
+                      + (clAddressF.a_topfx != "" ? clAddressF.a_topfx + " " : "")
+                      + (clAddressF.a_to != "" ? clAddressF.a_to + ", " : "")
+                      + clAddressF.a_ulpfx
+                      + clAddressF.a_ul + ", "
+                      + (clAddressF.a_dom != "" ? "д." + clAddressF.a_dom : "")
+                      + (clAddressF.a_korpuc != "" ? ", корпус " + clAddressF.a_korpuc : "")
+                      + (clAddressF.a_ctroen != "" ? ", строение " + clAddressF.a_ctroen : "")
+                      + (clAddressF.a_kvart != "" ? ", кв." + clAddressF.a_kvart : "")
+                    : "";
+                klientAdrJ = clAddressU != null
+                    ? (clAddressU.a_obl != ""
+                          ? clAddressU.a_obl + (clAddressU.a_obl.Contains("обл") ? ", " : " обл., ")
+                          : "")
+                      + (clAddressU.a_raion != "" ? clAddressU.a_raion + ", " : "")
+                      + clAddressU.a_np + ", "
+                      + (clAddressU.a_topfx != "" ? clAddressU.a_topfx + " " : "")
+                      + (clAddressU.a_to != "" ? clAddressU.a_to + ", " : "")
+                      + clAddressU.a_ulpfx
+                      + clAddressU.a_ul + ", "
+                      + (clAddressU.a_dom != "" ? "д." + clAddressU.a_dom : "")
+                      + (clAddressU.a_korpuc != "" ? ", корпус " + clAddressU.a_korpuc : "")
+                      + (clAddressU.a_ctroen != "" ? ", строение " + clAddressU.a_ctroen : "")
+                      + (clAddressU.a_kvart != "" ? ", кв." + clAddressU.a_kvart : "")
+                    : "";
             }
-            return data;
+            dataCl["addressU"] = klientAdrJ;
+            dataCl["addressF"] = klientAdrF;
+            //Паспортные данные
+            client_paspdata client_pass = _db.client_paspdata.FirstOrDefault(f => f.kl_kod == pCl.kl_kod);
+            string clientPassData = " ";
+            if (client_pass != null)
+            {
+                if (0 == 0)
+                    clientPassData = client_pass.p_viddok + ": " + client_pass.p_srdok + client_pass.p_ndok + ", выдан " + client_pass.p_mvd
+                                     + " от " + parseDateTime("dd.MM.yyyy", client_pass.p_datev);
+                else
+                    clientPassData = client_pass.p_viddok + ": " + client_pass.p_srdok + client_pass.p_ndok + ", документти берген мекеме " + client_pass.p_mvd
+                                     + " берилген күнү " + parseDateTime("dd.MM.yyyy", client_pass.p_datev);
+            }
+            dataCl["passData"] = clientPassData;
+            return dataCl;
+        }
+
+
+        private string createReplaceString(List<SharedProperty> listShProp, string propKey, params string[] datas)
+        {
+            if (listShProp == null) return null;
+            SharedProperty sharedProp = listShProp.FirstOrDefault(shP => shP.Key.Equals(propKey));
+
+            if (sharedProp == null) return null;
+
+            string dataString = sharedProp.Value;
+            if (datas != null && (datas.Length % 2 == 0))
+            {
+                for (int i = 0; i < datas.Length - 1; i += 2)
+                {
+                    if (datas[i] != null && datas[i] != "")
+                        dataString = dataString.Replace(datas[i], datas[i + 1]);
+                }
+            }
+
+            return dataString;
+        }
+
+        private  string parseDateTime(string pattern, DateTime? dTime)
+        {
+            string txtDate = dTime == null || dTime.Value == null ? "" : dTime.Value.ToString(pattern);
+            return txtDate;
         }
 
         private List<DocumentCommand> createListGuarantee(Dictionary<string, object> data)
@@ -528,7 +621,7 @@ namespace TrafficWaveService.CreditApp
             fCommand.addTableData(tabData1);
             fCommand.addParagraphProperties(new ParagraphProperties
             {
-                Justification = new Justification { Val = JustificationValues.Center }
+                Justification = new Justification { Val = JustificationValues.Center },
             });
 
             cCommand2.addInnerCoomand(fCommand);

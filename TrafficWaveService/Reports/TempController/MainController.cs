@@ -132,7 +132,8 @@ namespace TrafficWaveService.Reports.TempController
                 fCommand.addTableData(tabData1);
                 fCommand.addParagraphProperties(new ParagraphProperties
                 {
-                    Justification = new Justification { Val = JustificationValues.Center }
+                    Justification = new Justification { Val = JustificationValues.Center },
+                    
                 });
 
                 cCommand2.addInnerCoomand(fCommand);

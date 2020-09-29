@@ -12,18 +12,10 @@ namespace TrafficWaveService
     using System;
     using System.Collections.Generic;
     
-    public partial class LoanContracts
+    public partial class SharedProperty
     {
-        public int DgPozn { get; set; }
-        public int KodKl { get; set; }
-        public System.DateTime Date { get; set; }
-        public string Name { get; set; }
+        public string Key { get; set; }
+        public string Value { get; set; }
         public string Description { get; set; }
-        public string Number { get; set; }
-        public string Decision { get; set; }
-        public Nullable<bool> CheckEarlyPayment { get; set; }
-        public Nullable<System.DateTime> DateFact { get; set; }
-    
-        public virtual clients clients { get; set; }
     }
 }

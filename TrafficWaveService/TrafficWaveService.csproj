@@ -301,6 +301,9 @@
     <Compile Include="Client\ClientNew.cs" />
     <Compile Include="Dictionaries\Departament.cs" />
     <Compile Include="Dictionaries\RuToLatin.cs" />
+    <Compile Include="dogkr.cs">
+      <DependentUpon>TrafficWaveModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ENUMERATOR_SPR.cs">
       <DependentUpon>TrafficWaveModel.tt</DependentUpon>
     </Compile>
@@ -394,6 +397,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="SharedProperty.cs">
+      <DependentUpon>TrafficWaveModel.tt</DependentUpon>
     </Compile>
     <Compile Include="spr.cs">
       <DependentUpon>TrafficWaveModel.tt</DependentUpon>

@@ -537,6 +537,8 @@
           <Property Name="Description" Type="varchar" MaxLength="250" />
           <Property Name="Number" Type="varchar" MaxLength="50" />
           <Property Name="Decision" Type="varchar" MaxLength="250" />
+          <Property Name="CheckEarlyPayment" Type="bit" />
+          <Property Name="DateFact" Type="datetime" />
         </EntityType>
         <EntityType Name="LoanCredits">
           <Key>
@@ -685,6 +687,14 @@
           <Property Name="Irr" Type="numeric" Precision="38" Scale="10" />
           <Property Name="AmortizationValue" Type="numeric" Precision="38" Scale="10" />
         </EntityType>
+        <EntityType Name="SharedProperty">
+          <Key>
+            <PropertyRef Name="Key" />
+          </Key>
+          <Property Name="Key" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Value" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="150" />
+        </EntityType>
         <EntityType Name="sprotv_k">
           <Key>
             <PropertyRef Name="OT_NOM" />
@@ -754,6 +764,182 @@
           <Property Name="DG_CreatorID" Type="smallint" />
           <Property Name="IsEmployee" Type="bit" />
           <Property Name="DgPoznOld" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "bankasiaNS.dbo.dogkr" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="dogkr">
+          <Key>
+            <PropertyRef Name="DG_POZN" />
+            <PropertyRef Name="DgPozn" />
+          </Key>
+          <Property Name="DG_POZN" Type="int" Nullable="false" />
+          <Property Name="DG_DATE" Type="smalldatetime" />
+          <Property Name="DG_DATE1" Type="smalldatetime" />
+          <Property Name="DG_DATE2" Type="smalldatetime" />
+          <Property Name="DG_DATEZ" Type="smalldatetime" />
+          <Property Name="DG_NOM" Type="varchar" MaxLength="50" />
+          <Property Name="DG_NAM" Type="varchar" MaxLength="80" />
+          <Property Name="DG_KODV" Type="char" MaxLength="3" />
+          <Property Name="DG_KODKL" Type="int" />
+          <Property Name="DG_KODKL_OLD" Type="int" />
+          <Property Name="DG_SUM" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="DG_SUM2" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="DG_VIDOB" Type="tinyint" />
+          <Property Name="DG_OPISOB" Type="varchar" MaxLength="250" />
+          <Property Name="DG_VIDZ" Type="tinyint" />
+          <Property Name="DG_SHKR" Type="smallint" />
+          <Property Name="DG_LC" Type="char" MaxLength="16" />
+          <Property Name="DG_LCD" Type="char" MaxLength="16" />
+          <Property Name="DG_LCPO" Type="char" MaxLength="16" />
+          <Property Name="DG_LCVS" Type="char" MaxLength="16" />
+          <Property Name="DG_LCRC" Type="char" MaxLength="16" />
+          <Property Name="DG_LCVSOC" Type="char" MaxLength="16" />
+          <Property Name="DG_CELKR" Type="int" />
+          <Property Name="DG_LCDEP" Type="char" MaxLength="16" />
+          <Property Name="DG_STAT" Type="int" />
+          <Property Name="DG_KL" Type="tinyint" />
+          <Property Name="DG_VIDKR" Type="tinyint" />
+          <Property Name="DG_STATUS" Type="int" />
+          <Property Name="DG_GRPROC" Type="tinyint" />
+          <Property Name="DG_KOM" Type="varchar" MaxLength="250" />
+          <Property Name="DG_KOM2" Type="varchar" MaxLength="80" />
+          <Property Name="DG_VDNOMP" Type="smallint" />
+          <Property Name="DG_PSTP" Type="decimal" Precision="10" Scale="6" />
+          <Property Name="DG_OTV" Type="smallint" />
+          <Property Name="DG_VDNOM" Type="smallint" />
+          <Property Name="DG_PLDAY" Type="tinyint" />
+          <Property Name="DG_PLFLPR1" Type="tinyint" />
+          <Property Name="data_zal" Type="datetime" />
+          <Property Name="nom_zal" Type="varchar" MaxLength="50" />
+          <Property Name="nom_dov" Type="varchar" MaxLength="50" />
+          <Property Name="data_dov" Type="datetime" />
+          <Property Name="data_por" Type="datetime" />
+          <Property Name="nom_por" Type="varchar" MaxLength="50" />
+          <Property Name="passp_z" Type="varchar" MaxLength="80" />
+          <Property Name="passp_p" Type="varchar" MaxLength="80" />
+          <Property Name="crok" Type="decimal" Precision="4" Scale="0" />
+          <Property Name="crok_do" Type="datetime" />
+          <Property Name="procent" Type="decimal" Precision="7" Scale="2" />
+          <Property Name="do_chislo" Type="decimal" Precision="4" Scale="0" />
+          <Property Name="shtraf" Type="decimal" Precision="7" Scale="2" />
+          <Property Name="comiss" Type="decimal" Precision="7" Scale="2" />
+          <Property Name="scomiss" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="adress_z" Type="varchar" MaxLength="80" />
+          <Property Name="adress_p" Type="varchar" MaxLength="80" />
+          <Property Name="passp_z1" Type="varchar" MaxLength="80" />
+          <Property Name="adress_z1" Type="varchar" MaxLength="80" />
+          <Property Name="zalog1" Type="varchar" MaxLength="500" />
+          <Property Name="zalog2" Type="varchar" MaxLength="500" />
+          <Property Name="raion" Type="varchar" MaxLength="50" />
+          <Property Name="zdatel" Type="varchar" MaxLength="50" />
+          <Property Name="c11" Type="bit" />
+          <Property Name="c12" Type="bit" />
+          <Property Name="c13" Type="bit" />
+          <Property Name="c21" Type="bit" />
+          <Property Name="c22" Type="bit" />
+          <Property Name="c23" Type="bit" />
+          <Property Name="c31" Type="bit" />
+          <Property Name="c32" Type="bit" />
+          <Property Name="c33" Type="bit" />
+          <Property Name="c41" Type="bit" />
+          <Property Name="c42" Type="bit" />
+          <Property Name="c43" Type="bit" />
+          <Property Name="mecto_rab" Type="varchar" MaxLength="100" />
+          <Property Name="oform_zal" Type="varchar" MaxLength="50" />
+          <Property Name="telef_z" Type="varchar" MaxLength="50" />
+          <Property Name="notar" Type="int" />
+          <Property Name="cotr" Type="int" />
+          <Property Name="mec1" Type="int" />
+          <Property Name="data1" Type="datetime" />
+          <Property Name="StatusRest1" Type="smallint" />
+          <Property Name="mec2" Type="int" />
+          <Property Name="data2" Type="datetime" />
+          <Property Name="StatusRest2" Type="smallint" />
+          <Property Name="mec3" Type="int" />
+          <Property Name="data3" Type="datetime" />
+          <Property Name="StatusRest3" Type="smallint" />
+          <Property Name="mec4" Type="int" />
+          <Property Name="data4" Type="datetime" />
+          <Property Name="StatusRest4" Type="smallint" />
+          <Property Name="mec5" Type="int" />
+          <Property Name="data5" Type="datetime" />
+          <Property Name="StatusRest5" Type="smallint" />
+          <Property Name="mec6" Type="int" />
+          <Property Name="data6" Type="datetime" />
+          <Property Name="StatusRest6" Type="smallint" />
+          <Property Name="mec7" Type="int" />
+          <Property Name="data7" Type="datetime" />
+          <Property Name="StatusRest7" Type="smallint" />
+          <Property Name="ost" Type="numeric" Precision="14" Scale="2" />
+          <Property Name="DG_CHECK" Type="int" />
+          <Property Name="pas_prop" Type="varchar" MaxLength="100" />
+          <Property Name="pas_proj" Type="varchar" MaxLength="100" />
+          <Property Name="poruch" Type="varchar" MaxLength="50" />
+          <Property Name="date_vn" Type="datetime" />
+          <Property Name="date_stop" Type="datetime" />
+          <Property Name="DG_CHECKU" Type="int" />
+          <Property Name="DG_STATUS1" Type="char" MaxLength="3" />
+          <Property Name="kodb" Type="smallint" />
+          <Property Name="kodc" Type="int" />
+          <Property Name="pr_old" Type="int" />
+          <Property Name="saldo_dox" Type="numeric" Precision="14" Scale="2" />
+          <Property Name="date_nenach" Type="datetime" />
+          <Property Name="sotr" Type="smallint" />
+          <Property Name="affil" Type="smallint" />
+          <Property Name="DG_OTV1" Type="smallint" />
+          <Property Name="poruch1" Type="varchar" MaxLength="50" />
+          <Property Name="passp_p1" Type="varchar" MaxLength="80" />
+          <Property Name="adress_p1" Type="varchar" MaxLength="80" />
+          <Property Name="adress_pf" Type="varchar" MaxLength="80" />
+          <Property Name="adress_p1f" Type="varchar" MaxLength="80" />
+          <Property Name="pr_kr" Type="smallint" />
+          <Property Name="DG_OLDLC" Type="char" MaxLength="16" />
+          <Property Name="DG_OLDLCpo" Type="char" MaxLength="16" />
+          <Property Name="DG_OLDLcVs" Type="int" />
+          <Property Name="eps" Type="decimal" Precision="10" Scale="5" />
+          <Property Name="rasof" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="naimgrup" Type="varchar" MaxLength="150" />
+          <Property Name="amortSt" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="eps_as" Type="decimal" Precision="10" Scale="5" />
+          <Property Name="combine" Type="int" />
+          <Property Name="ebrd" Type="tinyint" />
+          <Property Name="nbkr" Type="tinyint" />
+          <Property Name="dg_os" Type="tinyint" />
+          <Property Name="dg_obs" Type="tinyint" />
+          <Property Name="dg_sm" Type="tinyint" />
+          <Property Name="auction" Type="varchar" MaxLength="50" />
+          <Property Name="zalogen" Type="varchar" MaxLength="50" />
+          <Property Name="pozn_old" Type="int" />
+          <Property Name="DG_LCVB" Type="char" MaxLength="16" />
+          <Property Name="DG_LCVBK" Type="char" MaxLength="16" />
+          <Property Name="DG_LCVND" Type="char" MaxLength="16" />
+          <Property Name="DG_Class" Type="tinyint" />
+          <Property Name="DG_Product" Type="int" />
+          <Property Name="DG_FirstPayment" Type="numeric" Precision="10" Scale="2" />
+          <Property Name="DG_ID_Source" Type="tinyint" />
+          <Property Name="DG_ID_Creator" Type="smallint" />
+          <Property Name="InsuranceID" Type="int" />
+          <Property Name="DgIdLc" Type="int" />
+          <Property Name="DgIdLcPo" Type="int" />
+          <Property Name="DgIdLcVn" Type="int" />
+          <Property Name="DgIdLcD" Type="int" />
+          <Property Name="DgIdLcVSOC" Type="int" />
+          <Property Name="DgIdLcOld" Type="int" />
+          <Property Name="DgIdLcPoOld" Type="int" />
+          <Property Name="DgIdLcDOld" Type="int" />
+          <Property Name="DgIdLcVSOCOld" Type="int" />
+          <Property Name="DgIdLcVB" Type="int" />
+          <Property Name="DgIdLcVK" Type="int" />
+          <Property Name="DgIdLcVND" Type="int" />
+          <Property Name="DgPozn" Type="int" Nullable="false" />
+          <Property Name="kl_rchp" Type="bit" />
+          <Property Name="kl_rip" Type="bit" />
+          <Property Name="LC_VNFineOnMS" Type="int" />
+          <Property Name="LC_VNFineOnPercents" Type="int" />
+          <Property Name="LcVnShtrafMs" Type="varchar" MaxLength="16" />
+          <Property Name="LcVnShtrafPercents" Type="varchar" MaxLength="16" />
+          <Property Name="MlLcNsp" Type="varchar" MaxLength="16" />
+          <Property Name="MlLcVnNsp" Type="varchar" MaxLength="16" />
         </EntityType>
         <Association Name="FK__client_ri__CR_KL__58360A52">
           <End Role="clients" Type="Self.clients" Multiplicity="0..1" />
@@ -1103,6 +1289,7 @@
           <EntitySet Name="LoanIncomeKodv" EntityType="Self.LoanIncomeKodv" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoanIssue" EntityType="Self.LoanIssue" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoanPercent" EntityType="Self.LoanPercent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SharedProperty" EntityType="Self.SharedProperty" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sprotv_k" EntityType="Self.sprotv_k" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="vGuarantee" EntityType="Self.vGuarantee" store:Type="Views" store:Schema="bankadm">
             <DefiningQuery>SELECT 
@@ -1144,6 +1331,178 @@
     [vLoanContract].[IsEmployee] AS [IsEmployee], 
     [vLoanContract].[DgPoznOld] AS [DgPoznOld]
     FROM [bankadm].[vLoanContract] AS [vLoanContract]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="dogkr" EntityType="Self.dogkr" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [dogkr].[DG_POZN] AS [DG_POZN], 
+    [dogkr].[DG_DATE] AS [DG_DATE], 
+    [dogkr].[DG_DATE1] AS [DG_DATE1], 
+    [dogkr].[DG_DATE2] AS [DG_DATE2], 
+    [dogkr].[DG_DATEZ] AS [DG_DATEZ], 
+    [dogkr].[DG_NOM] AS [DG_NOM], 
+    [dogkr].[DG_NAM] AS [DG_NAM], 
+    [dogkr].[DG_KODV] AS [DG_KODV], 
+    [dogkr].[DG_KODKL] AS [DG_KODKL], 
+    [dogkr].[DG_KODKL_OLD] AS [DG_KODKL_OLD], 
+    [dogkr].[DG_SUM] AS [DG_SUM], 
+    [dogkr].[DG_SUM2] AS [DG_SUM2], 
+    [dogkr].[DG_VIDOB] AS [DG_VIDOB], 
+    [dogkr].[DG_OPISOB] AS [DG_OPISOB], 
+    [dogkr].[DG_VIDZ] AS [DG_VIDZ], 
+    [dogkr].[DG_SHKR] AS [DG_SHKR], 
+    [dogkr].[DG_LC] AS [DG_LC], 
+    [dogkr].[DG_LCD] AS [DG_LCD], 
+    [dogkr].[DG_LCPO] AS [DG_LCPO], 
+    [dogkr].[DG_LCVS] AS [DG_LCVS], 
+    [dogkr].[DG_LCRC] AS [DG_LCRC], 
+    [dogkr].[DG_LCVSOC] AS [DG_LCVSOC], 
+    [dogkr].[DG_CELKR] AS [DG_CELKR], 
+    [dogkr].[DG_LCDEP] AS [DG_LCDEP], 
+    [dogkr].[DG_STAT] AS [DG_STAT], 
+    [dogkr].[DG_KL] AS [DG_KL], 
+    [dogkr].[DG_VIDKR] AS [DG_VIDKR], 
+    [dogkr].[DG_STATUS] AS [DG_STATUS], 
+    [dogkr].[DG_GRPROC] AS [DG_GRPROC], 
+    [dogkr].[DG_KOM] AS [DG_KOM], 
+    [dogkr].[DG_KOM2] AS [DG_KOM2], 
+    [dogkr].[DG_VDNOMP] AS [DG_VDNOMP], 
+    [dogkr].[DG_PSTP] AS [DG_PSTP], 
+    [dogkr].[DG_OTV] AS [DG_OTV], 
+    [dogkr].[DG_VDNOM] AS [DG_VDNOM], 
+    [dogkr].[DG_PLDAY] AS [DG_PLDAY], 
+    [dogkr].[DG_PLFLPR1] AS [DG_PLFLPR1], 
+    [dogkr].[data_zal] AS [data_zal], 
+    [dogkr].[nom_zal] AS [nom_zal], 
+    [dogkr].[nom_dov] AS [nom_dov], 
+    [dogkr].[data_dov] AS [data_dov], 
+    [dogkr].[data_por] AS [data_por], 
+    [dogkr].[nom_por] AS [nom_por], 
+    [dogkr].[passp_z] AS [passp_z], 
+    [dogkr].[passp_p] AS [passp_p], 
+    [dogkr].[crok] AS [crok], 
+    [dogkr].[crok_do] AS [crok_do], 
+    [dogkr].[procent] AS [procent], 
+    [dogkr].[do_chislo] AS [do_chislo], 
+    [dogkr].[shtraf] AS [shtraf], 
+    [dogkr].[comiss] AS [comiss], 
+    [dogkr].[scomiss] AS [scomiss], 
+    [dogkr].[adress_z] AS [adress_z], 
+    [dogkr].[adress_p] AS [adress_p], 
+    [dogkr].[passp_z1] AS [passp_z1], 
+    [dogkr].[adress_z1] AS [adress_z1], 
+    [dogkr].[zalog1] AS [zalog1], 
+    [dogkr].[zalog2] AS [zalog2], 
+    [dogkr].[raion] AS [raion], 
+    [dogkr].[zdatel] AS [zdatel], 
+    [dogkr].[c11] AS [c11], 
+    [dogkr].[c12] AS [c12], 
+    [dogkr].[c13] AS [c13], 
+    [dogkr].[c21] AS [c21], 
+    [dogkr].[c22] AS [c22], 
+    [dogkr].[c23] AS [c23], 
+    [dogkr].[c31] AS [c31], 
+    [dogkr].[c32] AS [c32], 
+    [dogkr].[c33] AS [c33], 
+    [dogkr].[c41] AS [c41], 
+    [dogkr].[c42] AS [c42], 
+    [dogkr].[c43] AS [c43], 
+    [dogkr].[mecto_rab] AS [mecto_rab], 
+    [dogkr].[oform_zal] AS [oform_zal], 
+    [dogkr].[telef_z] AS [telef_z], 
+    [dogkr].[notar] AS [notar], 
+    [dogkr].[cotr] AS [cotr], 
+    [dogkr].[mec1] AS [mec1], 
+    [dogkr].[data1] AS [data1], 
+    [dogkr].[StatusRest1] AS [StatusRest1], 
+    [dogkr].[mec2] AS [mec2], 
+    [dogkr].[data2] AS [data2], 
+    [dogkr].[StatusRest2] AS [StatusRest2], 
+    [dogkr].[mec3] AS [mec3], 
+    [dogkr].[data3] AS [data3], 
+    [dogkr].[StatusRest3] AS [StatusRest3], 
+    [dogkr].[mec4] AS [mec4], 
+    [dogkr].[data4] AS [data4], 
+    [dogkr].[StatusRest4] AS [StatusRest4], 
+    [dogkr].[mec5] AS [mec5], 
+    [dogkr].[data5] AS [data5], 
+    [dogkr].[StatusRest5] AS [StatusRest5], 
+    [dogkr].[mec6] AS [mec6], 
+    [dogkr].[data6] AS [data6], 
+    [dogkr].[StatusRest6] AS [StatusRest6], 
+    [dogkr].[mec7] AS [mec7], 
+    [dogkr].[data7] AS [data7], 
+    [dogkr].[StatusRest7] AS [StatusRest7], 
+    [dogkr].[ost] AS [ost], 
+    [dogkr].[DG_CHECK] AS [DG_CHECK], 
+    [dogkr].[pas_prop] AS [pas_prop], 
+    [dogkr].[pas_proj] AS [pas_proj], 
+    [dogkr].[poruch] AS [poruch], 
+    [dogkr].[date_vn] AS [date_vn], 
+    [dogkr].[date_stop] AS [date_stop], 
+    [dogkr].[DG_CHECKU] AS [DG_CHECKU], 
+    [dogkr].[DG_STATUS1] AS [DG_STATUS1], 
+    [dogkr].[kodb] AS [kodb], 
+    [dogkr].[kodc] AS [kodc], 
+    [dogkr].[pr_old] AS [pr_old], 
+    [dogkr].[saldo_dox] AS [saldo_dox], 
+    [dogkr].[date_nenach] AS [date_nenach], 
+    [dogkr].[sotr] AS [sotr], 
+    [dogkr].[affil] AS [affil], 
+    [dogkr].[DG_OTV1] AS [DG_OTV1], 
+    [dogkr].[poruch1] AS [poruch1], 
+    [dogkr].[passp_p1] AS [passp_p1], 
+    [dogkr].[adress_p1] AS [adress_p1], 
+    [dogkr].[adress_pf] AS [adress_pf], 
+    [dogkr].[adress_p1f] AS [adress_p1f], 
+    [dogkr].[pr_kr] AS [pr_kr], 
+    [dogkr].[DG_OLDLC] AS [DG_OLDLC], 
+    [dogkr].[DG_OLDLCpo] AS [DG_OLDLCpo], 
+    [dogkr].[DG_OLDLcVs] AS [DG_OLDLcVs], 
+    [dogkr].[eps] AS [eps], 
+    [dogkr].[rasof] AS [rasof], 
+    [dogkr].[naimgrup] AS [naimgrup], 
+    [dogkr].[amortSt] AS [amortSt], 
+    [dogkr].[eps_as] AS [eps_as], 
+    [dogkr].[combine] AS [combine], 
+    [dogkr].[ebrd] AS [ebrd], 
+    [dogkr].[nbkr] AS [nbkr], 
+    [dogkr].[dg_os] AS [dg_os], 
+    [dogkr].[dg_obs] AS [dg_obs], 
+    [dogkr].[dg_sm] AS [dg_sm], 
+    [dogkr].[auction] AS [auction], 
+    [dogkr].[zalogen] AS [zalogen], 
+    [dogkr].[pozn_old] AS [pozn_old], 
+    [dogkr].[DG_LCVB] AS [DG_LCVB], 
+    [dogkr].[DG_LCVBK] AS [DG_LCVBK], 
+    [dogkr].[DG_LCVND] AS [DG_LCVND], 
+    [dogkr].[DG_Class] AS [DG_Class], 
+    [dogkr].[DG_Product] AS [DG_Product], 
+    [dogkr].[DG_FirstPayment] AS [DG_FirstPayment], 
+    [dogkr].[DG_ID_Source] AS [DG_ID_Source], 
+    [dogkr].[DG_ID_Creator] AS [DG_ID_Creator], 
+    [dogkr].[InsuranceID] AS [InsuranceID], 
+    [dogkr].[DgIdLc] AS [DgIdLc], 
+    [dogkr].[DgIdLcPo] AS [DgIdLcPo], 
+    [dogkr].[DgIdLcVn] AS [DgIdLcVn], 
+    [dogkr].[DgIdLcD] AS [DgIdLcD], 
+    [dogkr].[DgIdLcVSOC] AS [DgIdLcVSOC], 
+    [dogkr].[DgIdLcOld] AS [DgIdLcOld], 
+    [dogkr].[DgIdLcPoOld] AS [DgIdLcPoOld], 
+    [dogkr].[DgIdLcDOld] AS [DgIdLcDOld], 
+    [dogkr].[DgIdLcVSOCOld] AS [DgIdLcVSOCOld], 
+    [dogkr].[DgIdLcVB] AS [DgIdLcVB], 
+    [dogkr].[DgIdLcVK] AS [DgIdLcVK], 
+    [dogkr].[DgIdLcVND] AS [DgIdLcVND], 
+    [dogkr].[DgPozn] AS [DgPozn], 
+    [dogkr].[kl_rchp] AS [kl_rchp], 
+    [dogkr].[kl_rip] AS [kl_rip], 
+    [dogkr].[LC_VNFineOnMS] AS [LC_VNFineOnMS], 
+    [dogkr].[LC_VNFineOnPercents] AS [LC_VNFineOnPercents], 
+    [dogkr].[LcVnShtrafMs] AS [LcVnShtrafMs], 
+    [dogkr].[LcVnShtrafPercents] AS [LcVnShtrafPercents], 
+    [dogkr].[MlLcNsp] AS [MlLcNsp], 
+    [dogkr].[MlLcVnNsp] AS [MlLcVnNsp]
+    FROM [dbo].[dogkr] AS [dogkr]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK__client_ri__CR_KL__58360A52" Association="Self.FK__client_ri__CR_KL__58360A52">
             <End Role="clients" EntitySet="clients" />
@@ -1423,6 +1782,8 @@
             <End Role="clients" EntitySet="clients" />
             <End Role="LoanIncomeKodv" EntitySet="LoanIncomeKodv" />
           </AssociationSet>
+          <EntitySet Name="SharedProperty" EntityType="bankasiaNSModel.SharedProperty" />
+          <EntitySet Name="dogkr" EntityType="bankasiaNSModel.dogkr" />
         </EntityContainer>
         <ComplexType Name="SearchReg_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -1835,6 +2196,8 @@
           <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Decision" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="clients" Relationship="bankasiaNSModel.FK__LoanContr__KodKl__01816D51" FromRole="LoanContracts" ToRole="clients" />
+          <Property Name="CheckEarlyPayment" Type="Boolean" />
+          <Property Name="DateFact" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="LoanCredits">
           <Key>
@@ -2453,6 +2816,188 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="SharedProperty">
+          <Key>
+            <PropertyRef Name="Key" />
+          </Key>
+          <Property Name="Key" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dogkr">
+          <Key>
+            <PropertyRef Name="DG_POZN" />
+            <PropertyRef Name="DgPozn" />
+          </Key>
+          <Property Name="DG_POZN" Type="Int32" Nullable="false" />
+          <Property Name="DG_DATE" Type="DateTime" Precision="0" />
+          <Property Name="DG_DATE1" Type="DateTime" Precision="0" />
+          <Property Name="DG_DATE2" Type="DateTime" Precision="0" />
+          <Property Name="DG_DATEZ" Type="DateTime" Precision="0" />
+          <Property Name="DG_NOM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DG_NAM" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="DG_KODV" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="DG_KODKL" Type="Int32" />
+          <Property Name="DG_KODKL_OLD" Type="Int32" />
+          <Property Name="DG_SUM" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="DG_SUM2" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="DG_VIDOB" Type="Byte" />
+          <Property Name="DG_OPISOB" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="DG_VIDZ" Type="Byte" />
+          <Property Name="DG_SHKR" Type="Int16" />
+          <Property Name="DG_LC" Type="String" MaxLength="16" FixedLength="true" Unicode="false" />
+          <Property Name="DG_LCD" Type="String" MaxLength="16" FixedLength="true" Unicode="false" />
+          <Property Name="DG_LCPO" Type="String" MaxLength="16" FixedLength="true" Unicode="false" />
+          <Property Name="DG_LCVS" Type="String" MaxLength="16" FixedLength="true" Unicode="false" />
+          <Property Name="DG_LCRC" Type="String" MaxLength="16" FixedLength="true" Unicode="false" />
+          <Property Name="DG_LCVSOC" Type="String" MaxLength="16" FixedLength="true" Unicode="false" />
+          <Property Name="DG_CELKR" Type="Int32" />
+          <Property Name="DG_LCDEP" Type="String" MaxLength="16" FixedLength="true" Unicode="false" />
+          <Property Name="DG_STAT" Type="Int32" />
+          <Property Name="DG_KL" Type="Byte" />
+          <Property Name="DG_VIDKR" Type="Byte" />
+          <Property Name="DG_STATUS" Type="Int32" />
+          <Property Name="DG_GRPROC" Type="Byte" />
+          <Property Name="DG_KOM" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="DG_KOM2" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="DG_VDNOMP" Type="Int16" />
+          <Property Name="DG_PSTP" Type="Decimal" Precision="10" Scale="6" />
+          <Property Name="DG_OTV" Type="Int16" />
+          <Property Name="DG_VDNOM" Type="Int16" />
+          <Property Name="DG_PLDAY" Type="Byte" />
+          <Property Name="DG_PLFLPR1" Type="Byte" />
+          <Property Name="data_zal" Type="DateTime" Precision="3" />
+          <Property Name="nom_zal" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nom_dov" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="data_dov" Type="DateTime" Precision="3" />
+          <Property Name="data_por" Type="DateTime" Precision="3" />
+          <Property Name="nom_por" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="passp_z" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="passp_p" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="crok" Type="Decimal" Precision="4" Scale="0" />
+          <Property Name="crok_do" Type="DateTime" Precision="3" />
+          <Property Name="procent" Type="Decimal" Precision="7" Scale="2" />
+          <Property Name="do_chislo" Type="Decimal" Precision="4" Scale="0" />
+          <Property Name="shtraf" Type="Decimal" Precision="7" Scale="2" />
+          <Property Name="comiss" Type="Decimal" Precision="7" Scale="2" />
+          <Property Name="scomiss" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="adress_z" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="adress_p" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="passp_z1" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="adress_z1" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="zalog1" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="zalog2" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="raion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="zdatel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="c11" Type="Boolean" />
+          <Property Name="c12" Type="Boolean" />
+          <Property Name="c13" Type="Boolean" />
+          <Property Name="c21" Type="Boolean" />
+          <Property Name="c22" Type="Boolean" />
+          <Property Name="c23" Type="Boolean" />
+          <Property Name="c31" Type="Boolean" />
+          <Property Name="c32" Type="Boolean" />
+          <Property Name="c33" Type="Boolean" />
+          <Property Name="c41" Type="Boolean" />
+          <Property Name="c42" Type="Boolean" />
+          <Property Name="c43" Type="Boolean" />
+          <Property Name="mecto_rab" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="oform_zal" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="telef_z" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="notar" Type="Int32" />
+          <Property Name="cotr" Type="Int32" />
+          <Property Name="mec1" Type="Int32" />
+          <Property Name="data1" Type="DateTime" Precision="3" />
+          <Property Name="StatusRest1" Type="Int16" />
+          <Property Name="mec2" Type="Int32" />
+          <Property Name="data2" Type="DateTime" Precision="3" />
+          <Property Name="StatusRest2" Type="Int16" />
+          <Property Name="mec3" Type="Int32" />
+          <Property Name="data3" Type="DateTime" Precision="3" />
+          <Property Name="StatusRest3" Type="Int16" />
+          <Property Name="mec4" Type="Int32" />
+          <Property Name="data4" Type="DateTime" Precision="3" />
+          <Property Name="StatusRest4" Type="Int16" />
+          <Property Name="mec5" Type="Int32" />
+          <Property Name="data5" Type="DateTime" Precision="3" />
+          <Property Name="StatusRest5" Type="Int16" />
+          <Property Name="mec6" Type="Int32" />
+          <Property Name="data6" Type="DateTime" Precision="3" />
+          <Property Name="StatusRest6" Type="Int16" />
+          <Property Name="mec7" Type="Int32" />
+          <Property Name="data7" Type="DateTime" Precision="3" />
+          <Property Name="StatusRest7" Type="Int16" />
+          <Property Name="ost" Type="Decimal" Precision="14" Scale="2" />
+          <Property Name="DG_CHECK" Type="Int32" />
+          <Property Name="pas_prop" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pas_proj" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="poruch" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="date_vn" Type="DateTime" Precision="3" />
+          <Property Name="date_stop" Type="DateTime" Precision="3" />
+          <Property Name="DG_CHECKU" Type="Int32" />
+          <Property Name="DG_STATUS1" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="kodb" Type="Int16" />
+          <Property Name="kodc" Type="Int32" />
+          <Property Name="pr_old" Type="Int32" />
+          <Property Name="saldo_dox" Type="Decimal" Precision="14" Scale="2" />
+          <Property Name="date_nenach" Type="DateTime" Precision="3" />
+          <Property Name="sotr" Type="Int16" />
+          <Property Name="affil" Type="Int16" />
+          <Property Name="DG_OTV1" Type="Int16" />
+          <Property Name="poruch1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="passp_p1" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="adress_p1" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="adress_pf" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="adress_p1f" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="pr_kr" Type="Int16" />
+          <Property Name="DG_OLDLC" Type="String" MaxLength="16" FixedLength="true" Unicode="false" />
+          <Property Name="DG_OLDLCpo" Type="String" MaxLength="16" FixedLength="true" Unicode="false" />
+          <Property Name="DG_OLDLcVs" Type="Int32" />
+          <Property Name="eps" Type="Decimal" Precision="10" Scale="5" />
+          <Property Name="rasof" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="naimgrup" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="amortSt" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="eps_as" Type="Decimal" Precision="10" Scale="5" />
+          <Property Name="combine" Type="Int32" />
+          <Property Name="ebrd" Type="Byte" />
+          <Property Name="nbkr" Type="Byte" />
+          <Property Name="dg_os" Type="Byte" />
+          <Property Name="dg_obs" Type="Byte" />
+          <Property Name="dg_sm" Type="Byte" />
+          <Property Name="auction" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="zalogen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pozn_old" Type="Int32" />
+          <Property Name="DG_LCVB" Type="String" MaxLength="16" FixedLength="true" Unicode="false" />
+          <Property Name="DG_LCVBK" Type="String" MaxLength="16" FixedLength="true" Unicode="false" />
+          <Property Name="DG_LCVND" Type="String" MaxLength="16" FixedLength="true" Unicode="false" />
+          <Property Name="DG_Class" Type="Byte" />
+          <Property Name="DG_Product" Type="Int32" />
+          <Property Name="DG_FirstPayment" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="DG_ID_Source" Type="Byte" />
+          <Property Name="DG_ID_Creator" Type="Int16" />
+          <Property Name="InsuranceID" Type="Int32" />
+          <Property Name="DgIdLc" Type="Int32" />
+          <Property Name="DgIdLcPo" Type="Int32" />
+          <Property Name="DgIdLcVn" Type="Int32" />
+          <Property Name="DgIdLcD" Type="Int32" />
+          <Property Name="DgIdLcVSOC" Type="Int32" />
+          <Property Name="DgIdLcOld" Type="Int32" />
+          <Property Name="DgIdLcPoOld" Type="Int32" />
+          <Property Name="DgIdLcDOld" Type="Int32" />
+          <Property Name="DgIdLcVSOCOld" Type="Int32" />
+          <Property Name="DgIdLcVB" Type="Int32" />
+          <Property Name="DgIdLcVK" Type="Int32" />
+          <Property Name="DgIdLcVND" Type="Int32" />
+          <Property Name="DgPozn" Type="Int32" Nullable="false" />
+          <Property Name="kl_rchp" Type="Boolean" />
+          <Property Name="kl_rip" Type="Boolean" />
+          <Property Name="LC_VNFineOnMS" Type="Int32" />
+          <Property Name="LC_VNFineOnPercents" Type="Int32" />
+          <Property Name="LcVnShtrafMs" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="LcVnShtrafPercents" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="MlLcNsp" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="MlLcVnNsp" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2806,6 +3351,8 @@
           <EntitySetMapping Name="LoanContracts">
             <EntityTypeMapping TypeName="bankasiaNSModel.LoanContracts">
               <MappingFragment StoreEntitySet="LoanContracts">
+                <ScalarProperty Name="DateFact" ColumnName="DateFact" />
+                <ScalarProperty Name="CheckEarlyPayment" ColumnName="CheckEarlyPayment" />
                 <ScalarProperty Name="Decision" ColumnName="Decision" />
                 <ScalarProperty Name="Number" ColumnName="Number" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -3235,6 +3782,189 @@
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="KodKl" ColumnName="KodKl" />
                 <ScalarProperty Name="DgPozn" ColumnName="DgPozn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SharedProperty">
+            <EntityTypeMapping TypeName="bankasiaNSModel.SharedProperty">
+              <MappingFragment StoreEntitySet="SharedProperty">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dogkr">
+            <EntityTypeMapping TypeName="bankasiaNSModel.dogkr">
+              <MappingFragment StoreEntitySet="dogkr">
+                <ScalarProperty Name="MlLcVnNsp" ColumnName="MlLcVnNsp" />
+                <ScalarProperty Name="MlLcNsp" ColumnName="MlLcNsp" />
+                <ScalarProperty Name="LcVnShtrafPercents" ColumnName="LcVnShtrafPercents" />
+                <ScalarProperty Name="LcVnShtrafMs" ColumnName="LcVnShtrafMs" />
+                <ScalarProperty Name="LC_VNFineOnPercents" ColumnName="LC_VNFineOnPercents" />
+                <ScalarProperty Name="LC_VNFineOnMS" ColumnName="LC_VNFineOnMS" />
+                <ScalarProperty Name="kl_rip" ColumnName="kl_rip" />
+                <ScalarProperty Name="kl_rchp" ColumnName="kl_rchp" />
+                <ScalarProperty Name="DgPozn" ColumnName="DgPozn" />
+                <ScalarProperty Name="DgIdLcVND" ColumnName="DgIdLcVND" />
+                <ScalarProperty Name="DgIdLcVK" ColumnName="DgIdLcVK" />
+                <ScalarProperty Name="DgIdLcVB" ColumnName="DgIdLcVB" />
+                <ScalarProperty Name="DgIdLcVSOCOld" ColumnName="DgIdLcVSOCOld" />
+                <ScalarProperty Name="DgIdLcDOld" ColumnName="DgIdLcDOld" />
+                <ScalarProperty Name="DgIdLcPoOld" ColumnName="DgIdLcPoOld" />
+                <ScalarProperty Name="DgIdLcOld" ColumnName="DgIdLcOld" />
+                <ScalarProperty Name="DgIdLcVSOC" ColumnName="DgIdLcVSOC" />
+                <ScalarProperty Name="DgIdLcD" ColumnName="DgIdLcD" />
+                <ScalarProperty Name="DgIdLcVn" ColumnName="DgIdLcVn" />
+                <ScalarProperty Name="DgIdLcPo" ColumnName="DgIdLcPo" />
+                <ScalarProperty Name="DgIdLc" ColumnName="DgIdLc" />
+                <ScalarProperty Name="InsuranceID" ColumnName="InsuranceID" />
+                <ScalarProperty Name="DG_ID_Creator" ColumnName="DG_ID_Creator" />
+                <ScalarProperty Name="DG_ID_Source" ColumnName="DG_ID_Source" />
+                <ScalarProperty Name="DG_FirstPayment" ColumnName="DG_FirstPayment" />
+                <ScalarProperty Name="DG_Product" ColumnName="DG_Product" />
+                <ScalarProperty Name="DG_Class" ColumnName="DG_Class" />
+                <ScalarProperty Name="DG_LCVND" ColumnName="DG_LCVND" />
+                <ScalarProperty Name="DG_LCVBK" ColumnName="DG_LCVBK" />
+                <ScalarProperty Name="DG_LCVB" ColumnName="DG_LCVB" />
+                <ScalarProperty Name="pozn_old" ColumnName="pozn_old" />
+                <ScalarProperty Name="zalogen" ColumnName="zalogen" />
+                <ScalarProperty Name="auction" ColumnName="auction" />
+                <ScalarProperty Name="dg_sm" ColumnName="dg_sm" />
+                <ScalarProperty Name="dg_obs" ColumnName="dg_obs" />
+                <ScalarProperty Name="dg_os" ColumnName="dg_os" />
+                <ScalarProperty Name="nbkr" ColumnName="nbkr" />
+                <ScalarProperty Name="ebrd" ColumnName="ebrd" />
+                <ScalarProperty Name="combine" ColumnName="combine" />
+                <ScalarProperty Name="eps_as" ColumnName="eps_as" />
+                <ScalarProperty Name="amortSt" ColumnName="amortSt" />
+                <ScalarProperty Name="naimgrup" ColumnName="naimgrup" />
+                <ScalarProperty Name="rasof" ColumnName="rasof" />
+                <ScalarProperty Name="eps" ColumnName="eps" />
+                <ScalarProperty Name="DG_OLDLcVs" ColumnName="DG_OLDLcVs" />
+                <ScalarProperty Name="DG_OLDLCpo" ColumnName="DG_OLDLCpo" />
+                <ScalarProperty Name="DG_OLDLC" ColumnName="DG_OLDLC" />
+                <ScalarProperty Name="pr_kr" ColumnName="pr_kr" />
+                <ScalarProperty Name="adress_p1f" ColumnName="adress_p1f" />
+                <ScalarProperty Name="adress_pf" ColumnName="adress_pf" />
+                <ScalarProperty Name="adress_p1" ColumnName="adress_p1" />
+                <ScalarProperty Name="passp_p1" ColumnName="passp_p1" />
+                <ScalarProperty Name="poruch1" ColumnName="poruch1" />
+                <ScalarProperty Name="DG_OTV1" ColumnName="DG_OTV1" />
+                <ScalarProperty Name="affil" ColumnName="affil" />
+                <ScalarProperty Name="sotr" ColumnName="sotr" />
+                <ScalarProperty Name="date_nenach" ColumnName="date_nenach" />
+                <ScalarProperty Name="saldo_dox" ColumnName="saldo_dox" />
+                <ScalarProperty Name="pr_old" ColumnName="pr_old" />
+                <ScalarProperty Name="kodc" ColumnName="kodc" />
+                <ScalarProperty Name="kodb" ColumnName="kodb" />
+                <ScalarProperty Name="DG_STATUS1" ColumnName="DG_STATUS1" />
+                <ScalarProperty Name="DG_CHECKU" ColumnName="DG_CHECKU" />
+                <ScalarProperty Name="date_stop" ColumnName="date_stop" />
+                <ScalarProperty Name="date_vn" ColumnName="date_vn" />
+                <ScalarProperty Name="poruch" ColumnName="poruch" />
+                <ScalarProperty Name="pas_proj" ColumnName="pas_proj" />
+                <ScalarProperty Name="pas_prop" ColumnName="pas_prop" />
+                <ScalarProperty Name="DG_CHECK" ColumnName="DG_CHECK" />
+                <ScalarProperty Name="ost" ColumnName="ost" />
+                <ScalarProperty Name="StatusRest7" ColumnName="StatusRest7" />
+                <ScalarProperty Name="data7" ColumnName="data7" />
+                <ScalarProperty Name="mec7" ColumnName="mec7" />
+                <ScalarProperty Name="StatusRest6" ColumnName="StatusRest6" />
+                <ScalarProperty Name="data6" ColumnName="data6" />
+                <ScalarProperty Name="mec6" ColumnName="mec6" />
+                <ScalarProperty Name="StatusRest5" ColumnName="StatusRest5" />
+                <ScalarProperty Name="data5" ColumnName="data5" />
+                <ScalarProperty Name="mec5" ColumnName="mec5" />
+                <ScalarProperty Name="StatusRest4" ColumnName="StatusRest4" />
+                <ScalarProperty Name="data4" ColumnName="data4" />
+                <ScalarProperty Name="mec4" ColumnName="mec4" />
+                <ScalarProperty Name="StatusRest3" ColumnName="StatusRest3" />
+                <ScalarProperty Name="data3" ColumnName="data3" />
+                <ScalarProperty Name="mec3" ColumnName="mec3" />
+                <ScalarProperty Name="StatusRest2" ColumnName="StatusRest2" />
+                <ScalarProperty Name="data2" ColumnName="data2" />
+                <ScalarProperty Name="mec2" ColumnName="mec2" />
+                <ScalarProperty Name="StatusRest1" ColumnName="StatusRest1" />
+                <ScalarProperty Name="data1" ColumnName="data1" />
+                <ScalarProperty Name="mec1" ColumnName="mec1" />
+                <ScalarProperty Name="cotr" ColumnName="cotr" />
+                <ScalarProperty Name="notar" ColumnName="notar" />
+                <ScalarProperty Name="telef_z" ColumnName="telef_z" />
+                <ScalarProperty Name="oform_zal" ColumnName="oform_zal" />
+                <ScalarProperty Name="mecto_rab" ColumnName="mecto_rab" />
+                <ScalarProperty Name="c43" ColumnName="c43" />
+                <ScalarProperty Name="c42" ColumnName="c42" />
+                <ScalarProperty Name="c41" ColumnName="c41" />
+                <ScalarProperty Name="c33" ColumnName="c33" />
+                <ScalarProperty Name="c32" ColumnName="c32" />
+                <ScalarProperty Name="c31" ColumnName="c31" />
+                <ScalarProperty Name="c23" ColumnName="c23" />
+                <ScalarProperty Name="c22" ColumnName="c22" />
+                <ScalarProperty Name="c21" ColumnName="c21" />
+                <ScalarProperty Name="c13" ColumnName="c13" />
+                <ScalarProperty Name="c12" ColumnName="c12" />
+                <ScalarProperty Name="c11" ColumnName="c11" />
+                <ScalarProperty Name="zdatel" ColumnName="zdatel" />
+                <ScalarProperty Name="raion" ColumnName="raion" />
+                <ScalarProperty Name="zalog2" ColumnName="zalog2" />
+                <ScalarProperty Name="zalog1" ColumnName="zalog1" />
+                <ScalarProperty Name="adress_z1" ColumnName="adress_z1" />
+                <ScalarProperty Name="passp_z1" ColumnName="passp_z1" />
+                <ScalarProperty Name="adress_p" ColumnName="adress_p" />
+                <ScalarProperty Name="adress_z" ColumnName="adress_z" />
+                <ScalarProperty Name="scomiss" ColumnName="scomiss" />
+                <ScalarProperty Name="comiss" ColumnName="comiss" />
+                <ScalarProperty Name="shtraf" ColumnName="shtraf" />
+                <ScalarProperty Name="do_chislo" ColumnName="do_chislo" />
+                <ScalarProperty Name="procent" ColumnName="procent" />
+                <ScalarProperty Name="crok_do" ColumnName="crok_do" />
+                <ScalarProperty Name="crok" ColumnName="crok" />
+                <ScalarProperty Name="passp_p" ColumnName="passp_p" />
+                <ScalarProperty Name="passp_z" ColumnName="passp_z" />
+                <ScalarProperty Name="nom_por" ColumnName="nom_por" />
+                <ScalarProperty Name="data_por" ColumnName="data_por" />
+                <ScalarProperty Name="data_dov" ColumnName="data_dov" />
+                <ScalarProperty Name="nom_dov" ColumnName="nom_dov" />
+                <ScalarProperty Name="nom_zal" ColumnName="nom_zal" />
+                <ScalarProperty Name="data_zal" ColumnName="data_zal" />
+                <ScalarProperty Name="DG_PLFLPR1" ColumnName="DG_PLFLPR1" />
+                <ScalarProperty Name="DG_PLDAY" ColumnName="DG_PLDAY" />
+                <ScalarProperty Name="DG_VDNOM" ColumnName="DG_VDNOM" />
+                <ScalarProperty Name="DG_OTV" ColumnName="DG_OTV" />
+                <ScalarProperty Name="DG_PSTP" ColumnName="DG_PSTP" />
+                <ScalarProperty Name="DG_VDNOMP" ColumnName="DG_VDNOMP" />
+                <ScalarProperty Name="DG_KOM2" ColumnName="DG_KOM2" />
+                <ScalarProperty Name="DG_KOM" ColumnName="DG_KOM" />
+                <ScalarProperty Name="DG_GRPROC" ColumnName="DG_GRPROC" />
+                <ScalarProperty Name="DG_STATUS" ColumnName="DG_STATUS" />
+                <ScalarProperty Name="DG_VIDKR" ColumnName="DG_VIDKR" />
+                <ScalarProperty Name="DG_KL" ColumnName="DG_KL" />
+                <ScalarProperty Name="DG_STAT" ColumnName="DG_STAT" />
+                <ScalarProperty Name="DG_LCDEP" ColumnName="DG_LCDEP" />
+                <ScalarProperty Name="DG_CELKR" ColumnName="DG_CELKR" />
+                <ScalarProperty Name="DG_LCVSOC" ColumnName="DG_LCVSOC" />
+                <ScalarProperty Name="DG_LCRC" ColumnName="DG_LCRC" />
+                <ScalarProperty Name="DG_LCVS" ColumnName="DG_LCVS" />
+                <ScalarProperty Name="DG_LCPO" ColumnName="DG_LCPO" />
+                <ScalarProperty Name="DG_LCD" ColumnName="DG_LCD" />
+                <ScalarProperty Name="DG_LC" ColumnName="DG_LC" />
+                <ScalarProperty Name="DG_SHKR" ColumnName="DG_SHKR" />
+                <ScalarProperty Name="DG_VIDZ" ColumnName="DG_VIDZ" />
+                <ScalarProperty Name="DG_OPISOB" ColumnName="DG_OPISOB" />
+                <ScalarProperty Name="DG_VIDOB" ColumnName="DG_VIDOB" />
+                <ScalarProperty Name="DG_SUM2" ColumnName="DG_SUM2" />
+                <ScalarProperty Name="DG_SUM" ColumnName="DG_SUM" />
+                <ScalarProperty Name="DG_KODKL_OLD" ColumnName="DG_KODKL_OLD" />
+                <ScalarProperty Name="DG_KODKL" ColumnName="DG_KODKL" />
+                <ScalarProperty Name="DG_KODV" ColumnName="DG_KODV" />
+                <ScalarProperty Name="DG_NAM" ColumnName="DG_NAM" />
+                <ScalarProperty Name="DG_NOM" ColumnName="DG_NOM" />
+                <ScalarProperty Name="DG_DATEZ" ColumnName="DG_DATEZ" />
+                <ScalarProperty Name="DG_DATE2" ColumnName="DG_DATE2" />
+                <ScalarProperty Name="DG_DATE1" ColumnName="DG_DATE1" />
+                <ScalarProperty Name="DG_DATE" ColumnName="DG_DATE" />
+                <ScalarProperty Name="DG_POZN" ColumnName="DG_POZN" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

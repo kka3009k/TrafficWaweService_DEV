@@ -101,7 +101,7 @@ namespace TrafficWaveService.Client
                 }
                 else
                 {
-                    ClientUpdate clUpdate = new ClientUpdate(_clientInfo, cl.kl_kod, 0);
+                    ClientUpdate clUpdate = new ClientUpdate(_clientInfo,_dopInfo, cl.kl_kod, 0);
                     return clUpdate.Update();
                 }
             }

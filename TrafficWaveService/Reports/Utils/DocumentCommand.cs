@@ -7,6 +7,7 @@ using System.Web;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 using System.Web.Hosting;
+using DocumentFormat.OpenXml;
 
 namespace TrafficWaveService.Reports.Utils
 {
@@ -192,7 +193,14 @@ namespace TrafficWaveService.Reports.Utils
                     else if (tCellProperties.Length > i && tCellProperties[i] != null)
                         tc.Append((TableCellProperties)tCellProperties[i].Clone());
                 }
-                Paragraph paragraph = new Paragraph(new Run(new Text(values[i])));
+                var run = new Run();
+                var runProp = new RunProperties {
+                    RunFonts = new RunFonts { Ascii = "Times New Roman" },
+                    FontSize = new FontSize { Val = new StringValue("24") }
+                };
+                run.Append(runProp);
+                run.Append(new Text(values[i]));
+                Paragraph paragraph = new Paragraph(run);
                 if (parahraphProperties != null)
                 {
                     if (parahraphProperties.Length == 1 && parahraphProperties[0] != null)
@@ -396,8 +404,14 @@ namespace TrafficWaveService.Reports.Utils
                             //object o = cellsData[cellDataIndex];
                             object o = cellDataIndex < cellsData.Count ? cellsData[cellDataIndex] : null;
                             Text text = o != null ? new Text(DocumentUtils.castTo<string>(o)) : new Text();
-
-                            Paragraph paragraph = new Paragraph(new Run(text));
+                            var run = new Run(text);
+                            var runProp = new RunProperties();
+                            var runFont = new RunFonts { Ascii = "Times New Roman" };
+                            var size = new FontSize { Val = new StringValue("12") };
+                            runProp.Append(runFont);
+                            runProp.Append(size);
+                            run.Append(runProp);
+                            Paragraph paragraph = new Paragraph(run);
                             if (cellPragraphProperties != null && cellPragraphProperties.Count() > 0)
                             {
                                 if (cellPragraphProperties.Count() > 1 && cellPragraphProperties.ElementAtOrDefault(i) != null)
