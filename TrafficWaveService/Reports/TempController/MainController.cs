@@ -14,7 +14,14 @@ namespace TrafficWaveService.Reports.TempController
 {
     public class MainController
     {
-        public string createReportDocx(Dictionary<string, object> data, List<DocumentCommand> commands, bool isPdf = true)
+        /// <summary>
+        /// Метод формирования отчета
+        /// </summary>
+        /// <param name="data">Данные для заполенения</param>
+        /// <param name="commands"></param>
+        /// <param name="isPdf">в pdf формате?</param>
+        /// <returns></returns>
+        public string createReport(Dictionary<string, object> data, List<DocumentCommand> commands, bool isPdf = true)
         {
             string tmplname = data["TEMPLATE_FILE_NAME"].ToString();
             string tempWorkPath = copyTemplate(tmplname, true);
@@ -141,7 +148,6 @@ namespace TrafficWaveService.Reports.TempController
 
             return commands;
         }
-
-        // public void createObjects
+       
     }
 }

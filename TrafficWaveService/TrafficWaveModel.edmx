@@ -1209,6 +1209,14 @@
           <Parameter Name="applicationID" Type="int" Mode="In" />
           <Parameter Name="CreatorID" Type="smallint" Mode="In" />
         </Function>
+        <Function Name="LoanApplication_delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="bankadm">
+          <Parameter Name="ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="LoanApplication_deleteLoanContract" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="bankadm">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="Kodkl" Type="int" Mode="In" />
+          <Parameter Name="NEW_STATUS" Type="smallint" Mode="In" />
+        </Function>
         <Function Name="LoanApplication_update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="bankadm">
           <Parameter Name="ID" Type="int" Mode="In" />
           <Parameter Name="ApplicationNumber" Type="varchar" Mode="In" />
@@ -1784,6 +1792,14 @@
           </AssociationSet>
           <EntitySet Name="SharedProperty" EntityType="bankasiaNSModel.SharedProperty" />
           <EntitySet Name="dogkr" EntityType="bankasiaNSModel.dogkr" />
+          <FunctionImport Name="LoanApplication_delete" ReturnType="Collection(Int32)">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="LoanApplication_deleteLoanContract" ReturnType="Collection(bankasiaNSModel.LoanApplication_deleteLoanContract_Result)">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="Kodkl" Mode="In" Type="Int32" />
+            <Parameter Name="NEW_STATUS" Mode="In" Type="Int16" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SearchReg_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -2998,6 +3014,10 @@
           <Property Name="MlLcNsp" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
           <Property Name="MlLcVnNsp" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
         </EntityType>
+        <ComplexType Name="LoanApplication_deleteLoanContract_Result">
+          <Property Type="Int32" Name="MQ_RESULT" Nullable="true" />
+          <Property Type="String" Name="MQ_DESC" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3968,6 +3988,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="LoanApplication_delete" FunctionName="Хранилище bankasiaNSModel.LoanApplication_delete" />
+          <FunctionImportMapping FunctionImportName="LoanApplication_deleteLoanContract" FunctionName="Хранилище bankasiaNSModel.LoanApplication_deleteLoanContract">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="bankasiaNSModel.LoanApplication_deleteLoanContract_Result">
+                <ScalarProperty Name="MQ_RESULT" ColumnName="MQ_RESULT" />
+                <ScalarProperty Name="MQ_DESC" ColumnName="MQ_DESC" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

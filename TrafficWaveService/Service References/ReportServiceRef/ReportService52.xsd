@@ -26,6 +26,7 @@
         <xs:element minOccurs="0" name="pKodc" type="xs:int" />
         <xs:element minOccurs="0" name="pOtv" type="xs:int" />
         <xs:element minOccurs="0" name="pAcc" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pCurrency" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="pFormNum" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
@@ -3623,6 +3624,7 @@
         <xs:element minOccurs="0" name="fio1" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="fio2" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="specCurs" type="xs:int" />
+        <xs:element minOccurs="0" name="entryOtv" type="xs:short" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -6141,6 +6143,7 @@
         <xs:element minOccurs="0" name="mkodb" type="xs:short" />
         <xs:element minOccurs="0" name="mkodv" type="xs:short" />
         <xs:element minOccurs="0" name="msumv" type="xs:decimal" />
+        <xs:element minOccurs="0" name="pBalGroup" type="xs:int" />
         <xs:element minOccurs="0" name="pFormNum" type="xs:int" />
       </xs:sequence>
     </xs:complexType>

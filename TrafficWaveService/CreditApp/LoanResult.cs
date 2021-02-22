@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Web;
+using TrafficWaveService;
 
 namespace TrafficWaveService.CreditApp
 {
@@ -18,5 +19,10 @@ namespace TrafficWaveService.CreditApp
         [DataMember]
         public string Base64Str { get; set; }
 
+        [DataMember]
+        public string Message { get; set; }
+
+        [DataMember]
+        public EnumRequestStatus EnumRequestStatus { get; set; }
     }
 }

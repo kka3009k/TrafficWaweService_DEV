@@ -163,7 +163,7 @@ namespace TrafficWaveService.Client
                 p_noend = false,
                 p_strb = "417",
                 p_db = Convert.ToDateTime(pCl.birthday),
-                p_pol = pCl.gender == null ? (byte)1 : int.Parse(pCl.gender.ToString()) == 0 ? (byte)1:(byte)2,
+                p_pol = pCl.gender == null ? (byte)1 : pCl.gender.ToString() == "M" ? (byte)1:(byte)2,
                 p_nation = pCl.nationality,
                 p_family_status = pCl.marital_status_grs == null ? (short)1: short.Parse(pCl.marital_status_grs.ToString()) == 1 ?
                 short.Parse(pCl.marital_status_grs.ToString()):(short)4

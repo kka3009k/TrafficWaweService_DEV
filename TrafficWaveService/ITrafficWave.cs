@@ -5,7 +5,6 @@ using TrafficWaveService.Client;
 using TrafficWaveService.Reports;
 using TrafficWaveService.ClientSearch;
 using TrafficWaveService.CreditApp;
-using TrafficWaveService.Sprs;
 using System.Collections.Generic;
 
 namespace TrafficWaveService
@@ -38,14 +37,6 @@ namespace TrafficWaveService
         Task<LoanResult> CreateLoanApp(CreditQuery pCreditQuery);
 
         /// <summary>
-        /// Загрузка справочника
-        /// </summary>
-        /// <param name="pCreditQuery"></param>
-        /// <returns></returns>
-        [OperationContract]
-        Task<string> GetSprs(SprQuery pSprQuery);
-
-        /// <summary>
         /// Формирование графика погашения
         /// </summary>
         /// <param name="pCreditQuery"></param>
@@ -69,6 +60,13 @@ namespace TrafficWaveService
         [OperationContract]
         Task<bool> ConfirmCredit(CreditQuery pCreditQuery);
 
+        /// <summary>
+        ///  Отклонение кредита
+        /// </summary>
+        /// <param name="pCreditQuery">Параметры запроса</param>
+        /// <returns></returns>
+        [OperationContract]
+        Task<bool> RejectCredit(CreditQuery pCreditQuery);
 
 
     }

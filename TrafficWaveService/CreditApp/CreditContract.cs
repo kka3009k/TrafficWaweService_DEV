@@ -25,7 +25,7 @@ namespace TrafficWaveService.CreditApp
         CreditAppData _Cr;
         LoanApplication _ln;
         Dictionary<string, object> _dict;
-        bankasiaNSEntities _db;
+        bankasiaNSEntities _db;      
         public CreditContract()
         {
            
@@ -42,6 +42,7 @@ namespace TrafficWaveService.CreditApp
             _dict = pDict;
         }
 
+        #region CreateCreditContract
         public string CreateCreditContract()
         {
             _ln = _db.LoanApplication.FirstOrDefault(x => x.ID == _Cr.IDLoan);
@@ -89,7 +90,6 @@ namespace TrafficWaveService.CreditApp
                             GuaranteeName = $"{x.name_product}, {x.description_product}",
                             BorrowerIsHolder = true,
                             GuaranteeOwnerType = 1,
-                            //GuaranteeHolderID
                             
                         };
                         _db.Guarantee.Add(gr);
@@ -342,8 +342,9 @@ namespace TrafficWaveService.CreditApp
             catch { lgsNew = null; }
             return lgsNew;
         }
+        #endregion
 
-
+        #region Confirm credit
         public bool IssueLoan()
         {
             bool status = false;
@@ -391,10 +392,9 @@ namespace TrafficWaveService.CreditApp
             }
             return status;
         }
+        #endregion
 
-
-
-
+        #region CreateCreditContractDocx
         /// <summary>
         /// Формирование шаблона в формате docx
         /// </summary>
@@ -403,8 +403,8 @@ namespace TrafficWaveService.CreditApp
         {
             Dictionary<string, object> dict = CreateContractMeta();
             ReportServiceRef.ReportServiceClient client = new ReportServiceRef.ReportServiceClient();
-            client.ClientCredentials.UserName.UserName = "60k.kargin";
-            client.ClientCredentials.UserName.Password = "hF5KewrmZpH9D/xzdo9SKQ==5j8Mc7mItUpLSe";
+            client.ClientCredentials.UserName.UserName = AuthData.UserNameService;
+            client.ClientCredentials.UserName.Password = AuthData.PasswordService;
             ServicePointManager.ServerCertificateValidationCallback += new System.Net.Security.RemoteCertificateValidationCallback((s, ce, ch, ssl)=>true);
             ReportServiceRef.XLSDownload xls = client.print_DOG_KREDIT(dict, 0);
             byte [] bytes = xls.XLSFile;
@@ -438,7 +438,9 @@ namespace TrafficWaveService.CreditApp
             }
             return dict;
         }
+        #endregion
 
+        #region CreateCreditPledgeDocx
         /// <summary>
         /// Формирование шаблона в формате docx
         /// </summary>
@@ -448,7 +450,7 @@ namespace TrafficWaveService.CreditApp
             Dictionary<string, object> dict = CreateContractPledgeMeta();
             MainController mainController = new MainController();
             Guarantee gr = _db.Guarantee.FirstOrDefault(x => x.DG_POZN == _Cr.IDLoan);
-            return mainController.createReportDocx(dict, createListGuarantee(dict),false);
+            return mainController.createReport(dict, CreateListGuarantee(dict), false);
            
         }
 
@@ -478,11 +480,11 @@ namespace TrafficWaveService.CreditApp
             IQueryable<SharedProperty> qSharProp = _db.SharedProperty.Where(shp => shp.Key.Contains("kr800PAT_Data"));
             List<SharedProperty> sharedProperties = qSharProp != null ? qSharProp.ToList() : new List<SharedProperty>();
             Dictionary<string, string> dataCl = GetClientData(client);
-            dict["<Данные 1>"] = createReplaceString(sharedProperties, "kr800PAT_Data1_2",
+            dict["<Данные 1>"] = CreateReplaceString(sharedProperties, "kr800PAT_Data1_2",
                                        "<B_NAM>", client.kl_nam,
                                        "<B_PASP>", dataCl["passData"]);
 
-            dict["<Данные 2>"] = createReplaceString(sharedProperties, "kr800PAT_Data2_2",
+            dict["<Данные 2>"] = CreateReplaceString(sharedProperties, "kr800PAT_Data2_2",
                 "<B_NAM>", client.kl_nam,
                 "<B_PASP>", dataCl["passData"],
                 "<B_ADR_J>", dataCl["addressU"],
@@ -555,7 +557,7 @@ namespace TrafficWaveService.CreditApp
         }
 
 
-        private string createReplaceString(List<SharedProperty> listShProp, string propKey, params string[] datas)
+        private string CreateReplaceString(List<SharedProperty> listShProp, string propKey, params string[] datas)
         {
             if (listShProp == null) return null;
             SharedProperty sharedProp = listShProp.FirstOrDefault(shP => shP.Key.Equals(propKey));
@@ -581,7 +583,7 @@ namespace TrafficWaveService.CreditApp
             return txtDate;
         }
 
-        private List<DocumentCommand> createListGuarantee(Dictionary<string, object> data)
+        private List<DocumentCommand> CreateListGuarantee(Dictionary<string, object> data)
         {
             List<DocumentCommand> commands = new List<DocumentCommand>();
             List<vGuarantee> vGr = _db.vGuarantee.Where(x => x.DG_POZN == _Cr.IDLoan).ToList();
@@ -629,15 +631,25 @@ namespace TrafficWaveService.CreditApp
 
             return commands;
         }
+        #endregion
 
-
-        private void FileWriteStream(byte[] pBytes, string pFileName)
+        #region RejectLoanApp
+        public bool RejectLoanApp()
         {
-            using (FileStream fs = File.Create(pFileName))
+            bool status = false;
+            LoanApplication la = _db.LoanApplication.FirstOrDefault(x=>x.ID == _Cr.IDLoan);
+            if(la != null)
             {
-                fs.Write(pBytes, 0, pBytes.Length);
-                fs.Close();
+                int result = _db.LoanApplication_deleteLoanContract(la.ID, la.ClientID, 4).ToList().First().MQ_RESULT.Value;
+                if (result != 0)
+                    return false;
+                la.Comment = _Cr.Comment;
+                la.ClientComment = _Cr.Comment;
+                _db.SaveChanges();
+                status = true;
             }
+            return status;
         }
+        #endregion
     }
 }

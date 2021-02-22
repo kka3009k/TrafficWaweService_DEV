@@ -6,7 +6,6 @@ using TrafficWaveService.Dictionaries;
 using TrafficWaveService.Reports;
 using TrafficWaveService.ClientSearch;
 using TrafficWaveService.CreditApp;
-using TrafficWaveService.Sprs;
 using System.ServiceModel.Web;
 using System.Net;
 using System.Collections.Generic;
@@ -79,8 +78,6 @@ namespace TrafficWaveService
         public async Task<Result> AddClient(ClientQuery pClientQuery)
         {
             ClientMain client = new ClientMain(pClientQuery);
-            RuToLatin trans =new RuToLatin();
-            string res = trans.Front("Султан Джунушалиев Аскенович");
             return await client.Run();
         }
 
@@ -118,18 +115,6 @@ namespace TrafficWaveService
         }
 
         /// <summary>
-        /// Загрузка справочника
-        /// </summary>
-        /// <param name="pCreditQuery"></param>
-        /// <returns></returns>
-      
-        public async Task<string> GetSprs(SprQuery pSprQuery)
-        {
-            SprsController spr = new SprsController(pSprQuery);
-            return await spr.Run();
-        }
-
-        /// <summary>
         /// Формирование графика погашения
         /// </summary>
         /// <param name="pSprQuery"></param>
@@ -163,8 +148,16 @@ namespace TrafficWaveService
             return await credit.ConfirmCredit();
         }
 
-
-
+        /// <summary>
+        ///  Отклонение кредита
+        /// </summary>
+        /// <param name="pCreditQuery">Параметры запроса</param>
+        /// <returns></returns>
+        public async Task<bool> RejectCredit(CreditQuery pCreditQuery)
+        {
+            CreditController credit = new CreditController(pCreditQuery);
+            return await credit.RejectCredit();
+        }
 
     }
 }

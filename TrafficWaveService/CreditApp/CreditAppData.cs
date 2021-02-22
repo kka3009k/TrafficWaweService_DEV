@@ -44,6 +44,8 @@ namespace TrafficWaveService.CreditApp
         public int IDLoan { get; set; }
         public string IDLoanContract { get; set; }
         public string FirstRepayDate { get; set; }
+        public string Comment { get; set; }
+
         //Тип операция 1 создание заявки 2 создание договора 3 формирование договора
         public int TypeOperation { get; set; }
 

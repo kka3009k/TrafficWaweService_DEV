@@ -131,7 +131,7 @@ namespace TrafficWaveService.Client
                     cl_pasp.p_mvd = pCl.passport_info.issued_by;
                     cl_pasp.p_enddok = Convert.ToDateTime(pCl.passport_info.deadline);
                     cl_pasp.p_datev = Convert.ToDateTime(pCl.passport_info.issued_date);
-                    cl_pasp.p_pol = pCl.gender == null ? (byte)1 : int.Parse(pCl.gender.ToString()) == 0 ? (byte)1 : (byte)2;
+                    cl_pasp.p_pol = pCl.gender == null ? (byte)1 : pCl.gender.ToString() == "M" ? (byte)1 : (byte)2;
                     //    //p_strb = "417",
                     //    //p_db = Convert.ToDateTime(pCl.birthday),
                     //    //p_pol = pCl.gender == null ? (byte)0 : (byte)1,

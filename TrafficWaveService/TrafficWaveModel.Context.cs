@@ -386,5 +386,31 @@ namespace TrafficWaveService
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SetContextInfo", pLoginParameter, pIpAdressParameter);
         }
+    
+        public virtual ObjectResult<Nullable<int>> LoanApplication_delete(Nullable<int> iD)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("LoanApplication_delete", iDParameter);
+        }
+    
+        public virtual ObjectResult<LoanApplication_deleteLoanContract_Result> LoanApplication_deleteLoanContract(Nullable<int> iD, Nullable<int> kodkl, Nullable<short> nEW_STATUS)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            var kodklParameter = kodkl.HasValue ?
+                new ObjectParameter("Kodkl", kodkl) :
+                new ObjectParameter("Kodkl", typeof(int));
+    
+            var nEW_STATUSParameter = nEW_STATUS.HasValue ?
+                new ObjectParameter("NEW_STATUS", nEW_STATUS) :
+                new ObjectParameter("NEW_STATUS", typeof(short));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<LoanApplication_deleteLoanContract_Result>("LoanApplication_deleteLoanContract", iDParameter, kodklParameter, nEW_STATUSParameter);
+        }
     }
 }

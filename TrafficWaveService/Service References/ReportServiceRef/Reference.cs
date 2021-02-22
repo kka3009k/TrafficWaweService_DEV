@@ -670,7 +670,7 @@ namespace TrafficWaveService.ReportServiceRef {
         TrafficWaveService.ReportServiceRef.XLSDownload kr805060(System.DateTime pDate, int pFormNum);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/od700000Requzits", ReplyAction="http://tempuri.org/IReportService/od700000RequzitsResponse")]
-        TrafficWaveService.ReportServiceRef.XLSDownload od700000Requzits(int pKlKod, int pKodb, int pKodc, int pOtv, string pAcc, int pFormNum);
+        TrafficWaveService.ReportServiceRef.XLSDownload od700000Requzits(int pKlKod, int pKodb, int pKodc, int pOtv, string pAcc, string pCurrency, int pFormNum);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/od560010AccountingOrder", ReplyAction="http://tempuri.org/IReportService/od560010AccountingOrderResponse")]
         TrafficWaveService.ReportServiceRef.XLSDownload od560010AccountingOrder(int pPozn, int pOtv, System.DateTime pDate, int pFormNum);
@@ -1452,7 +1452,7 @@ namespace TrafficWaveService.ReportServiceRef {
         TrafficWaveService.ReportServiceRef.XLSDownload od2o04(System.DateTime mdt, short kodb, short kodc);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/od250r2", ReplyAction="http://tempuri.org/IReportService/od250r2Response")]
-        TrafficWaveService.ReportServiceRef.XLSDownload od250r2(System.DateTime dateBeg, System.DateTime dateEnd, string kodb, string kodc, string otv, string podrazdel, short selTypeRep, string fio1, string fio2, int specCurs);
+        TrafficWaveService.ReportServiceRef.XLSDownload od250r2(System.DateTime dateBeg, System.DateTime dateEnd, string kodb, string kodc, string otv, string podrazdel, short selTypeRep, string fio1, string fio2, int specCurs, short entryOtv);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/od220i", ReplyAction="http://tempuri.org/IReportService/od220iResponse")]
         TrafficWaveService.ReportServiceRef.XLSDownload od220i(System.DateTime dateBeg, System.DateTime dateEnd, string kodb, string kodc, string otv, string podrazdel, short docType, string fio1, string fio2);
@@ -1888,7 +1888,7 @@ namespace TrafficWaveService.ReportServiceRef {
         TrafficWaveService.ReportServiceRef.XLSDownload od290e(System.DateTime mdate1, System.DateTime mdate2, int mfil, int motv, string mlc, string mbs, string mkodv);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/od1901", ReplyAction="http://tempuri.org/IReportService/od1901Response")]
-        TrafficWaveService.ReportServiceRef.XLSDownload od1901(int mpozn, short mkodb, short mkodv, decimal msumv, int pFormNum);
+        TrafficWaveService.ReportServiceRef.XLSDownload od1901(int mpozn, short mkodb, short mkodv, decimal msumv, int pBalGroup, int pFormNum);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/od191", ReplyAction="http://tempuri.org/IReportService/od191Response")]
         TrafficWaveService.ReportServiceRef.XLSDownload od191(int pozn, short kodb);
@@ -1973,8 +1973,8 @@ namespace TrafficWaveService.ReportServiceRef {
             return base.Channel.kr805060(pDate, pFormNum);
         }
         
-        public TrafficWaveService.ReportServiceRef.XLSDownload od700000Requzits(int pKlKod, int pKodb, int pKodc, int pOtv, string pAcc, int pFormNum) {
-            return base.Channel.od700000Requzits(pKlKod, pKodb, pKodc, pOtv, pAcc, pFormNum);
+        public TrafficWaveService.ReportServiceRef.XLSDownload od700000Requzits(int pKlKod, int pKodb, int pKodc, int pOtv, string pAcc, string pCurrency, int pFormNum) {
+            return base.Channel.od700000Requzits(pKlKod, pKodb, pKodc, pOtv, pAcc, pCurrency, pFormNum);
         }
         
         public TrafficWaveService.ReportServiceRef.XLSDownload od560010AccountingOrder(int pPozn, int pOtv, System.DateTime pDate, int pFormNum) {
@@ -2953,8 +2953,8 @@ namespace TrafficWaveService.ReportServiceRef {
             return base.Channel.od2o04(mdt, kodb, kodc);
         }
         
-        public TrafficWaveService.ReportServiceRef.XLSDownload od250r2(System.DateTime dateBeg, System.DateTime dateEnd, string kodb, string kodc, string otv, string podrazdel, short selTypeRep, string fio1, string fio2, int specCurs) {
-            return base.Channel.od250r2(dateBeg, dateEnd, kodb, kodc, otv, podrazdel, selTypeRep, fio1, fio2, specCurs);
+        public TrafficWaveService.ReportServiceRef.XLSDownload od250r2(System.DateTime dateBeg, System.DateTime dateEnd, string kodb, string kodc, string otv, string podrazdel, short selTypeRep, string fio1, string fio2, int specCurs, short entryOtv) {
+            return base.Channel.od250r2(dateBeg, dateEnd, kodb, kodc, otv, podrazdel, selTypeRep, fio1, fio2, specCurs, entryOtv);
         }
         
         public TrafficWaveService.ReportServiceRef.XLSDownload od220i(System.DateTime dateBeg, System.DateTime dateEnd, string kodb, string kodc, string otv, string podrazdel, short docType, string fio1, string fio2) {
@@ -3522,8 +3522,8 @@ namespace TrafficWaveService.ReportServiceRef {
             return base.Channel.od290e(mdate1, mdate2, mfil, motv, mlc, mbs, mkodv);
         }
         
-        public TrafficWaveService.ReportServiceRef.XLSDownload od1901(int mpozn, short mkodb, short mkodv, decimal msumv, int pFormNum) {
-            return base.Channel.od1901(mpozn, mkodb, mkodv, msumv, pFormNum);
+        public TrafficWaveService.ReportServiceRef.XLSDownload od1901(int mpozn, short mkodb, short mkodv, decimal msumv, int pBalGroup, int pFormNum) {
+            return base.Channel.od1901(mpozn, mkodb, mkodv, msumv, pBalGroup, pFormNum);
         }
         
         public TrafficWaveService.ReportServiceRef.XLSDownload od191(int pozn, short kodb) {

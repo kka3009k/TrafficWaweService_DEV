@@ -30,10 +30,6 @@ namespace TrafficWaveService.CreditApp
             _CreditQuery = pCreditQuery;
         }
 
-
-
-
-
         /// <summary>
         /// 
         /// </summary>
@@ -57,28 +53,40 @@ namespace TrafficWaveService.CreditApp
                     case 1:
                         //Создание новой заявки
                         res.ID = InsertCreditApp(_crApp);
+                        if (res.ID == -1)
+                        {
+                            res.Message = "Ошибка создания заявки в ОДБ";
+                            res.EnumRequestStatus = EnumRequestStatus.ServiceError;
+                        }
                         break;
                     case 2:
-                        //Создание кредитнго договора
+                        //Создание кредитного договора
                         res.IDString = InsertCreditContract(_crApp);
+                        if (res.IDString == "-1")
+                        {
+                            res.Message = "Ошибка создания договора в ОДБ";
+                            res.EnumRequestStatus = EnumRequestStatus.ServiceError;
+                        }
                         break;
                     case 3:
                         //Формирование договора 
                         res.Base64Str = GetContractCredit(_crApp);
                         break;
                     case 4:
-                        //Формирование договора 
+                        //Формирование договора о залоге 
                         res.Base64Str = GetContractPledge(_crApp);
                         break;
                     default:
                         res.ID = 200;
                         break;
                 }
-                res.Base64Str = res.Base64Str == null || res.Base64Str == "" ? "Заявка создана" : res.Base64Str;
+                res.Message = res.Base64Str == null || res.Base64Str == "" ? "Заявка создана":"Документ сформирован";
+                res.EnumRequestStatus = EnumRequestStatus.Ok;
             }
             catch (Exception ex)
             {
-                res.Base64Str = ex.Message;
+                res.Message = ex.Message;
+                res.EnumRequestStatus = EnumRequestStatus.ServiceError;
                 new DataBase().WriteLog(ex, "Run");
 
             }
@@ -148,7 +156,7 @@ namespace TrafficWaveService.CreditApp
                 }
                 catch(Exception ex)
                 {
-                    new DataBase().WriteLog(ex, "CreateLoan");
+                    new DataBase().WriteLog(ex, "CreateLoanRequest");
                     return -1;
                 }
                 return -1;
@@ -194,6 +202,29 @@ namespace TrafficWaveService.CreditApp
                     _crApp = JsonConvert.DeserializeObject<CreditAppData>(str);
                     CreditContract cr = new CreditContract(_crApp);
                     status = cr.IssueLoan();
+                }
+                catch (Exception ex)
+                {
+                    new DataBase().WriteLog(ex, "Run");
+
+                }
+                return status;
+            });
+        }
+
+        public async Task<bool> RejectCredit()
+        {
+            return await Task.Run(() =>
+            {
+                bool status = false;
+                try
+                {
+
+                    //Десериализация строки
+                    string str = _CreditQuery.RequestStringCreditData.Replace("None", "null").Replace("False", "false").Replace("True", "true");
+                    _crApp = JsonConvert.DeserializeObject<CreditAppData>(str);
+                    CreditContract cr = new CreditContract(_crApp);
+                    status = cr.RejectLoanApp();
                 }
                 catch (Exception ex)
                 {

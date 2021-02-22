@@ -42,11 +42,11 @@ namespace TrafficWaveService.Reports.TempController
             _mainController = new MainController();
             if (data.ContainsKey("products"))
             {
-                return _mainController.createReportDocx(data, _mainController.createComands(data));
+                return _mainController.createReport(data, _mainController.createComands(data));
             }
             else
             {
-                return _mainController.createReportDocx(data, null);
+                return _mainController.createReport(data, null);
             }
 
         }

@@ -5,13 +5,22 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Hosting;
+using TrafficWaveService.Models;
 
 namespace TrafficWaveService.Client
 {
     public class ClientReport
     {
+        /// <summary>
+        /// id клиента в ОДБ
+        /// </summary>
         private int _ClientId = 0;
+
+        /// <summary>
+        /// id исполнителя в ОДБ
+        /// </summary>
         private int _OtvId = 0;
+
         /// <summary>
         /// Конструктор
         /// </summary>
@@ -31,11 +40,11 @@ namespace TrafficWaveService.Client
 
         private void Init()
         {
-            
+            ServicePointManager.ServerCertificateValidationCallback += new System.Net.Security.RemoteCertificateValidationCallback((s, ce, ch, ssl) => true);
         }
 
         /// <summary>
-        /// Печать анкеты клиента
+        /// Метод получения анкеты клиента
         /// </summary>
         /// <returns></returns>
         public async Task<Dictionary<string,object>> GetClientProfile()
@@ -50,11 +59,8 @@ namespace TrafficWaveService.Client
             try
             {
                 ReportServiceRef.ReportServiceClient client = new ReportServiceRef.ReportServiceClient();
-                client.ClientCredentials.UserName.UserName = "60k.kargin";
-                client.ClientCredentials.UserName.Password = "hF5KewrmZpH9D/xzdo9SKQ==5j8Mc7mItUpLSe";
-                //client.ClientCredentials.UserName.UserName = "60s.korostelev";
-                //client.ClientCredentials.UserName.Password = "L8PY5ID5bsVS9k0PV5S3Kg==FCGgPat3KVIsbh";
-                ServicePointManager.ServerCertificateValidationCallback += new System.Net.Security.RemoteCertificateValidationCallback((s, ce, ch, ssl) => true);
+                client.ClientCredentials.UserName.UserName = AuthData.UserNameService;
+                client.ClientCredentials.UserName.Password = AuthData.PasswordService;
                 ReportServiceRef.XLSDownload xls = client.od320_anketa_fiz(_ClientId, _OtvId, 320);
                 byte[] bytes = xls.XLSFile;
                 dict.Add("data", Convert.ToBase64String(bytes));
@@ -62,7 +68,7 @@ namespace TrafficWaveService.Client
             }
             catch (Exception ex)
             {
-                new DataBase().WriteLog(ex, "GetAnketa");
+                new DataBase().WriteLog(ex, $"GetAnketa");
             }
             return dict;
         }
